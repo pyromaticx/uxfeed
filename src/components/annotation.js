@@ -4,44 +4,65 @@ export default class Annotation extends Component {
   constructor() {
     super();
     this.state = {
-      height: 100,
-      expanded: false
+      height: 80,
+      expanded: false,
+      imgScale: 5.5 - (window.innerWidth / 450)
     }
   }
+  componentWillMount() {
+    window.addEventListener('resize', () => this.handleResize())
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize');
+  }
+  handleResize() {
+    this.setState({
+      imgScale: 5.5 - (window.innerWidth / 450)
+    });
+  }
   render() {
+    var imageW = this.props.annotation.imageW / this.state.imgScale + 'px';
+    var imageH = this.props.annotation.imageH / this.state.imgScale + 'px';
     var annotationWrapper = {
       width: '100%',
-      height: this.state.height + 'px',
+      minHeight: this.state.height + 'px',
       backgroundColor: this.props.color.primary,
       border: '1px solid ' + this.props.color.tertiary,
-      transition: 'all 100ms ease',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: this.state.expanded ? 'space-between' : 'center',
       padding: '20px',
       marginTop: '20px',
-      boxShadow: '3px 3px 5px 0.5px ' + this.props.color.tertiary,
-      borderRadius: '5px'
+      boxShadow: '0 3px 5px 0.5px ' + this.props.color.tertiary,
+      borderRadius: '5px',
+      overflow: 'hidden',
     },
     thumbnailStyle = {
       marginTop: '20px',
       marginBottom: '20px',
       display: this.state.expanded ? 'flex' : 'none',
-      backgroundImage: this.props.annotation.image,
-      backgroundSize: 'contain',
+      backgroundImage: 'url(' + this.props.annotation.image + ')',
+      backgroundSize: imageW + ' ' + imageH,
       backgroundRepeat: 'no-repeat',
       backgroundPostion: 'center',
-      height: '350px',
-      width: '100%',
+      height: imageH,
+      width: imageW,
       border: '1px solid ' + this.props.color.tertiary,
-      transition: 'all 100ms ease'
     },
     textRow = {
       display: 'flex',
       width: '100%',
       justifyContent: 'space-between',
-
+      alignItems: 'center'
+    },
+    userImageStyle = {
+      height: '50px',
+      width: '50px',
+      backgroundImage: 'url(' + (this.props.annotation.userImage || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png') + ')',
+      backgroundSize: 'contain',
+      backgroundRepeat: 'no-repeat',
+      backgroundPostion: 'center'
     },
     title = this.truncate(this.props.annotation.title),
     text = this.truncate(this.props.annotation.text);
@@ -51,19 +72,23 @@ export default class Annotation extends Component {
         onClick={() => {this.expandAnnotation()}}
         style={annotationWrapper}>
           <div style={textRow}>
+            <div style={userImageStyle} onMouseOver={(event) => {this.userHover(event)}}></div>
             <h6>{this.state.expanded ? this.props.annotation.title : title}</h6>
             <h6>{this.props.annotation.type}</h6>
           </div>
           <div style={thumbnailStyle}></div>
-          <h6>{this.state.expanded ? this.props.annotation.text : text}</h6>
+
       </div>
     );
+  }
+  userHover(event) {
+    console.log(event.target)
   }
   expandAnnotation() {
     var current = !this.state.expanded;
     this.setState({
       expanded: current,
-      height: current == true ? '600' : '100'
+      height: current == true ? '300' : '80'
     });
   }
   truncate(str) {

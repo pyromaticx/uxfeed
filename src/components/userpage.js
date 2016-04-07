@@ -6,6 +6,7 @@ import SideBar from './sidebar.js';
 
 var dummyAnnotation = {
   userId: 'pyromaticx',
+  userImage: '',
   websiteId: 1,
   domain: 'https://www.homestarrunner.com',
   title: "Needs to be adjusted",
@@ -16,7 +17,9 @@ var dummyAnnotation = {
   pinX: '123',
   pinY: '456',
   emoji: 'emoji',
-  image: 'url(' + img + ')',
+  image: img,
+  imageH: 683,
+  imageW: 1301,
   comments: 'this is a really cool app, but the comments suck',
   isPrivate: false,
   thumbnailDot: {
@@ -28,6 +31,7 @@ var dummyAnnotation = {
 
 export default class UserPage extends Component {
   render() {
+    console.log(this.props.params);
     var pageWrapper = {
       width: '100%',
       minHeight : '100vh',
@@ -44,7 +48,8 @@ export default class UserPage extends Component {
     },
     annotationWrapper = {
       minWidth: '300px',
-      width: '50%'
+      width: '50%',
+      paddingBottom: '20px'
     },
     leftBarContent = ['All Users', 'Followed Users', 'My Followers', 'Companies'];
     return (
@@ -59,6 +64,31 @@ export default class UserPage extends Component {
           <Annotation
           annotation={dummyAnnotation}
           color={this.props.route.color}/>
+          <Annotation
+          annotation={dummyAnnotation}
+          color={this.props.route.color}/>
+          <Annotation
+          annotation={dummyAnnotation}
+          color={this.props.route.color}/>
+          <Annotation
+          annotation={dummyAnnotation}
+          color={this.props.route.color}/>
+          <Annotation
+          annotation={dummyAnnotation}
+          color={this.props.route.color}/>
+          <Annotation
+          annotation={dummyAnnotation}
+          color={this.props.route.color}/>
+          <Annotation
+          annotation={dummyAnnotation}
+          color={this.props.route.color}/>
+          <Annotation
+          annotation={dummyAnnotation}
+          color={this.props.route.color}/>
+          <Annotation
+          annotation={dummyAnnotation}
+          color={this.props.route.color}/>
+
         </div>
         <div style={rightBarWrapper}>
           <SideBar color={this.props.route.color} />

@@ -1,19 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, Link, BrowserHistory} from 'react-router';
+import {Router, Route, Link, BrowserHistory, IndexRoute} from 'react-router';
 import App from './components/app';
+import Home from './components/home.js';
 import UserPage from './components/userpage.js';
+import api from './components/api/api.js';
+import Login from './components/login.js';
 
 var createHistory = require('history/lib/createHashHistory');
 
 var history = new createHistory({
   queryKey: false
 });
-
+api.getUsers();
 var color = {
   primary: '#ffffff',
   secondary: '#7b1cf0',
   tertiary: '#ccc',
+  four: '#fc8c4b',
   text: '#464646',
   textLight: '#EEE'
 }
@@ -22,7 +26,9 @@ var color = {
 var Routes = (
   <Router history={history}>
     <Route path='/' component={App} color={color}>
-      <Route path='username' component={UserPage} color={color}/>
+      <IndexRoute component={Home} color={color} />
+      <Route path='/login' component={Login} color={color} />
+      <Route path='username/:username' component={UserPage} color={color}/>
     </Route>
   </Router>
 )

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import FooterItem from './footer-item.js';
 export default class Footer extends Component {
   render() {
     var footerStyle = {
@@ -11,12 +11,19 @@ export default class Footer extends Component {
       alignItems: 'center',
       justifyContent: 'space-around',
       color: this.props.color.textLight
+    },
+    injectedJsxStyle = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      flexDirection: 'column'
     }
     return (
       <div style={footerStyle}>
-        <h4>Copyright 2016 Go Live Labs</h4>
-        <h4>Copyright 2016 Go Live Labs</h4>
-        <h4>Copyright 2016 Go Live Labs</h4>
+        <FooterItem title='Copyright Info' content={(<span style={injectedJsxStyle}><h3>Other stuff</h3><h5>Some more stuff</h5></span>)} color={this.props.color}/>
+        <FooterItem title='Social Icons' color={this.props.color}/>
+        <FooterItem title='Site map' color={this.props.color}/>
+
       </div>
     );
   }
