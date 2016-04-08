@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import {Link} from 'react-router';
 export default class HeaderItem extends Component {
   constructor() {
     super();
@@ -31,15 +31,18 @@ export default class HeaderItem extends Component {
     }
 
     return (
-      <div
-        onMouseEnter={() => {this.mouseEnter()}}
-        onMouseLeave={() => {this.mouseLeave()}}
-        style={headerItemStyle}>
-          <span style={iconStyle} className={'fa ' + this.props.icon}></span>
-          <span style={titleStyle}>{this.props.title}</span>
-      </div>
+      <Link to={'/' + this.props.linkTo}>
+        <div
+          onMouseEnter={() => {this.mouseEnter()}}
+          onMouseLeave={() => {this.mouseLeave()}}
+          style={headerItemStyle}>
+            <span style={iconStyle} className={'fa ' + this.props.icon}></span>
+            <span style={titleStyle}>{this.props.title}</span>
+        </div>
+      </Link>
     );
   }
+
   mouseEnter() {
     this.setState({
       isHovered: true

@@ -3,7 +3,7 @@ import Annotation from './annotation.js';
 import moment from 'moment';
 import img from './base64.js';
 import SideBar from './sidebar.js';
-
+import api from './api/api.js';
 var dummyAnnotation = {
   userId: 'pyromaticx',
   userImage: '',
@@ -30,8 +30,14 @@ var dummyAnnotation = {
 
 
 export default class UserPage extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+  componentWillMount() {
+  }
   render() {
-    console.log(this.props.params);
+
     var pageWrapper = {
       width: '100%',
       minHeight : '100vh',
@@ -61,30 +67,6 @@ export default class UserPage extends Component {
             color={this.props.route.color} />
         </div>
         <div style={annotationWrapper}>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}/>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}/>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}/>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}/>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}/>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}/>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}/>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}/>
           <Annotation
           annotation={dummyAnnotation}
           color={this.props.route.color}/>

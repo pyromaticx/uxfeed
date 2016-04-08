@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Logo from './logo.js';
 import HeaderItem from './header-item.js';
+import {Link} from 'react-router';
 export default class Header extends Component {
   constructor() {
     super();
@@ -39,6 +40,7 @@ export default class Header extends Component {
         <HeaderItem
           height={headerStyle.height}
           color={this.props.color}
+          linkTo='login'
           icon='fa-sign-in'
           title='Login' />
         <input

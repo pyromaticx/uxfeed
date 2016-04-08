@@ -6,12 +6,17 @@ var myInit = { method: 'GET',
 
 var api = {
   baseUrl: 'http://hrboost.herokuapp.com',
-  getUsers: function() {
-    return fetch(this.baseUrl + '/users/', myInit).then(function (resp) {
+  getUser: function(username) {
+    return fetch(this.baseUrl + '/users/' + username, myInit).then(function (resp) {
       return resp.json()
     }).then(function(data) {
       console.log(data);
       return data;
+    });
+  },
+  annotations: function() {
+    return fetch(this.baseUrl + '/annotations/', myInit).then(function(resp) {
+      return resp.json();
     });
   }
 }
