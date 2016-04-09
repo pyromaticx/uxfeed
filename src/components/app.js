@@ -12,13 +12,22 @@ export default class App extends Component {
   render() {
     var appStyle = {
       display: 'flex',
+    },
+    contentWrapper = {
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      minHeight: '100vh',
+      width: '100%',
     };
     return (
       <div>
         <div style={appStyle}>
           <Header color={this.state.color}/>
         </div>
-        {this.props.children}
+        <div style={contentWrapper}>
+          {this.props.children}
+        </div>
         <Footer color={this.props.route.color} />
       </div>
     );

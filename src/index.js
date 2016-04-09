@@ -18,7 +18,9 @@ var color = {
   tertiary: '#ccc',
   four: '#fc8c4b',
   text: '#464646',
-  textLight: '#EEE'
+  textLight: '#EEE',
+  teal: '#36BDB1',
+  blue: '#0d1bff'
 }
 
 

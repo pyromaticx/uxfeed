@@ -24,9 +24,11 @@ export default class Header extends Component {
     };
     return (
       <div style={headerStyle}>
-        <Logo
-          color={this.props.color}
-          height={headerStyle.height} />
+        <Link to='/'>
+          <Logo
+            color={this.props.color}
+            height={headerStyle.height} />
+          </Link>
         <HeaderItem
           height={headerStyle.height}
           color={this.props.color}
