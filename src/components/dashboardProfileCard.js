@@ -27,7 +27,7 @@ export default class DashboardProfileCard extends Component{
         render(){
             var topSection ={
                 height: "100px",
-                backgroundColor: "#7b1cf0"
+                backgroundColor: this.props.color.secondary
             };
             var bottomSection = {
                 height: "100px",
@@ -60,7 +60,6 @@ export default class DashboardProfileCard extends Component{
                     </div>
                     <div style={topSection}></div>
                     <div style={bottomSection}></div>
-
                 </div>
             )
         }

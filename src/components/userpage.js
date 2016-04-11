@@ -40,7 +40,7 @@ export default class UserPage extends Component {
   render() {
 
     var pageWrapper = {
-      width: '100%',
+      width: '75%',
       minHeight : '100vh',
       display: 'flex',
       justifyContent: 'space-between',
@@ -63,9 +63,10 @@ export default class UserPage extends Component {
     leftBarContent = ['All Users', 'My Feeds', 'Followed Users', 'My Followers', 'Companies'],
     rightBarContent = ['Most Used Pin Type', 'Most Used Emojii', 'Most Searched', 'Most Votes', 'Most Active Reviewed', 'Most Pins'];
     return (
-      <div className="container" style={pageWrapper}>
+      <div style={pageWrapper}>
         <div style={leftBarWrapper}>
           <DashboardProfileCard
+              color={this.props.route.color}
           />
           <SideBar
             icon="fa-filter"
