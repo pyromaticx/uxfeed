@@ -13,15 +13,14 @@ var history = new createHistory({
 });
 
 var color = {
-  bgColor: "#E7EAEC",
   primary: '#ffffff',
   secondary: '#7b1cf0',
   tertiary: '#ccc',
   four: '#fc8c4b',
   text: '#464646',
   textLight: '#EEE',
-  teal: '#36BDB1',
-  blue: '#235eef',
+  five: '#36BDB1',
+  six: '#235eef',
   none: "none"
 };
 

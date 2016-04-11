@@ -38,16 +38,28 @@ var dummyUser = {
 
 export default class UserPage extends Component {
   intervalID
+  resizeListener
   constructor() {
     super();
     this.state = {
       expandAll: false,
-      getResponse: []
+      getResponse: [],
+      contentWidth: window.innerWidth <= 1024 ? '100%' : '85%'
     };
   }
   componentWillMount() {
+    this.resizeListener = window.addEventListener('resize', () => this.handleResize())
     this.getUpdated()
     window.setInterval(this.getUpdated.bind(this), 2000);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.resizeListener);
+  }
+  handleResize() {
+    var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%'
+    this.setState({
+      contentWidth: contentWidth
+    });
   }
   getUpdated() {
     console.log(this.props.route.path);
@@ -89,7 +101,7 @@ export default class UserPage extends Component {
     });
     console.log(Annotations)
     var pageWrapper = {
-      width: '75%',
+      width: this.state.contentWidth,
       minHeight : '100vh',
       display: 'flex',
       justifyContent: 'space-between',
