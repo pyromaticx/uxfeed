@@ -27,25 +27,20 @@ export default class DashboardProfileCard extends Component{
             };
             var profilePicContainer = {
                 width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center"
+                height: "100%"
             };
             var fontColor = {
-                color: "white",
-                position: "relative",
-                left: "2em",
-                top: "-25%"
+                color: "white"
             }
             return(
                 <div style={profileCardWrapper}>
                     <div style={topSection}>
                         <div style={profilePicContainer}>
                             <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt=""/>
-                            <span style={fontColor}>Annotations 14</span>
                         </div>
                     </div>
-                    <div style={bottomSection}><h6>{this.props.user.name}</h6>
+                    <div style={bottomSection}>
+                        <h6>{this.props.user.name}</h6>
                         <p>{this.props.user.company}</p>
                         <p>{this.props.user.title}</p>
                         <p>{this.props.user.location}</p>
