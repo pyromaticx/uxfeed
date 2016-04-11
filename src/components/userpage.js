@@ -28,6 +28,12 @@ var dummyAnnotation = {
     left: '35%'
   }
 }
+var dummyUser = {
+  name: "Derpy Dan",
+  company: "Go Live Labs",
+  title: "UI/UX Experts",
+  location: "Sunnyvale, CA",
+}
 
 
 export default class UserPage extends Component {
@@ -41,7 +47,7 @@ export default class UserPage extends Component {
   }
   componentWillMount() {
     this.getUpdated()
-    window.setInterval(this.getUpdated.bind(this), 1000);
+    window.setInterval(this.getUpdated.bind(this), 20000);
   }
   getUpdated() {
     console.log(this.props.route.path);
@@ -76,6 +82,7 @@ export default class UserPage extends Component {
       return (
         <Annotation
             key={idx}
+            user={dummyUser}
             expanded={this.state.expandAll}
             annotation={annotation}
             color={this.props.route.color}/>);
