@@ -47,7 +47,7 @@ export default class UserPage extends Component {
   }
   componentWillMount() {
     this.getUpdated()
-    window.setInterval(this.getUpdated.bind(this), 20000);
+    window.setInterval(this.getUpdated.bind(this), 2000);
   }
   getUpdated() {
     console.log(this.props.route.path);

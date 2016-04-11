@@ -63,16 +63,23 @@ export default class Annotation extends Component {
       alignItems: 'center'
     },
     userImageStyle = {
-      height: '100px',
-      width: '100px',
+      height: '50px',
+      width: '60px',
       margin: "0",
       backgroundImage: 'url(' + (this.props.annotation.userImage || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png') + ')',
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
-      backgroundPostion: 'center'
+      backgroundPostion: 'center',
+      flex: '1'
     },
     userInfo = {
-      fontSize: "14px"
+      fontSize: "14px",
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+      flex: '3'
     },
     mainComment = {
       display: this.state.expanded ? 'inline-flex' : 'none',
@@ -91,26 +98,30 @@ export default class Annotation extends Component {
     },
     annotationFooterStyle = {
       display: 'flex',
-      justifyContent: 'flex-start',
+      justifyContent: 'center',
       flexDirection: 'column',
       alignItems: 'flex-start',
-      width: '100%'
+      width: '100%',
+      minHeight: '50px'
 
+    },
+    emojiStyle = {
+      backgroundColor: 'red',
+      display: 'flex',
+      flex: '1',
+      height: '50px',
+      width: '60px',
     },
     title = this.truncate(this.props.annotation.title),
     text = this.truncate(this.props.annotation.text);
     var userModule = (
       <div style={userInfo} className="right">
-        <h6>{this.props.user.name || 'Some Name'}</h6>
-        <p>{this.props.user.company || 'Some Company'}</p>
-        <p>{this.props.user.title || 'Some Title'}</p>
-        <p>{this.props.user.location || 'Some City, Some State'}</p>
+
+        <h6>{this.props.annotation.title || 'Some Title'}</h6>
       </div>
     );
     var annotationFooter = (
       <div style={annotationFooterStyle}>
-        <h6>{this.props.annotation.title}</h6>
-        <h6>{this.props.annotation.type}</h6>
           <div style={mainComment}>
             <span style={mainComment.span}>
               {this.props.annotation.userId + ":"}
@@ -121,8 +132,8 @@ export default class Annotation extends Component {
     );
     //this.props.annotation.emoji
     var emojiModule = (
-      <div>
-
+      <div style={emojiStyle}>
+        {this.props.annotation.emoji}
       </div>
     );
     return (
@@ -130,16 +141,14 @@ export default class Annotation extends Component {
         onClick={() => {this.expandAnnotation()}}
         style={annotationWrapper}>
           <div style={headingStyle}>
-            <div style={userImageStyle} onMouseOver={(event) => {this.userHover(event)}}></div>
-            {this.state.expanded ? emojiModule : userModule}
+            <div style={userImageStyle}></div>
+            {userModule}
+            {emojiModule}
           </div>
           <div style={thumbnailStyle}></div>
         {this.state.expanded ? annotationFooter : ''}
       </div>
     );
-  }
-  userHover(event) {
-    console.log(event.target)
   }
   expandAnnotation() {
     var current = !this.state.expanded;
