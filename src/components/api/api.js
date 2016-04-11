@@ -9,9 +9,6 @@ var api = {
   getUser: function(username) {
     return fetch(this.baseUrl + '/users/' + username, myInit).then(function (resp) {
       return resp.json()
-    }).then(function(data) {
-      console.log(data);
-      return data;
     });
   },
   annotations: function() {

@@ -32,7 +32,7 @@ export default class Home extends Component {
       alignItems: 'center',
       backgroundColor: this.props.route.color.primary,
       padding: '40px',
-      backgroundColor: this.props.route.color.teal,
+      backgroundColor: this.props.route.color.five,
       left: {
         width: '50%',
         display: 'flex',

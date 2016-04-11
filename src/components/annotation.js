@@ -1,26 +1,33 @@
 import React, {Component} from 'react';
 
 export default class Annotation extends Component {
-  constructor() {
-    super();
+  resizeListener
+  constructor(props) {
+    super(props);
     this.state = {
       height: 80,
-      expanded: true,
-      imgScale: 5.5 - (window.innerWidth / 450)
+      expanded: props.expanded || true,
+      imgScale: 2.5
+    }
+  }
+  componentWillReceiveProps(oldprops, newprops) {
+    if(newprops.expanded) {
+      this.setState({
+        expanded: newprops.expanded
+      });
     }
   }
   componentWillMount() {
-    window.addEventListener('resize', () => this.handleResize())
+    this.resizeListener = window.addEventListener('resize', () => this.handleResize())
   }
   componentWillUnmount() {
-    window.removeEventListener('resize');
+    window.removeEventListener('resize', this.resizeListener);
   }
   handleResize() {
-    this.setState({
-      imgScale: 5.5 - (window.innerWidth / 450)
-    });
+
   }
   render() {
+    console.log(this.state.imgScale)
     var imageW = this.props.annotation.imageW / this.state.imgScale + 'px';
     var imageH = this.props.annotation.imageH / this.state.imgScale + 'px';
     var annotationWrapper = {
@@ -41,8 +48,8 @@ export default class Annotation extends Component {
       marginTop: '20px',
       marginBottom: '20px',
       display: this.state.expanded ? 'flex' : 'none',
-      backgroundImage: 'url(' + this.props.annotation.image + ')',
-      backgroundSize: imageW + ' ' + imageH,
+      backgroundImage: this.props.annotation.image,
+      backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPostion: 'center',
       height: imageH,
@@ -55,13 +62,25 @@ export default class Annotation extends Component {
       alignItems: 'center'
     },
     userImageStyle = {
-      height: '50px',
-      width: '50px',
+      height: '100px',
+      width: '100px',
+      display: "inline-block",
       margin: "0",
       backgroundImage: 'url(' + (this.props.annotation.userImage || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png') + ')',
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
       backgroundPostion: 'center'
+    },
+    userInfo = {
+      fontSize: "14px"
+    },
+    mainComment = {
+      display: this.state.expanded ? 'inline-flex' : 'none',
+      span: {
+        fontWeight: 'bold',
+        color: this.props.color.five,
+        paddingRight: '5px'
+      }
     },
     title = this.truncate(this.props.annotation.title),
     text = this.truncate(this.props.annotation.text);
@@ -72,7 +91,7 @@ export default class Annotation extends Component {
         style={annotationWrapper}>
           <div>
             <div style={userImageStyle} onMouseOver={(event) => {this.userHover(event)}}></div>
-            <div className="right">
+            <div style={userInfo} className="right">
               <h6>Some Name</h6>
               <p>Some Company</p>
               <p>Some Title</p>
@@ -82,6 +101,12 @@ export default class Annotation extends Component {
           <div style={thumbnailStyle}></div>
         <h6>{this.state.expanded ? this.props.annotation.title : title}</h6>
         <h6>{this.props.annotation.type}</h6>
+          <div style={mainComment}>
+            <span style={mainComment.span}>
+              {this.props.annotation.userId + ":"}
+            </span>
+            {this.props.annotation.text}
+          </div>
       </div>
     );
   }

@@ -34,7 +34,7 @@ export default class DashboardProfileCard extends Component{
                 backgroundColor: "white"
             };
             var profilePicContainer = {
-                width: "30%",
+                width: "100px",
                 height: "100px",
                 position: "absolute",
                 top: "25%",

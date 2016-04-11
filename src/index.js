@@ -26,13 +26,13 @@ var color = {
 };
 
 
-
 var Routes = (
   <Router history={history}>
     <Route path='/' component={App} color={color}>
       <IndexRoute component={Home} color={color} />
       <Route path='/login' component={Login} color={color} />
-      <Route path='username/:username' component={UserPage} color={color}/>
+      <Route path='username/:username' component={UserPage} color={color} />
+      <Route path='annotations' component={UserPage} color={color} />
     </Route>
   </Router>
 );

@@ -11,7 +11,7 @@ var dummyAnnotation = {
   websiteId: 1,
   domain: 'https://www.homestarrunner.com',
   title: "Needs to be adjusted",
-  text: "This looks good, but it could look better, its also really long and annoying",
+  text: "Lorem Ipsum delo mumbo jumbo. Her the do to the left and bring a widget this Thurs.",
   timeStamp: moment(Date.now()).format('MMM Do YY, HH:MM'),
   type: "Business Review",
   pinAttribute: '123456',
@@ -21,7 +21,7 @@ var dummyAnnotation = {
   image: img,
   imageH: 683,
   imageW: 1301,
-  comments: 'this is a really cool app, but the comments suck',
+  comments: 'Lorem Ipsum delo mumbo jumbo. Her the do to the left and bring a widget this Thurs.',
   isPrivate: false,
   thumbnailDot: {
     top: '35%',
@@ -31,14 +31,56 @@ var dummyAnnotation = {
 
 
 export default class UserPage extends Component {
+  intervalID
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      expandAll: false,
+      getResponse: []
+    };
   }
   componentWillMount() {
+    this.getUpdated()
+    window.setInterval(this.getUpdated.bind(this), 1000);
   }
+  getUpdated() {
+    console.log(this.props.route.path);
+    switch (this.props.route.path) {
+      case 'annotations': {
+          api.annotations().then((data) => {
+            var sortedByPinId = data.sort(function(a, b) {
+              return a.pinId - b.pinId;
+            }).reverse();
+            this.setState({
+              getResponse: sortedByPinId
+            });
+          });
+          break;
+        }
+      case 'username/:username': {
+        api.getUser(this.props.params.username).then((data) => {
+          
+          var sortedByPinId = data.sort(function(a, b) {
+            return a.pinId - b.pinId;
+          }).reverse();
+          this.setState({
+            getResponse: sortedByPinId
+          });
+        });
+        break;
+      }
+      }
+    }
   render() {
-
+    var Annotations = this.state.getResponse.map((annotation, idx) => {
+      return (
+        <Annotation
+            key={idx}
+            expanded={this.state.expandAll}
+            annotation={annotation}
+            color={this.props.route.color}/>);
+    });
+    console.log(Annotations)
     var pageWrapper = {
       width: '75%',
       minHeight : '100vh',
@@ -75,10 +117,7 @@ export default class UserPage extends Component {
             color={this.props.route.color} />
         </div>
         <div style={annotationWrapper}>
-          <Annotation
-          annotation={dummyAnnotation}
-          color={this.props.route.color}
-          content={dummyAnnotation.comments}/>
+          {Annotations}
         </div>
         <div style={rightBarWrapper}>
           <SideBar color={this.props.route.color}

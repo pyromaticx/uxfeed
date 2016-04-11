@@ -19,7 +19,7 @@ export default class SideBar extends Component {
       minHeight: '500px',
       border: '1px solid ' + this.props.color.tertiary,
       backgroundColor: this.props.color.primary,
-      boxShadow: '0 3px 15px 0.5px ' + this.props.color.tertiary
+      boxShadow: '0 3px 15px 0.5px ' + this.props.color.textLight,
     },
     barHeading = {
       height: '40px',
@@ -39,7 +39,7 @@ export default class SideBar extends Component {
       width: '20px',
       color: this.props.color.four,
       fontSize: "18",
-      lineHeight: "10px",
+      lineHeight: "18px",
       marginRight: "10px"
     }
 
