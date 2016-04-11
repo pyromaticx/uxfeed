@@ -6,7 +6,7 @@ export default class Footer extends Component {
     var footerStyle = {
       height: '200px',
       width: '100%',
-      backgroundColor: this.props.color.secondary,
+      backgroundColor: this.props.color.blue,
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',

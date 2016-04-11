@@ -31,13 +31,23 @@ export default class SideBar extends Component {
       alignItems: 'center'
     },
     listItemStyle = {
-      padding: '20px 5px 5px 5px',
+      padding: '20px 5px 5px 5px'
+    },
+    iconStyle = {
+      marginTop: '3px',
+      height: '20px',
+      width: '20px',
+      color: this.props.color.four,
+      fontSize: "18",
+      lineHeight: "10px",
+      marginRight: "10px"
+    }
 
-    };
 
     return (
       <div style={barStyle}>
         <div style={barHeading}>
+          <span style={iconStyle} className={'fa ' + this.props.icon}></span>
           <h5>{this.props.title}</h5>
         </div>
         <div style={listItemStyle}>

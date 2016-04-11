@@ -1,6 +1,41 @@
-body {
-  padding: 0;
+body, html{
   margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: #E7EAEC;
+}
+
+h1,h2,h3,h4,h5,h6, p{
+  margin: 0;
+  padding: 0;
+}
+
+.right{
+  float: right;
+  clear: both;
+}
+
+.left{
+  float: left;
+  clear: both;
+}
+
+img{
+  max-width: 100%;
+  height: 100%;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  list-style: none;
+  padding: 10px;
 }
 
 .headerHover:hover {
