@@ -58,7 +58,7 @@ export default class UserPage extends Component {
         }
       case 'username/:username': {
         api.getUser(this.props.params.username).then((data) => {
-          
+
           var sortedByPinId = data.sort(function(a, b) {
             return a.pinId - b.pinId;
           }).reverse();
@@ -81,7 +81,7 @@ export default class UserPage extends Component {
     });
     console.log(Annotations)
     var pageWrapper = {
-      width: '100%',
+      width: '75%',
       minHeight : '100vh',
       backgroundColor: this.props.route.color.primary,
       display: 'flex',
