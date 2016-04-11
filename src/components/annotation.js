@@ -92,10 +92,10 @@ export default class Annotation extends Component {
           <div>
             <div style={userImageStyle} onMouseOver={(event) => {this.userHover(event)}}></div>
             <div style={userInfo} className="right">
-              <h6>Some Name</h6>
-              <p>Some Company</p>
-              <p>Some Title</p>
-              <p>Some city and state</p>
+              <h6>{this.props.user.name}</h6>
+              <p>{this.props.user.company}</p>
+              <p>{this.props.user.title}</p>
+              <p>{this.props.user.location}</p>
             </div>
           </div>
           <div style={thumbnailStyle}></div>

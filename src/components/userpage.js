@@ -27,7 +27,14 @@ var dummyAnnotation = {
     top: '35%',
     left: '35%'
   }
-}
+};
+
+var dummyUser = {
+  name: "Derpy Dan",
+  company: "Go Live Labs",
+  title: "UI/UX experts",
+  location: "Sunnyvale, CA"
+};
 
 
 export default class UserPage extends Component {
@@ -76,6 +83,7 @@ export default class UserPage extends Component {
       return (
         <Annotation
             key={idx}
+            user={dummyUser}
             expanded={this.state.expandAll}
             annotation={annotation}
             color={this.props.route.color}/>);
@@ -109,6 +117,7 @@ export default class UserPage extends Component {
         <div style={leftBarWrapper}>
           <DashboardProfileCard
               color={this.props.route.color}
+              user={dummyUser}
           />
           <SideBar
             icon="fa-filter"
