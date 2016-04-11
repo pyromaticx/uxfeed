@@ -32,5 +32,9 @@ describe("GET requests", function() {
         var response = chakram.get(baseURL + '/users/1/websites/1/history');
         return expect(response).to.have.status(200);
     });
+    it("Should GET a list of annotations from a certain hashtag or topic", function () {
+        var response = chakram.get(baseURL + '/annotation/topic/uxfeed');
+        return expect(response).to.have.status(200);
+    });
 
 });

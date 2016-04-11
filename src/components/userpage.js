@@ -27,14 +27,13 @@ var dummyAnnotation = {
     top: '35%',
     left: '35%'
   }
-};
-
+}
 var dummyUser = {
   name: "Derpy Dan",
   company: "Go Live Labs",
-  title: "UI/UX experts",
-  location: "Sunnyvale, CA"
-};
+  title: "UI/UX Experts",
+  location: "Sunnyvale, CA",
+}
 
 
 export default class UserPage extends Component {
@@ -48,25 +47,13 @@ export default class UserPage extends Component {
   }
   componentWillMount() {
     this.getUpdated()
-    window.setInterval(this.getUpdated.bind(this), 1000);
+    window.setInterval(this.getUpdated.bind(this), 2000);
   }
   getUpdated() {
     console.log(this.props.route.path);
     switch (this.props.route.path) {
       case 'annotations': {
-          api.annotations().then((data) => {
-            var sortedByPinId = data.sort(function(a, b) {
-              return a.pinId - b.pinId;
-            }).reverse();
-            this.setState({
-              getResponse: sortedByPinId
-            });
-          });
-          break;
-        }
-      case 'username/:username': {
-        api.getUser(this.props.params.username).then((data) => {
-          
+        api.annotations().then((data) => {
           var sortedByPinId = data.sort(function(a, b) {
             return a.pinId - b.pinId;
           }).reverse();
@@ -76,65 +63,77 @@ export default class UserPage extends Component {
         });
         break;
       }
+      case 'username/:username': {
+        api.getUser(this.props.params.username).then((data) => {
+
+          var sortedByPinId = data.sort(function(a, b) {
+            return a.pinId - b.pinId;
+          }).reverse();
+          this.setState({
+            getResponse: sortedByPinId
+          });
+        });
+        break;
       }
     }
+  }
   render() {
     var Annotations = this.state.getResponse.map((annotation, idx) => {
       return (
-        <Annotation
-            key={idx}
-            user={dummyUser}
-            expanded={this.state.expandAll}
-            annotation={annotation}
-            color={this.props.route.color}/>);
+          <Annotation
+              key={idx}
+              user={dummyUser}
+              expanded={this.state.expandAll}
+              annotation={annotation}
+              color={this.props.route.color}/>);
     });
     console.log(Annotations)
     var pageWrapper = {
-      width: '75%',
-      minHeight : '100vh',
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginTop: "4%"
-    },
-    leftBarWrapper = {
-      width: '25%',
-      marginTop: "2%"
-    },
-    rightBarWrapper = {
-      width: '20%',
-      marginTop: "2.5%"
-    },
-    annotationWrapper = {
-      minWidth: '300px',
-      width: '50%',
-      paddingBottom: '20px',
-      marginTop: "0.5%"
-    },
-    leftBarContent = ['All Users', 'My Feeds', 'Followed Users', 'My Followers', 'Companies'],
-    rightBarContent = ['Most Used Pin Type', 'Most Used Emojii', 'Most Searched', 'Most Votes', 'Most Active Reviewed', 'Most Pins'];
+          width: '75%',
+          minHeight : '100vh',
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginTop: "4%"
+        },
+        leftBarWrapper = {
+          width: '25%',
+          marginTop: "2%"
+        },
+        rightBarWrapper = {
+          width: '20%',
+          marginTop: "2.5%"
+        },
+        annotationWrapper = {
+          minWidth: '300px',
+          width: '50%',
+          paddingBottom: '20px',
+          marginTop: "0.5%"
+        },
+        leftBarContent = ['All Users', 'My Feeds', 'Followed Users', 'My Followers', 'Companies'],
+        rightBarContent = ['Most Used Pin Type', 'Most Used Emojii', 'Most Searched', 'Most Votes', 'Most Active Reviewed', 'Most Pins'];
     return (
-      <div style={pageWrapper}>
-        <div style={leftBarWrapper}>
-          <DashboardProfileCard
-              color={this.props.route.color}
-              user={dummyUser}
-          />
-          <SideBar
-            icon="fa-filter"
-            title='Filters'
-            content={leftBarContent}
-            color={this.props.route.color} />
+        <div style={pageWrapper}>
+          <div style={leftBarWrapper}>
+            <DashboardProfileCard
+                color={this.props.route.color}
+                user={dummyUser}
+            />
+            <SideBar
+                icon="fa-filter"
+                title='Filters'
+                content={leftBarContent}
+                color={this.props.route.color} />
+          </div>
+          <div style={annotationWrapper}>
+            {Annotations}
+          </div>
+          <div style={rightBarWrapper}>
+            <SideBar color={this.props.route.color}
+                     icon="fa-fire"
+                     title="Popular"
+                     content={rightBarContent}/>
+          </div>
         </div>
-        <div style={annotationWrapper}>
-          {Annotations}
-        </div>
-        <div style={rightBarWrapper}>
-          <SideBar color={this.props.route.color}
-          icon="fa-fire"
-          title="Popular"
-          content={rightBarContent}/>
-        </div>
-      </div>
     );
   }
 }
