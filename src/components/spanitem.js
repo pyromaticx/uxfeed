@@ -18,10 +18,11 @@ export default class SpanItem extends Component {
       textAlign: 'center',
       padding: '30px',
       boxSizing: 'border-box',
-      backgroundColor: this.state.hovered == false ? this.props.color.primary : this.props.color.secondary,
+      backgroundColor: this.state.hovered == false ? this.props.color.primary : this.props.color.four,
       color: this.state.hovered == false ? this.props.color.text : this.props.color.textLight,
       transformStyle: 'preserve-3d',
-      transform: this.state.hovered == false ? '' : 'rotate3d(2,2,2, 360deg)',
+      transform: this.state.hovered == false ? '' : 'scale(1.1)',
+      zIndex: this.state.hovered == false ? '1' : '10',
       transition: 'all 500ms ease-out'
     },
     spannerWrapper = {

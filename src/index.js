@@ -14,13 +14,13 @@ var history = new createHistory({
 
 var color = {
   primary: '#ffffff',
-  secondary: '#7b1cf0',
-  tertiary: '#ccc',
-  four: '#fc8c4b',
+  secondary: '#ccc',
+  tertiary: '#aaa',
+  four: '#888',
   text: '#464646',
   textLight: '#EEE',
-  teal: '#36BDB1',
-  blue: '#0d1bff'
+  five: '#555',
+  six: '#222'
 }
 
 
@@ -29,7 +29,8 @@ var Routes = (
     <Route path='/' component={App} color={color}>
       <IndexRoute component={Home} color={color} />
       <Route path='/login' component={Login} color={color} />
-      <Route path='username/:username' component={UserPage} color={color}/>
+      <Route path='username/:username' component={UserPage} color={color} />
+      <Route path='annotations' component={UserPage} color={color} />
     </Route>
   </Router>
 )

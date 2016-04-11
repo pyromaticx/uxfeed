@@ -1,26 +1,33 @@
 import React, {Component} from 'react';
 
 export default class Annotation extends Component {
-  constructor() {
-    super();
+  resizeListener
+  constructor(props) {
+    super(props);
     this.state = {
       height: 80,
-      expanded: false,
-      imgScale: 5.5 - (window.innerWidth / 450)
+      expanded: props.expanded || false,
+      imgScale: 2.5
+    }
+  }
+  componentWillReceiveProps(oldprops, newprops) {
+    if(newprops.expanded) {
+      this.setState({
+        expanded: newprops.expanded
+      });
     }
   }
   componentWillMount() {
-    window.addEventListener('resize', () => this.handleResize())
+    this.resizeListener = window.addEventListener('resize', () => this.handleResize())
   }
   componentWillUnmount() {
-    window.removeEventListener('resize');
+    window.removeEventListener('resize', this.resizeListener);
   }
   handleResize() {
-    this.setState({
-      imgScale: 5.5 - (window.innerWidth / 450)
-    });
+
   }
   render() {
+    console.log(this.state.imgScale)
     var imageW = this.props.annotation.imageW / this.state.imgScale + 'px';
     var imageH = this.props.annotation.imageH / this.state.imgScale + 'px';
     var annotationWrapper = {
@@ -34,7 +41,7 @@ export default class Annotation extends Component {
       justifyContent: this.state.expanded ? 'space-between' : 'center',
       padding: '20px',
       marginTop: '20px',
-      boxShadow: '0 3px 5px 0.5px ' + this.props.color.tertiary,
+      boxShadow: '0 3px 15px 0.5px ' + this.props.color.textLight,
       borderRadius: '5px',
       overflow: 'hidden',
     },
@@ -42,8 +49,8 @@ export default class Annotation extends Component {
       marginTop: '20px',
       marginBottom: '20px',
       display: this.state.expanded ? 'flex' : 'none',
-      backgroundImage: 'url(' + this.props.annotation.image + ')',
-      backgroundSize: imageW + ' ' + imageH,
+      backgroundImage: this.props.annotation.image,
+      backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPostion: 'center',
       height: imageH,
@@ -64,6 +71,14 @@ export default class Annotation extends Component {
       backgroundRepeat: 'no-repeat',
       backgroundPostion: 'center'
     },
+    mainComment = {
+      display: this.state.expanded ? 'inline-flex' : 'none',
+      span: {
+        fontWeight: 'bold',
+        color: this.props.color.five,
+        paddingRight: '5px'
+      }
+    },
     title = this.truncate(this.props.annotation.title),
     text = this.truncate(this.props.annotation.text);
 
@@ -77,7 +92,12 @@ export default class Annotation extends Component {
             <h6>{this.props.annotation.type}</h6>
           </div>
           <div style={thumbnailStyle}></div>
-
+          <div style={mainComment}>
+            <span style={mainComment.span}>
+              {this.props.annotation.userId + ":"}
+            </span>
+            {this.props.annotation.text}
+          </div>
       </div>
     );
   }

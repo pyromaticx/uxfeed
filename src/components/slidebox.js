@@ -35,7 +35,7 @@ export default class SlideBox extends Component {
       transition: 'all 500ms ease',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: this.props.color.blue,
+      backgroundColor: this.props.color.six,
       borderBottom: '10px solid ' + this.props.color.tertiary
     },
     box3 = {
