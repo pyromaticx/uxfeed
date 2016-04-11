@@ -6,7 +6,7 @@ export default class Annotation extends Component {
     super(props);
     this.state = {
       height: 80,
-      expanded: props.expanded || false,
+      expanded: props.expanded || true,
       imgScale: 2.5
     }
   }
@@ -37,11 +37,10 @@ export default class Annotation extends Component {
       border: '1px solid ' + this.props.color.tertiary,
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
       justifyContent: this.state.expanded ? 'space-between' : 'center',
       padding: '20px',
       marginTop: '20px',
-      boxShadow: '0 3px 15px 0.5px ' + this.props.color.textLight,
+      boxShadow: "0px 1px 15px 2px #A8A8A8",
       borderRadius: '5px',
       overflow: 'hidden',
     },
@@ -60,16 +59,20 @@ export default class Annotation extends Component {
     textRow = {
       display: 'flex',
       width: '100%',
-      justifyContent: 'space-between',
       alignItems: 'center'
     },
     userImageStyle = {
-      height: '50px',
-      width: '50px',
+      height: '100px',
+      width: '100px',
+      display: "inline-block",
+      margin: "0",
       backgroundImage: 'url(' + (this.props.annotation.userImage || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png') + ')',
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
       backgroundPostion: 'center'
+    },
+    userInfo = {
+      fontSize: "14px"
     },
     mainComment = {
       display: this.state.expanded ? 'inline-flex' : 'none',
@@ -86,12 +89,18 @@ export default class Annotation extends Component {
       <div
         onClick={() => {this.expandAnnotation()}}
         style={annotationWrapper}>
-          <div style={textRow}>
+          <div>
             <div style={userImageStyle} onMouseOver={(event) => {this.userHover(event)}}></div>
-            <h6>{this.state.expanded ? this.props.annotation.title : title}</h6>
-            <h6>{this.props.annotation.type}</h6>
+            <div style={userInfo} className="right">
+              <h6>Some Name</h6>
+              <p>Some Company</p>
+              <p>Some Title</p>
+              <p>Some city and state</p>
+            </div>
           </div>
           <div style={thumbnailStyle}></div>
+        <h6>{this.state.expanded ? this.props.annotation.title : title}</h6>
+        <h6>{this.props.annotation.type}</h6>
           <div style={mainComment}>
             <span style={mainComment.span}>
               {this.props.annotation.userId + ":"}

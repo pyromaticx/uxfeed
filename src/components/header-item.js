@@ -10,24 +10,17 @@ export default class HeaderItem extends Component {
   render() {
     var headerItemStyle = {
       display: 'flex',
-      padding: '10px 5px 5px 5px',
+      paddingBottom: "5px",
+      borderBottom: "1px solid" + (this.state.isHovered ? this.props.color.teal : this.props.color.primary ),
       alignItems: 'center',
       justifyContent: 'center',
-      borderBottom: '3px solid ' + (this.state.isHovered ? this.props.color.secondary : this.props.color.tertiary ),
-      transition: 'all 250ms ease',
       height: this.props.height,
-      transition: 'all 250ms ease'
+      transition: 'all 500ms ease'
     },
     titleStyle = {
-      fontSize: '14px',
-      color: this.props.color.text,
-
-    },
-    iconStyle = {
-      marginTop: '3px',
-      height: '20px',
-      width: '20px',
+      fontSize: '16px',
       color: this.props.color.secondary
+
     }
 
     return (
@@ -36,7 +29,6 @@ export default class HeaderItem extends Component {
           onMouseEnter={() => {this.mouseEnter()}}
           onMouseLeave={() => {this.mouseLeave()}}
           style={headerItemStyle}>
-            <span style={iconStyle} className={'fa ' + this.props.icon}></span>
             <span style={titleStyle}>{this.props.title}</span>
         </div>
       </Link>

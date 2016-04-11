@@ -13,15 +13,17 @@ var history = new createHistory({
 });
 
 var color = {
+  bgColor: "#E7EAEC",
   primary: '#ffffff',
-  secondary: '#ccc',
-  tertiary: '#aaa',
-  four: '#888',
+  secondary: '#7b1cf0',
+  tertiary: '#ccc',
+  four: '#fc8c4b',
   text: '#464646',
   textLight: '#EEE',
-  five: '#555',
-  six: '#222'
-}
+  teal: '#36BDB1',
+  blue: '#235eef',
+  none: "none"
+};
 
 
 var Routes = (
@@ -33,7 +35,7 @@ var Routes = (
       <Route path='annotations' component={UserPage} color={color} />
     </Route>
   </Router>
-)
+);
 
 
 ReactDOM.render(Routes, document.querySelector('#app'));

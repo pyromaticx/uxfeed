@@ -17,10 +17,15 @@ export default class Header extends Component {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-around',
-      borderBottom: '1px solid ' + this.props.color.tertiary
+      borderBottom: '1px solid ' + this.props.color.tertiary,
+      padding: "0 16.5%",
+      position: "fixed",
+      zIndex: "100",
+      boxShadow: "0px 1px 15px 2px #A8A8A8"
     },
     inputStyle = {
-      width: '200px'
+      width: '219px',
+      marginRight: "10px"
     };
     return (
       <div style={headerStyle}>
@@ -30,27 +35,17 @@ export default class Header extends Component {
             height={headerStyle.height} />
           </Link>
         <HeaderItem
-          height={headerStyle.height}
           color={this.props.color}
-          icon='fa-hashtag'
-          title='Check this out!' />
+          title='Full View' />
         <HeaderItem
-          height={headerStyle.height}
           color={this.props.color}
-          icon='fa-question-circle'
-          title='Frequently Asked Questions' />
-        <HeaderItem
-          height={headerStyle.height}
-          color={this.props.color}
-          linkTo='login'
-          icon='fa-sign-in'
-          title='Login' />
+          title='Min View' />
         <input
           onChange={(event) => {this.inputChange(event)}}
           style={inputStyle}
           className='form-control'
           type='text'
-          placeholder='🔎'
+          placeholder='🔎  Search'
           value={this.state.searchValue}/>
       </div>
     );

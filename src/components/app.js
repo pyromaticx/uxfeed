@@ -1,7 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
 import Header from './header.js';
-import Footer from './footer.js';
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +27,6 @@ export default class App extends Component {
         <div style={contentWrapper}>
           {this.props.children}
         </div>
-        <Footer color={this.props.route.color} />
       </div>
     );
   }
