@@ -63,7 +63,7 @@ export default class Annotation extends Component {
                 justifyContent: this.state.expanded ? 'space-between' : 'center',
                 alignItems: 'center',
                 padding: '20px',
-                marginTop: '20px',
+                marginTop: '25px',
                 boxShadow: "0px 1px 15px 2px #A8A8A8",
                 borderRadius: '5px',
                 overflow: 'hidden',

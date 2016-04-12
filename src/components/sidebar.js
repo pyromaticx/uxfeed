@@ -20,6 +20,7 @@ export default class SideBar extends Component {
       border: '1px solid ' + this.props.color.tertiary,
       backgroundColor: this.props.color.primary,
       boxShadow: '0 3px 15px 0.5px ' + this.props.color.textLight,
+      borderRadius: "5px"
     },
     barHeading = {
       height: '40px',
@@ -28,7 +29,8 @@ export default class SideBar extends Component {
       width: '100%',
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      borderRadius: "5px 5px 0 0"
     },
     listItemStyle = {
       padding: '20px 5px 5px 5px'
