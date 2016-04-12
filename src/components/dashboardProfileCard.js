@@ -13,12 +13,13 @@ export default class DashboardProfileCard extends Component{
         render(){
             var profileCardWrapper = {
                 width: '100%',
-                height: "200px",
+                height: "150px",
                 marginTop: "2%",
                 marginBottom: "5%",
                 display: "flex",
                 flexDirection: "row",
-                backgroundColor: this.props.color.secondary
+                backgroundColor: this.props.color.secondary,
+                borderRadius: "5px"
             };
             var bottomSection = {
                 height: "100px",
@@ -27,17 +28,27 @@ export default class DashboardProfileCard extends Component{
             var profilePicContainer = {
                 width: "100%",
                 height: "100%",
-                flex: "3"
+                flex: "3",
+                borderRadius: "5px 0 0 5px",
+                backgroundImage: "url('http://s3.amazonaws.com/37assets/svn/765-default-avatar.png')",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+                backgroundPosition: "center"
             };
             var fontColor = {
                 color: "white",
                 flex: "3",
-                wordWrap: "break-all"
+                wordWrap: "break-all",
+                display: "flex",
+                alignItems: "flex-start",
+                flexDirection: "column",
+                justifyContent: "center",
+                paddingLeft: "10px",
+                borderRadius: "5px"
             }
             return(
                 <div style={profileCardWrapper}>
                         <div style={profilePicContainer}>
-                            <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt=""/>
                         </div>
                         <div style={fontColor}>
                             <h6>{this.props.user.name}</h6>
