@@ -39,7 +39,7 @@ export default class SideBar extends Component {
       marginTop: '3px',
       height: '20px',
       width: '20px',
-      color: this.props.color.four,
+      color: this.props.color.primary,
       fontSize: "18",
       lineHeight: "18px",
       marginRight: "10px"

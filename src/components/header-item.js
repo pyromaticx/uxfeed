@@ -19,7 +19,7 @@ export default class HeaderItem extends Component {
     },
     titleStyle = {
       fontSize: '16px',
-      color: this.props.color.secondary
+      color: this.props.color.four
 
     }
 
