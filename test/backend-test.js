@@ -9,15 +9,15 @@ describe("GET requests", function() {
         return expect(response).to.have.status(200);
     });
     it("Should be able to GET a specific annotation", function () {
-        var response = chakram.get(baseURL + '/annotations/1');
+        var response = chakram.get(baseURL + '/annotations/pinId?pinId=1');
         return expect(response).to.have.status(200);
     });
     it("Should be able to GET all users", function () {
-        var response = chakram.get(baseURL + '/users');
+        var response = chakram.get(baseURL + '/users/');
         return expect(response).to.have.status(200);
     });
-    it("Should be able to GET all of a specific users annotations", function () {
-        var response = chakram.get(baseURL + '/users/1');
+    it("Should be able to GET a specific user", function () {
+        var response = chakram.get(baseURL + '/users/2');
         return expect(response).to.have.status(200);
     });
     it("Should be able to GET a paginated data set of all annotations for a particular user for a particular website", function () {
