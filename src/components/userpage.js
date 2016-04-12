@@ -44,7 +44,8 @@ export default class UserPage extends Component {
         this.state = {
             expandAll: false,
             getResponse: [],
-            contentWidth: window.innerWidth <= 1024 ? '100%' : '85%'
+            contentWidth: window.innerWidth <= 1024 ? '100%' : '85%',
+            scaleValue: window.innerWidth <= 1024 ? '4' : '3'
         };
     }
     componentWillMount() {
@@ -56,9 +57,20 @@ export default class UserPage extends Component {
         window.removeEventListener('resize', this.resizeListener);
     }
     handleResize() {
-        var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%'
+        var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%';
+        var scaleValue;
+
+        if(window.innerWidth >= 1280) {
+          scaleValue = 2.6;
+        } else if (window.innerWidth >= 1024) {
+          scaleValue = 3.5;
+        } else {
+          scaleValue = 4;
+        }
+
         this.setState({
-            contentWidth: contentWidth
+            contentWidth: contentWidth,
+            scaleValue: scaleValue
         });
     }
     getUpdated() {
@@ -96,6 +108,7 @@ export default class UserPage extends Component {
                     user={dummyUser}
                     expanded={this.state.expandAll}
                     annotation={annotation}
+                    scale={this.state.scaleValue}
                     color={this.props.route.color}/>);
         });
         var pageWrapper = {

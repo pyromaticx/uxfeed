@@ -50,8 +50,8 @@ export default class Annotation extends Component {
         }
     }
     render() {
-        var imageW = this.props.annotation.imageW / this.state.imgScale + 'px';
-        var imageH = this.props.annotation.imageH / this.state.imgScale + 'px';
+        var imageW = this.props.annotation.imageW / this.props.scale + 'px';
+        var imageH = this.props.annotation.imageH / this.props.scale + 'px';
         var annotationWrapper = {
                 width: '100%',
                 minHeight: this.state.height + 'px',
@@ -177,9 +177,7 @@ export default class Annotation extends Component {
                         color: '#55acee'
                     }
                 }
-            },
-            title = this.truncate(this.props.annotation.title),
-            text = this.truncate(this.props.annotation.text);
+            };
         var userModule = (
             <div style={userInfo}>
                 <h3>{this.state.expanded ? this.props.annotation.title : this.truncate(this.props.annotation.title)}</h3>
