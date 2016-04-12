@@ -7,7 +7,7 @@ export default class Annotation extends Component {
         this.state = {
             height: 80,
             expanded: props.expanded || true,
-            imgScale: 3.5
+            imgScale: 2.5
         }
     }
     componentWillReceiveProps(oldprops, newprops) {
@@ -77,7 +77,7 @@ export default class Annotation extends Component {
                 backgroundPostion: 'center',
                 height: imageH,
                 width: imageW,
-                border: '1px solid ' + this.props.color.tertiary,
+                border: '1px solid gray'
             },
             textRow = {
                 display: 'flex',
@@ -88,7 +88,6 @@ export default class Annotation extends Component {
                 display: 'flex',
                 alignContent: 'center',
                 height: '50px',
-                width: '40px',
                 margin: "0",
                 backgroundImage: 'url(' + (this.props.annotation.userImage || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png') + ')',
                 backgroundSize: 'contain',
@@ -103,7 +102,10 @@ export default class Annotation extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
                 width: '100%',
-                flex: '4'
+                flex: '8',
+                titleColor: {
+                    color: "#333"
+                }
             },
             mainComment = {
                 display: this.state.expanded ? 'inline-flex' : 'none',
@@ -153,8 +155,7 @@ export default class Annotation extends Component {
             timeSocialStyles = {
                 width: '100%',
                 display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                justifyContent: 'space-around',
                 alignItems: 'center',
                 marginBottom: '10px',
                 time: {
@@ -180,8 +181,8 @@ export default class Annotation extends Component {
             title = this.truncate(this.props.annotation.title),
             text = this.truncate(this.props.annotation.text);
         var userModule = (
-            <div style={userInfo} className="right">
-                <h6>{this.state.expanded ? this.props.annotation.title : this.truncate(this.props.annotation.title)}</h6>
+            <div style={userInfo}>
+                <h3>{this.state.expanded ? this.props.annotation.title : this.truncate(this.props.annotation.title)}</h3>
             </div>
         );
         var annotationFooter = (

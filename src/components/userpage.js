@@ -106,8 +106,8 @@ export default class UserPage extends Component {
                 marginTop: "4%"
             },
             leftBarWrapper = {
-                width: '25%',
-                marginTop: "2%"
+                width: '20%',
+                marginTop: "2.5%"
             },
             rightBarWrapper = {
                 width: '20%',
