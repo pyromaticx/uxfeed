@@ -62,7 +62,6 @@ export default class UserPage extends Component {
         });
     }
     getUpdated() {
-        console.log(this.props.route.path);
         switch (this.props.route.path) {
             case 'annotations': {
                 api.annotations().then((data) => {
@@ -99,7 +98,6 @@ export default class UserPage extends Component {
                     annotation={annotation}
                     color={this.props.route.color}/>);
         });
-        console.log(Annotations)
         var pageWrapper = {
                 width: this.state.contentWidth,
                 minHeight : '100vh',

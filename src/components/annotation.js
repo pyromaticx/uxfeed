@@ -50,7 +50,6 @@ export default class Annotation extends Component {
         }
     }
     render() {
-        console.log(this.state.imgScale)
         var imageW = this.props.annotation.imageW / this.state.imgScale + 'px';
         var imageH = this.props.annotation.imageH / this.state.imgScale + 'px';
         var annotationWrapper = {
