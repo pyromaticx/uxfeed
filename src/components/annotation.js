@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import moment from 'moment';
 export default class Annotation extends Component {
     resizeListener
     constructor(props) {
@@ -188,7 +188,7 @@ export default class Annotation extends Component {
             <div style={annotationFooterStyle}>
                 <div style={timeSocialStyles}>
                     <div style={timeSocialStyles.time}>
-                        {this.props.annotation.timeStamp}
+                        {moment(Date(this.props.annotation.timeStamp)test).format('MMM Do YY, HH:MM')}
                     </div>
                     <div style={timeSocialStyles.social}>
                         <span className='fa fa-pinterest-p' style={timeSocialStyles.social.pinterest}></span>
