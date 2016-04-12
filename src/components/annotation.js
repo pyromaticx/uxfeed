@@ -189,7 +189,7 @@ export default class Annotation extends Component {
             <div style={annotationFooterStyle}>
                 <div style={timeSocialStyles}>
                     <div style={timeSocialStyles.time}>
-                        {moment(Date(this.props.annotation.timeStamp)test).format('MMM Do YY, HH:MM')}
+                        {moment(Date(this.props.annotation.timeStamp)).format('MMM Do YY, HH:MM')}
                     </div>
                     <div style={timeSocialStyles.social}>
                         <span className='fa fa-pinterest-p' style={timeSocialStyles.social.pinterest}></span>
