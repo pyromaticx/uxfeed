@@ -6,7 +6,7 @@ export default class SideBar extends Component {
     var content = props.content || []
     var listItems = content.map(function(el, idx) {
       return (
-        <li key={idx}>{el}</li>
+        <li key={idx}>{el} <span className="badge">4</span></li>
       )
     });
     this.state = {
