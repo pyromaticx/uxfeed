@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import MenuItem from './menuitem.js';
 
 export default class SideBar extends Component {
   constructor(props) {
@@ -6,7 +7,7 @@ export default class SideBar extends Component {
     var content = props.content || []
     var listItems = content.map(function(el, idx) {
       return (
-        <li key={idx}>{el}</li>
+        <MenuItem color={props.color} title={el.title} value={el.value} />
       )
     });
     this.state = {

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
+import UserComment from './usercomment.js';
+
 export default class Annotation extends Component {
     resizeListener
     constructor(props) {
@@ -16,15 +18,6 @@ export default class Annotation extends Component {
                 expanded: newprops.expanded
             });
         }
-    }
-    componentWillMount() {
-        this.resizeListener = window.addEventListener('resize', () => this.handleResize())
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.resizeListener);
-    }
-    handleResize() {
-
     }
     emojiPicker(emoji) {
         var type;
@@ -177,12 +170,34 @@ export default class Annotation extends Component {
                         color: '#55acee'
                     }
                 }
-            };
+            },
+            userCommentStyle = {
+              display: 'inline-flex',
+              width: '100%',
+              minHeight: '40px',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              commentUser: {
+                paddingRight: '5px',
+                fontWeight: 'bold',
+                color: this.props.color.five
+              }
+            }
         var userModule = (
             <div style={userInfo}>
                 <h3>{this.state.expanded ? this.props.annotation.title : this.truncate(this.props.annotation.title)}</h3>
             </div>
         );
+        var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
+        var Comments = currentComments.map((comment) => {
+          return (
+            <div style={userCommentStyle}>
+              <span style={userCommentStyle.commentUser}>{comment.username + ':'}</span>
+              <span>{comment.comment}</span>
+
+            </div>
+          );
+        });
         var annotationFooter = (
             <div style={annotationFooterStyle}>
                 <div style={timeSocialStyles}>
@@ -196,14 +211,19 @@ export default class Annotation extends Component {
                     </div>
                 </div>
                 <div style={mainComment}>
-            <span style={mainComment.span}>
-              {this.props.annotation.userId + ":"}
-            </span>
-                    {this.props.annotation.text}
+                  <span style={mainComment.span}>
+                    {this.props.annotation.userId + ":"}
+                  </span>
+                  {this.props.annotation.text}
                 </div>
+                {Comments}
+              <UserComment updateCommentsCB={this.props.updateCommentsCB}
+                user={this.props.user}
+                color={this.props.color}
+                annotation={this.props.annotation} />
             </div>
         );
-        //this.props.annotation.emoji
+
         var emojiModule = (
             <div style={emojiStyle}>
             </div>

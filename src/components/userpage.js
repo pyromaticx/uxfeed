@@ -21,7 +21,7 @@ var dummyAnnotation = {
     image: img,
     imageH: 683,
     imageW: 1301,
-    comments: 'Lorem Ipsum delo mumbo jumbo. Her the do to the left and bring a widget this Thurs.',
+    comments: [{username: 'SimpleSara', comment: 'this is lame...', timestamp: moment(Date.now()).format('MMM Do YY, HH:MM') }],
     isPrivate: false,
     thumbnailDot: {
         top: '35%',
@@ -33,6 +33,8 @@ var dummyUser = {
     company: "Go Live Labs",
     title: "UI/UX Experts",
     location: "Sunnyvale, CA",
+    following: ["brendon", "james", "kelly"],
+    followers: ["steve", "dan", "somebooty"]
 }
 
 
@@ -73,6 +75,10 @@ export default class UserPage extends Component {
             scaleValue: scaleValue
         });
     }
+    updateCommentsCB(commentObj) {
+      // !!! TODO: Add PATCH request to update comment array in DB !!!
+      console.log(commentObj)
+    }
     getUpdated() {
         switch (this.props.route.path) {
             case 'annotations': {
@@ -109,6 +115,7 @@ export default class UserPage extends Component {
                     expanded={this.state.expandAll}
                     annotation={annotation}
                     scale={this.state.scaleValue}
+                    updateCommentsCB={this.updateCommentsCB}
                     color={this.props.route.color}/>);
         });
         var pageWrapper = {
@@ -132,8 +139,8 @@ export default class UserPage extends Component {
                 paddingBottom: '20px',
                 marginTop: "0.5%"
             },
-            leftBarContent = ['All Users', 'My Feeds', 'Followed Users', 'My Followers', 'Companies'],
-            rightBarContent = ['Most Used Pin Type', 'Most Used Emojii', 'Most Searched', 'Most Votes', 'Most Active Reviewed', 'Most Pins'];
+            leftBarContent = [{title: 'All Users', value: ''}, {title: 'My Feeds', value: ''}, {title: 'Followed Users', value: dummyUser.following.length}, {title: 'My Followers', value: dummyUser.followers.length}, {title: 'Companies', value: ''}],
+            rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
         return (
             <div style={pageWrapper}>
                 <div style={leftBarWrapper}>
