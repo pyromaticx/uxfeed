@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import AllUserModule from "./allUsersModule";
 
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
-    var content = props.content || []
+    var content = props.content || [];
     var listItems = content.map(function(el, idx) {
       return (
-        <li key={idx}>{el} <span className="badge">4</span></li>
+        <AllUserModule title={el} key={idx} />
       )
     });
     this.state = {
@@ -24,7 +25,7 @@ export default class SideBar extends Component {
     },
     barHeading = {
       height: '40px',
-      backgroundColor: this.props.color.secondary,
+      backgroundColor: this.props.color.six,
       color: this.props.color.textLight,
       width: '100%',
       display: 'flex',
@@ -54,7 +55,7 @@ export default class SideBar extends Component {
         </div>
         <div style={listItemStyle}>
           <ul>
-          {this.state.listItems}
+            {this.state.listItems}
           </ul>
         </div>
       </div>

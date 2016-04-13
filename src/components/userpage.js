@@ -106,16 +106,16 @@ export default class UserPage extends Component {
                 marginTop: "4%"
             },
             leftBarWrapper = {
-                width: '20%',
+                width: '25%',
                 marginTop: "2.5%"
             },
             rightBarWrapper = {
-                width: '20%',
+                width: '25%',
                 marginTop: "2.5%"
             },
             annotationWrapper = {
                 minWidth: '300px',
-                width: '50%',
+                width: '45%',
                 paddingBottom: '20px',
                 marginTop: "0.5%"
             },

@@ -7,7 +7,7 @@ export default class Annotation extends Component {
         this.state = {
             height: 80,
             expanded: props.expanded || true,
-            imgScale: 2.5
+            imgScale: 3.5
         }
     }
     componentWillReceiveProps(oldprops, newprops) {
@@ -49,6 +49,7 @@ export default class Annotation extends Component {
             }
         }
     }
+
     render() {
         var imageW = this.props.annotation.imageW / this.state.imgScale + 'px';
         var imageH = this.props.annotation.imageH / this.state.imgScale + 'px';
@@ -76,7 +77,7 @@ export default class Annotation extends Component {
                 backgroundRepeat: 'no-repeat',
                 backgroundPostion: 'center',
                 height: imageH,
-                width: imageW,
+                 width: imageW,
                 border: '1px solid gray'
             },
             textRow = {
