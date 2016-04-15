@@ -123,21 +123,21 @@ export default class UserPage extends Component {
                 minHeight : '100vh',
                 display: 'flex',
                 justifyContent: 'space-between',
-                marginTop: "4%"
+
             },
             leftBarWrapper = {
-                width: '20%',
-                marginTop: "2.5%"
+                width: '25%',
+
             },
             rightBarWrapper = {
-                width: '20%',
-                marginTop: "2.5%"
+                width: '25%',
+                
             },
             annotationWrapper = {
                 minWidth: '300px',
-                width: '50%',
+                width: '45%',
                 paddingBottom: '20px',
-                marginTop: "0.5%"
+
             },
             leftBarContent = [{title: 'All Users', value: ''}, {title: 'My Feeds', value: ''}, {title: 'Followed Users', value: dummyUser.following.length}, {title: 'My Followers', value: dummyUser.followers.length}, {title: 'Companies', value: ''}],
             rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
@@ -150,7 +150,7 @@ export default class UserPage extends Component {
                     />
                     <SideBar
                         icon="fa-filter"
-                        title='Filters'
+                        title=''
                         content={leftBarContent}
                         color={this.props.route.color} />
                 </div>
@@ -160,7 +160,7 @@ export default class UserPage extends Component {
                 <div style={rightBarWrapper}>
                     <SideBar color={this.props.route.color}
                              icon="fa-fire"
-                             title="Popular"
+                             title=""
                              content={rightBarContent}/>
                 </div>
             </div>

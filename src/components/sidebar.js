@@ -17,14 +17,14 @@ export default class SideBar extends Component {
   render() {
     var barStyle = {
       width: '100%',
-      minHeight: '500px',
-      border: '1px solid ' + this.props.color.tertiary,
+      minHeight: '200px',
+
       backgroundColor: this.props.color.primary,
-      boxShadow: '0 3px 15px 0.5px ' + this.props.color.textLight,
+      boxShadow: '0 3px 15px 1px ' + this.props.color.five,
       borderRadius: "5px"
     },
     barHeading = {
-      height: '40px',
+      height: '80px',
       backgroundColor: this.props.color.secondary,
       color: this.props.color.textLight,
       width: '100%',
@@ -34,16 +34,18 @@ export default class SideBar extends Component {
       borderRadius: "5px 5px 0 0"
     },
     listItemStyle = {
-      padding: '20px 5px 5px 5px'
+      padding: '0'
     },
     iconStyle = {
       marginTop: '3px',
-      height: '20px',
-      width: '20px',
+      height: '80px',
+      width: '100%',
       color: this.props.color.primary,
-      fontSize: "18",
-      lineHeight: "18px",
-      marginRight: "10px"
+      fontSize: "60px",
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+
     }
 
 

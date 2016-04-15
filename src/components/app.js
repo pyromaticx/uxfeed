@@ -18,6 +18,7 @@ export default class App extends Component {
       justifyContent: 'center',
       minHeight: '100vh',
       width: '100%',
+      paddingTop: '80px'
     };
     return (
       <div>

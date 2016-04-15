@@ -14,12 +14,11 @@ export default class DashboardProfileCard extends Component{
             var profileCardWrapper = {
                 width: '100%',
                 height: "150px",
-                marginTop: "2%",
-                marginBottom: "5%",
                 display: "flex",
                 flexDirection: "row",
-                backgroundColor: this.props.color.secondary,
-                borderRadius: "5px"
+                backgroundColor: this.props.color.four,
+                borderRadius: "5px",
+                marginBottom: '25px'
             };
             var bottomSection = {
                 height: "100px",

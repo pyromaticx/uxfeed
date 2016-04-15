@@ -33,6 +33,7 @@ export default class UserComment extends Component {
   }
   render() {
     var commentStyle = {
+      marginTop: '15px',
       display: 'flex',
       width: '100%',
       minHeight: '50px',

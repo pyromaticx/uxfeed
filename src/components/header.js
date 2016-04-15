@@ -13,15 +13,15 @@ export default class Header extends Component {
     var headerStyle = {
       height: '60px',
       width: '100%',
-      backgroundColor: this.props.color.primary,
+      backgroundColor: this.props.color.secondary,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-around',
-      borderBottom: '1px solid ' + this.props.color.tertiary,
+
       padding: "0 16.5%",
       position: "fixed",
       zIndex: "100",
-      boxShadow: "0px 1px 15px 2px #A8A8A8"
+      boxShadow: '0 3px 15px 1px ' + this.props.color.five,
     },
     inputStyle = {
       width: '219px',
