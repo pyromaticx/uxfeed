@@ -33,6 +33,8 @@ var dummyUser = {
     company: "Go Live Labs",
     title: "UI/UX Experts",
     location: "Sunnyvale, CA",
+    following: ["brendan", "james", "kelly"],
+    followers: ["steve", "dan", "somebooty"]
 }
 
 
@@ -102,22 +104,18 @@ export default class UserPage extends Component {
                 width: this.state.contentWidth,
                 minHeight : '100vh',
                 display: 'flex',
-                justifyContent: 'space-between',
-                marginTop: "4%"
+                justifyContent: 'space-between'
             },
             leftBarWrapper = {
-                width: '25%',
-                marginTop: "2.5%"
+                width: '25%'
             },
             rightBarWrapper = {
-                width: '25%',
-                marginTop: "2.5%"
+                width: '25%'
             },
             annotationWrapper = {
                 minWidth: '300px',
                 width: '45%',
-                paddingBottom: '20px',
-                marginTop: "0.5%"
+                paddingBottom: '20px'
             },
             leftBarContent = ['All Users', 'My Feeds', 'Followed Users', 'My Followers', 'Companies'],
             rightBarContent = ['Most Used Pin Type', 'Most Used Emojii', 'Most Searched', 'Most Votes', 'Most Active Reviewed', 'Most Pins'];

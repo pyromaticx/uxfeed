@@ -35,7 +35,6 @@ var color = {
   textLight: "#eee"
 }
 
-
 var Routes = (
   <Router history={history}>
     <Route path='/' component={App} color={color}>

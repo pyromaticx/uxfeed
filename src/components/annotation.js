@@ -90,7 +90,7 @@ export default class Annotation extends Component {
                 alignContent: 'center',
                 height: '50px',
                 margin: "0",
-                backgroundImage: 'url(' + (this.props.annotation.userImage || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png') + ')',
+                backgroundImage: "url('http://s3.amazonaws.com/37assets/svn/765-default-avatar.png')",
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',

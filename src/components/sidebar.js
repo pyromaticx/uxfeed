@@ -4,10 +4,10 @@ import AllUserModule from "./allUsersModule";
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
-    var content = props.content || [];
+    var content = props.content || []
     var listItems = content.map(function(el, idx) {
       return (
-        <AllUserModule title={el} key={idx} />
+        <li className="sideBarItems" key={idx}>{el} <span className="badge">4</span></li>
       )
     });
     this.state = {
@@ -34,7 +34,7 @@ export default class SideBar extends Component {
       borderRadius: "5px 5px 0 0"
     },
     listItemStyle = {
-      padding: '20px 5px 5px 5px'
+      padding: '5px 5px 5px 5px'
     },
     iconStyle = {
       marginTop: '3px',

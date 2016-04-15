@@ -15,7 +15,7 @@ export default class allUsersModule extends Component{
             color: "white"
         }
         return(
-            <li>{this.props.title} <span style={badgeStyle}>2</span></li>
+            <li>{this.props.title} <span style={badgeStyle}>4</span></li>
         )
     }
 }
