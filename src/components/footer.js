@@ -6,12 +6,12 @@ export default class Footer extends Component {
         var footerStyle = {
                 height: '200px',
                 width: '100%',
-                backgroundColor: this.props.color.five,
+                backgroundColor: this.props.color.secondary,
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-around',
-                color: this.props.color.textLight
+                color: this.props.color.primary
             },
             injectedJsxStyle = {
                 display: 'flex',

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import Footer from './footer';
+import PricingBoxOne from './pricingBoxOne';
+import PricingBoxTwo from './pricingBoxTwo';
+import PricingBoxThree from './pricingBoxThree';
 
 export default class PricingPage extends Component {
   constructor(props){
@@ -15,6 +17,34 @@ export default class PricingPage extends Component {
       width: '80%',
       flexDirection: "column"
     };
+
+    var row ={
+      display: "flex",
+      flexDirection: "row",
+      width: "100%",
+      flexWrap: "no-wrap",
+      color: this.props.route.color.primary
+    };
+
+    var featuresStyles = {
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "50px"
+    };
+    var checkIconColor = {
+      color: this.props.route.color.secondary
+    }
+    var box1styles = {
+      marginTop: "25px",
+      padding: "15px",
+      border: "1px solid" + this.props.route.color.primary,
+      width: "100%",
+      height: "20em",
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+      backgroundColor: this.props.route.color.six
+    };
     var couponDiv = {
       backgroundColor: this.props.route.color.secondary,
       padding: "5px",
@@ -28,31 +58,23 @@ export default class PricingPage extends Component {
       fontWeight: "300",
       color: this.props.route.color.primary
     };
-    var row ={
-      display: "flex",
-      flexDirection: "row",
-      width: "100%",
-      flexWrap: "no-wrap",
-      color: this.props.route.color.primary
-    };
-    var box1styles = {
-      marginTop: "25px",
-      padding: "15px",
-      border: "1px solid" + this.props.route.color.primary,
-      width: "100%",
-      height: "20em",
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      backgroundColor: this.props.route.color.six
-    };
-    var featuresStyles = {
-      display: "flex",
-      justifyContent: "center",
-      marginTop: "50px"
-    };
-    var checkIconColor = {
-      color: this.props.route.color.secondary
+
+    var pricingBox = {
+      free: {
+        text: "Free Membership",
+        payments: "$0/Month",
+        salePitch: "Free Membership is good"
+      },
+      private: {
+        text: "Private Membership",
+        payments: "$15/Month",
+        salePitch: "Private Membership is good"
+      },
+      superPrivate: {
+        text: "Super Private",
+        payments: "$30/Month",
+        salePitch: "Super Private Membership is good"
+      }
     }
 
     return(
@@ -64,24 +86,24 @@ export default class PricingPage extends Component {
           <p style={couponStyles}>First time user? use our coupon code "uxfeed brah" for a 2 month free trail</p>
         </div>
         <div style={row}>
-          <div className="box1" style={box1styles}>
-            <p>Free Membership</p>
-            <h1>$0/Month</h1>
-            <p>Free shit gets the good shit</p>
-            <button className="btn btn-primary">Try Now</button>
-          </div>
-          <div className="box1" style={box1styles}>
-            <p>Private</p>
-            <h1>$15/Month</h1>
-            <p>Free shit gets the good shit</p>
-            <button className="btn btn-primary">Try Now</button>
-          </div>
-          <div className="box1" style={box1styles}>
-            <p>Super Private</p>
-            <h1>$30/Month</h1>
-            <p>Free shit gets the good shit</p>
-            <button className="btn btn-primary">Try Now</button>
-          </div>
+          <PricingBoxOne
+              color={this.props.route.color}
+              text={pricingBox.free.text}
+              payments={pricingBox.free.payments}
+              pitch={pricingBox.free.salePitch}
+          />
+          <PricingBoxTwo
+              color={this.props.route.color}
+              text={pricingBox.private.text}
+              payments={pricingBox.private.payments}
+              pitch={pricingBox.private.salePitch}
+          />
+          <PricingBoxThree
+              color={this.props.route.color}
+              text={pricingBox.superPrivate.text}
+              payments={pricingBox.superPrivate.payments}
+              pitch={pricingBox.superPrivate.salePitch}
+          />
         </div>
         <div style={featuresStyles}>
           <h3>All Features</h3>
