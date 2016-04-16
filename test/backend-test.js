@@ -38,3 +38,15 @@ describe("GET requests", function() {
     });
 
 });
+
+describe("POST requests", function() {
+  it("Should be able to add a comment to an annotation", function() {
+    var comment = {
+      userName: 'chakramBro',
+      comment: 'this commentary provided by Chakram',
+      timestamp: '' + Date.now()
+    };
+    var response = chakram.post(baseURL + 'annotations/17/comments', comment);
+    return expect(response).to.have.status(200);
+  });
+});

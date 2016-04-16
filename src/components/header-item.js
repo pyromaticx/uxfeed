@@ -11,7 +11,7 @@ export default class HeaderItem extends Component {
     var headerItemStyle = {
       display: 'flex',
       paddingBottom: "5px",
-      borderBottom: "1px solid" + (this.state.isHovered ? this.props.color.teal : this.props.color.primary ),
+      borderBottom: "1px solid" + (this.state.isHovered ? this.props.color.five : this.props.color.primary ),
       alignItems: 'center',
       justifyContent: 'center',
       height: this.props.height,
@@ -19,7 +19,7 @@ export default class HeaderItem extends Component {
     },
     titleStyle = {
       fontSize: '16px',
-      color: this.props.color.four
+      color: this.props.color.textLight
 
     }
 

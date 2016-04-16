@@ -21,7 +21,7 @@ var dummyAnnotation = {
     image: img,
     imageH: 683,
     imageW: 1301,
-    comments: 'Lorem Ipsum delo mumbo jumbo. Her the do to the left and bring a widget this Thurs.',
+    comments: [{username: 'SimpleSara', comment: 'this is lame...', timestamp: moment(Date.now()).format('MMM Do YY, HH:MM') }],
     isPrivate: false,
     thumbnailDot: {
         top: '35%',
@@ -33,7 +33,7 @@ var dummyUser = {
     company: "Go Live Labs",
     title: "UI/UX Experts",
     location: "Sunnyvale, CA",
-    following: ["brendan", "james", "kelly"],
+    following: ["brendon", "james", "kelly"],
     followers: ["steve", "dan", "somebooty"]
 }
 
@@ -46,7 +46,8 @@ export default class UserPage extends Component {
         this.state = {
             expandAll: false,
             getResponse: [],
-            contentWidth: window.innerWidth <= 1024 ? '100%' : '85%'
+            contentWidth: window.innerWidth <= 1024 ? '100%' : '85%',
+            scaleValue: window.innerWidth <= 1024 ? '4' : '3'
         };
     }
     componentWillMount() {
@@ -58,10 +59,25 @@ export default class UserPage extends Component {
         window.removeEventListener('resize', this.resizeListener);
     }
     handleResize() {
-        var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%'
+        var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%';
+        var scaleValue;
+
+        if(window.innerWidth >= 1280) {
+            scaleValue = 2.6;
+        } else if (window.innerWidth >= 1024) {
+            scaleValue = 3.5;
+        } else {
+            scaleValue = 4;
+        }
+
         this.setState({
-            contentWidth: contentWidth
+            contentWidth: contentWidth,
+            scaleValue: scaleValue
         });
+    }
+    updateCommentsCB(commentObj) {
+        // !!! TODO: Add PATCH request to update comment array in DB !!!
+        console.log(commentObj)
     }
     getUpdated() {
         switch (this.props.route.path) {
@@ -98,27 +114,33 @@ export default class UserPage extends Component {
                     user={dummyUser}
                     expanded={this.state.expandAll}
                     annotation={annotation}
+                    scale={this.state.scaleValue}
+                    updateCommentsCB={this.updateCommentsCB}
                     color={this.props.route.color}/>);
         });
         var pageWrapper = {
                 width: this.state.contentWidth,
                 minHeight : '100vh',
                 display: 'flex',
-                justifyContent: 'space-between'
+                justifyContent: 'space-between',
+
             },
             leftBarWrapper = {
-                width: '25%'
+                width: '25%',
+
             },
             rightBarWrapper = {
-                width: '25%'
+                width: '25%',
+
             },
             annotationWrapper = {
                 minWidth: '300px',
                 width: '45%',
-                paddingBottom: '20px'
+                paddingBottom: '20px',
+
             },
-            leftBarContent = ['All Users', 'My Feeds', 'Followed Users', 'My Followers', 'Companies'],
-            rightBarContent = ['Most Used Pin Type', 'Most Used Emojii', 'Most Searched', 'Most Votes', 'Most Active Reviewed', 'Most Pins'];
+            leftBarContent = [{title: 'All Users', value: ''}, {title: 'My Feeds', value: ''}, {title: 'Followed Users', value: dummyUser.following.length}, {title: 'My Followers', value: dummyUser.followers.length}, {title: 'Companies', value: ''}],
+            rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
         return (
             <div style={pageWrapper}>
                 <div style={leftBarWrapper}>
@@ -128,7 +150,7 @@ export default class UserPage extends Component {
                     />
                     <SideBar
                         icon="fa-filter"
-                        title='Filters'
+                        title=''
                         content={leftBarContent}
                         color={this.props.route.color} />
                 </div>
@@ -138,7 +160,7 @@ export default class UserPage extends Component {
                 <div style={rightBarWrapper}>
                     <SideBar color={this.props.route.color}
                              icon="fa-fire"
-                             title="Popular"
+                             title=""
                              content={rightBarContent}/>
                 </div>
             </div>

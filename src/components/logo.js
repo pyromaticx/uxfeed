@@ -8,7 +8,7 @@ export default class Logo extends Component {
       justifyContent: 'center',
       width: '150px',
       height: this.props.height,
-      color: this.props.color.four
+      color: this.props.color.textLight
     };
     return (
       <div style={textStyles}>

@@ -1,64 +1,66 @@
 import React, {Component} from 'react';
-import AllUserModule from "./allUsersModule";
+import MenuItem from './menuitem.js';
 
 export default class SideBar extends Component {
-  constructor(props) {
-    super(props);
-    var content = props.content || []
-    var listItems = content.map(function(el, idx) {
-      return (
-        <li className="sideBarItems" key={idx}>{el} <span className="badge">4</span></li>
-      )
-    });
-    this.state = {
-      listItems: listItems
+    constructor(props) {
+        super(props);
+        var content = props.content || []
+        var listItems = content.map(function(el, idx) {
+            return (
+                <MenuItem color={props.color} key={idx} title={el.title} value={el.value} />
+            )
+        });
+        this.state = {
+            listItems: listItems
+        }
     }
-  }
-  render() {
-    var barStyle = {
-      width: '100%',
-      minHeight: '500px',
-      border: '1px solid ' + this.props.color.tertiary,
-      backgroundColor: this.props.color.primary,
-      boxShadow: '0 3px 15px 0.5px ' + this.props.color.textLight,
-      borderRadius: "5px"
-    },
-    barHeading = {
-      height: '40px',
-      backgroundColor: this.props.color.six,
-      color: this.props.color.textLight,
-      width: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: "5px 5px 0 0"
-    },
-    listItemStyle = {
-      padding: '5px 5px 5px 5px'
-    },
-    iconStyle = {
-      marginTop: '3px',
-      height: '20px',
-      width: '20px',
-      color: this.props.color.primary,
-      fontSize: "18",
-      lineHeight: "18px",
-      marginRight: "10px"
-    }
+    render() {
+        var barStyle = {
+                width: '100%',
+                minHeight: '200px',
+
+                backgroundColor: this.props.color.primary,
+                boxShadow: '0 3px 15px 1px ' + this.props.color.five,
+                borderRadius: "5px"
+            },
+            barHeading = {
+                height: '80px',
+                backgroundColor: this.props.color.secondary,
+                color: this.props.color.textLight,
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: "5px 5px 0 0"
+            },
+            listItemStyle = {
+                padding: '0'
+            },
+            iconStyle = {
+                marginTop: '3px',
+                height: '80px',
+                width: '100%',
+                color: this.props.color.primary,
+                fontSize: "60px",
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+
+            }
 
 
-    return (
-      <div style={barStyle}>
-        <div style={barHeading}>
-          <span style={iconStyle} className={'fa ' + this.props.icon}></span>
-          <h5>{this.props.title}</h5>
-        </div>
-        <div style={listItemStyle}>
-          <ul>
-            {this.state.listItems}
-          </ul>
-        </div>
-      </div>
-    );
-  }
+        return (
+            <div style={barStyle}>
+                <div style={barHeading}>
+                    <span style={iconStyle} className={'fa ' + this.props.icon}></span>
+                    <h5>{this.props.title}</h5>
+                </div>
+                <div style={listItemStyle}>
+                    <ul>
+                        {this.state.listItems}
+                    </ul>
+                </div>
+            </div>
+        );
+    }
 }

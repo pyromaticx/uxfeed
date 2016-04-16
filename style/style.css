@@ -4,9 +4,44 @@ body, html{
   height: 100%;
 }
 
+
 body {
   background-color: #E7EAEC;
 }
+
+table{
+  margin-top: 50px;
+  width: 0;
+}
+
+td{
+  text-align: center;
+}
+
+#features{
+  width: 35%;
+}
+
+#free{
+  width: 23%;
+  text-align: center;
+}
+
+#private{
+  width: 23%;
+  text-align: center;
+}
+
+#superPrivate{
+  width: 23%;
+  text-align: center;
+}
+
+table, th, tr, thead, td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
 
 h1,h2,h3,h4,h5,h6, p{
   margin: 0;
@@ -41,8 +76,6 @@ img{
   max-width: 100%;
   height: 100%;
 }
-
-.sideBarIte
 
 .badge{
   display: inline-block;

@@ -1,5 +1,8 @@
+
 import React, {Component} from 'react';
 import moment from 'moment';
+import UserComment from './usercomment.js';
+
 export default class Annotation extends Component {
     resizeListener
     constructor(props) {
@@ -7,7 +10,7 @@ export default class Annotation extends Component {
         this.state = {
             height: 80,
             expanded: props.expanded || true,
-            imgScale: 3.5
+            imgScale: 2.5
         }
     }
     componentWillReceiveProps(oldprops, newprops) {
@@ -16,15 +19,6 @@ export default class Annotation extends Component {
                 expanded: newprops.expanded
             });
         }
-    }
-    componentWillMount() {
-        this.resizeListener = window.addEventListener('resize', () => this.handleResize())
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.resizeListener);
-    }
-    handleResize() {
-
     }
     emojiPicker(emoji) {
         var type;
@@ -49,22 +43,21 @@ export default class Annotation extends Component {
             }
         }
     }
-
     render() {
-        var imageW = this.props.annotation.imageW / this.state.imgScale + 'px';
-        var imageH = this.props.annotation.imageH / this.state.imgScale + 'px';
+        var imageW = this.props.annotation.imageW / this.props.scale + 'px';
+        var imageH = this.props.annotation.imageH / this.props.scale + 'px';
         var annotationWrapper = {
                 width: '100%',
                 minHeight: this.state.height + 'px',
                 backgroundColor: this.props.color.primary,
-                border: '1px solid ' + this.props.color.tertiary,
+                border: '1px solid ' + this.props.color.five,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: this.state.expanded ? 'space-between' : 'center',
                 alignItems: 'center',
                 padding: '20px',
-                marginTop: '25px',
-                boxShadow: "0px 1px 15px 2px #A8A8A8",
+                marginBottom: '25px',
+                boxShadow: '0 3px 15px 1px ' + this.props.color.five,
                 borderRadius: '5px',
                 overflow: 'hidden',
             },
@@ -77,7 +70,7 @@ export default class Annotation extends Component {
                 backgroundRepeat: 'no-repeat',
                 backgroundPostion: 'center',
                 height: imageH,
-                 width: imageW,
+                width: imageW,
                 border: '1px solid gray'
             },
             textRow = {
@@ -90,8 +83,8 @@ export default class Annotation extends Component {
                 alignContent: 'center',
                 height: '50px',
                 margin: "0",
-                backgroundImage: "url('http://s3.amazonaws.com/37assets/svn/765-default-avatar.png')",
-                backgroundSize: 'contain',
+                backgroundImage: 'url(http://s3.amazonaws.com/37assets/svn/765-default-avatar.png)',
+                backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
                 flex: '1'
@@ -179,13 +172,33 @@ export default class Annotation extends Component {
                     }
                 }
             },
-            title = this.truncate(this.props.annotation.title),
-            text = this.truncate(this.props.annotation.text);
+            userCommentStyle = {
+                display: 'inline-flex',
+                width: '100%',
+                minHeight: '40px',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+                commentUser: {
+                    paddingRight: '5px',
+                    fontWeight: 'bold',
+                    color: this.props.color.five
+                }
+            }
         var userModule = (
             <div style={userInfo}>
                 <h3>{this.state.expanded ? this.props.annotation.title : this.truncate(this.props.annotation.title)}</h3>
             </div>
         );
+        var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
+        var Comments = currentComments.map((comment) => {
+            return (
+                <div style={userCommentStyle}>
+                    <span style={userCommentStyle.commentUser}>{comment.username + ':'}</span>
+                    <span>{comment.comment}</span>
+
+                </div>
+            );
+        });
         var annotationFooter = (
             <div style={annotationFooterStyle}>
                 <div style={timeSocialStyles}>
@@ -199,14 +212,19 @@ export default class Annotation extends Component {
                     </div>
                 </div>
                 <div style={mainComment}>
-            <span style={mainComment.span}>
-              {this.props.annotation.userId + ":"}
-            </span>
+                  <span style={mainComment.span}>
+                    {this.props.annotation.userId + ":"}
+                  </span>
                     {this.props.annotation.text}
                 </div>
+                {Comments}
+                <UserComment updateCommentsCB={this.props.updateCommentsCB}
+                             user={this.props.user}
+                             color={this.props.color}
+                             annotation={this.props.annotation} />
             </div>
         );
-        //this.props.annotation.emoji
+
         var emojiModule = (
             <div style={emojiStyle}>
             </div>
