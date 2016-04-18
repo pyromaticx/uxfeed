@@ -58,7 +58,15 @@ export default class PricingPage extends Component {
       fontWeight: "300",
       color: this.props.route.color.primary
     };
-
+    var membershipStyles = {
+      backgroundColor: this.props.route.color.tertiary,
+      color: this.props.route.color.primary,
+      border: "1px solid" + this.props.route.color.primary
+    }
+    var tableRowBGColor ={
+      backgroundColor: this.props.route.color.four,
+      border: "1px solid" + this.props.route.color.primary
+    }
     var pricingBox = {
       free: {
         text: "Free Membership",
@@ -75,11 +83,25 @@ export default class PricingPage extends Component {
         payments: "$30/Month",
         salePitch: "Super Private Membership is good"
       }
+    };
+    var borderWhite = {
+      border: "1px solid" + this.props.route.color.primary
+    };
+    var tryItStyles = {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column",
+      backgroundColor: this.props.route.color.five,
+      padding: "50px"
+    };
+    var center = {
+      display: "flex",
+      justifyContent: "center"
     }
-
     return(
       <div style={pricingPageWrapper}>
-        <div>
+        <div style={center}>
           <h2>uxFeed Pricing</h2>
         </div>
         <div style={couponDiv}>
@@ -113,38 +135,49 @@ export default class PricingPage extends Component {
             <thead>
               <tr>
                 <th id="features">Features</th>
-                <th id="free">Free Membership</th>
-                <th id="private">Private Membership</th>
-                <th id="superPrivate">Super Private Membership</th>
+                <th style={membershipStyles} id="free">Free Membership</th>
+                <th style={membershipStyles} id="private">Private Membership</th>
+                <th style={membershipStyles} id="superPrivate">Super Private Membership</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr style={tableRowBGColor}>
                 <th>Feature 1</th>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
               </tr>
               <tr>
                 <th>Feature 2</th>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
               </tr>
-              <tr>
+              <tr style={tableRowBGColor}>
                 <th>Feature 3</th>
-                <td>asdf1</td>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}>asdf1</td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
               </tr>
               <tr>
                 <th>Feature 4</th>
-                <td>asdf1</td>
-                <td>asdf2</td>
-                <td><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}>asdf1</td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
+              </tr>
+              <tr style={tableRowBGColor}>
+                <th>Feature 5</th>
+                <td style={borderWhite}>asdf1</td>
+                <td style={borderWhite}>asdf2</td>
+                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div style={tryItStyles}>
+          <button className="btn btn-primary">Try It Now</button>
+          <h3>Start your free trial with the coupon code "uxfeed brah"</h3>
+          <p>No credit card required. Cancel anytime</p>
         </div>
       </div>
     );
