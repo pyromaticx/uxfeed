@@ -9,16 +9,17 @@ export default class Annotation extends Component {
         super(props);
         this.state = {
             height: 80,
-            expanded: props.expanded || true,
-            imgScale: 2.5
+            expanded: props.expanded,
+            imgScale: 2.5,
+            clicked: false
         }
     }
-    componentWillReceiveProps(oldprops, newprops) {
-        if(newprops.expanded) {
-            this.setState({
-                expanded: newprops.expanded
-            });
-        }
+    componentWillReceiveProps() {
+      if(!this.state.clicked) {
+        this.setState({
+          expanded: this.props.expanded
+        });
+      }
     }
     emojiPicker(emoji) {
         var type;
@@ -48,7 +49,7 @@ export default class Annotation extends Component {
         var imageH = this.props.annotation.imageH / this.props.scale + 'px';
         var annotationWrapper = {
                 width: '100%',
-                minHeight: this.state.height + 'px',
+                minHeight: this.state.expanded ? '300px' : '80px',
                 backgroundColor: this.props.color.primary,
                 border: '1px solid ' + this.props.color.five,
                 display: 'flex',
@@ -253,7 +254,8 @@ export default class Annotation extends Component {
         var current = !this.state.expanded;
         this.setState({
             expanded: current,
-            height: current == true ? '300' : '80'
+            height: current == true ? '300' : '80',
+            clicked: true
         });
     }
     truncate(str) {

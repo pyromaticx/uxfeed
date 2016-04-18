@@ -5,6 +5,8 @@ import img from './base64.js';
 import SideBar from './sidebar.js';
 import DashboardProfileCard from './dashboardProfileCard';
 import api from './api/api.js';
+import Loader from './loader.js';
+import FilterBar from './filterbar.js';
 var dummyAnnotation = {
     userId: 'pyromaticx',
     userImage: '',
@@ -44,10 +46,10 @@ export default class UserPage extends Component {
     constructor() {
         super();
         this.state = {
-            expandAll: false,
+            expanded: false,
             getResponse: [],
             contentWidth: window.innerWidth <= 1024 ? '100%' : '85%',
-            scaleValue: window.innerWidth <= 1024 ? '4' : '3'
+            scaleValue: window.innerWidth <= 1024 ? '5' : '4'
         };
     }
     componentWillMount() {
@@ -63,7 +65,7 @@ export default class UserPage extends Component {
         var scaleValue;
 
         if(window.innerWidth >= 1280) {
-            scaleValue = 2.6;
+          scaleValue = 2.9;
         } else if (window.innerWidth >= 1024) {
             scaleValue = 3.5;
         } else {
@@ -106,18 +108,29 @@ export default class UserPage extends Component {
             }
         }
     }
+    expander() {
+
+      this.setState({
+        expanded: !this.state.expanded
+      });
+
+    }
+    annotationRender() {
+      var Annotations = this.state.getResponse.map((annotation, idx) => {
+          return (
+              <Annotation
+                  key={idx}
+                  user={dummyUser}
+                  expanded={this.state.expanded}
+                  annotation={annotation}
+                  scale={this.state.scaleValue}
+                  updateCommentsCB={this.updateCommentsCB}
+                  color={this.props.route.color}/>);
+      });
+      return Annotations;
+    }
     render() {
-        var Annotations = this.state.getResponse.map((annotation, idx) => {
-            return (
-                <Annotation
-                    key={idx}
-                    user={dummyUser}
-                    expanded={this.state.expandAll}
-                    annotation={annotation}
-                    scale={this.state.scaleValue}
-                    updateCommentsCB={this.updateCommentsCB}
-                    color={this.props.route.color}/>);
-        });
+        var Annotations = this.annotationRender();
         var pageWrapper = {
                 width: this.state.contentWidth,
                 minHeight : '100vh',
@@ -137,7 +150,10 @@ export default class UserPage extends Component {
                 minWidth: '300px',
                 width: '45%',
                 paddingBottom: '20px',
-
+                display: 'flex',
+                justifyContent: Annotations.length > 0 ? 'flex-start' : 'center',
+                alignItems: 'center',
+                flexDirection: 'column'
             },
             leftBarContent = [{title: 'All Users', value: ''}, {title: 'My Feeds', value: ''}, {title: 'Followed Users', value: dummyUser.following.length}, {title: 'My Followers', value: dummyUser.followers.length}, {title: 'Companies', value: ''}],
             rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
@@ -146,8 +162,7 @@ export default class UserPage extends Component {
                 <div style={leftBarWrapper}>
                     <DashboardProfileCard
                         color={this.props.route.color}
-                        user={dummyUser}
-                    />
+                        user={dummyUser} />
                     <SideBar
                         icon="fa-filter"
                         title=''
@@ -155,13 +170,19 @@ export default class UserPage extends Component {
                         color={this.props.route.color} />
                 </div>
                 <div style={annotationWrapper}>
-                    {Annotations}
+                  <FilterBar
+                  expandCB={() => this.expander()}
+                  expanded={this.state.expanded}
+                  displayed={Annotations.length > 0 ? true : false}
+                  color={this.props.route.color} />
+                  <Loader annotations={Annotations.length} color={this.props.route.color}/>
+                  {Annotations.length > 0 ? Annotations : ''}
                 </div>
                 <div style={rightBarWrapper}>
                     <SideBar color={this.props.route.color}
                              icon="fa-fire"
                              title=""
-                             content={rightBarContent}/>
+                             content={rightBarContent} />
                 </div>
             </div>
         );

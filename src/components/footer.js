@@ -24,7 +24,6 @@ export default class Footer extends Component {
                 <FooterItem title='Copyright Info' content={(<span style={injectedJsxStyle}><h3>Other stuff</h3><h5>Some more stuff</h5></span>)} color={this.props.color}/>
                 <FooterItem content={(<FooterSocial color={this.props.color} />)} color={this.props.color}/>
                 <FooterItem title='Site map' color={this.props.color}/>
-
             </div>
         );
     }

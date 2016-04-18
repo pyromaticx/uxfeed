@@ -93,11 +93,14 @@ export default class PricingPage extends Component {
       alignItems: "center",
       flexDirection: "column",
       backgroundColor: this.props.route.color.five,
-      padding: "50px"
+      padding: "25px"
     };
     var center = {
       display: "flex",
       justifyContent: "center"
+    };
+    var textSpacing = {
+      marginTop: "25px"
     };
     return(
       <div style={pricingPageWrapper}>
@@ -175,9 +178,9 @@ export default class PricingPage extends Component {
           </table>
         </div>
         <div style={tryItStyles}>
-          <button className="btn btn-primary">Try It Now</button>
-          <h3>Start your free trial with the coupon code "uxfeed brah"</h3>
-          <p>No credit card required. Cancel anytime</p>
+          <button style={textSpacing} className="btn btn-primary btn-lg">Try It Now</button>
+          <h3 style={textSpacing}>Start your free trial with the coupon code "uxfeed brah"</h3>
+          <p style={textSpacing}>No credit card required. Cancel anytime</p>
         </div>
       </div>
     );
