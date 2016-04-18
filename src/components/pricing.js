@@ -98,7 +98,7 @@ export default class PricingPage extends Component {
     var center = {
       display: "flex",
       justifyContent: "center"
-    }
+    };
     return(
       <div style={pricingPageWrapper}>
         <div style={center}>
