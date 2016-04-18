@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
 
-
-
-
-
 export default class DashboardProfileCard extends Component{
     constructor(props){
         super(props);

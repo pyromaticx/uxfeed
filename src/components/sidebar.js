@@ -37,7 +37,6 @@ export default class SideBar extends Component {
       padding: '0'
     },
     iconStyle = {
-      marginTop: '3px',
       height: '80px',
       width: '100%',
       color: this.props.color.primary,
@@ -45,7 +44,9 @@ export default class SideBar extends Component {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-
+    },
+    boss = {
+      textShadow: '1px 1px 10px 1px ' + this.props.color.five
     }
 
 
@@ -53,7 +54,7 @@ export default class SideBar extends Component {
       <div style={barStyle}>
         <div style={barHeading}>
           <span style={iconStyle} className={'fa ' + this.props.icon}></span>
-          <h5>{this.props.title}</h5>
+          <h5 style={boss}>{this.props.title}</h5>
         </div>
         <div style={listItemStyle}>
           <ul>
