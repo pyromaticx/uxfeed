@@ -4,15 +4,6 @@ import MenuItem from './menuitem.js';
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
-    var content = props.content || []
-    var listItems = content.map(function(el, idx) {
-      return (
-        <MenuItem color={props.color} title={el.title} value={el.value} />
-      )
-    });
-    this.state = {
-      listItems: listItems
-    }
   }
   render() {
     var barStyle = {
@@ -48,7 +39,11 @@ export default class SideBar extends Component {
     boss = {
       textShadow: '1px 1px 10px 1px ' + this.props.color.five
     }
-
+    var listItems = this.props.content.map((el, idx) => {
+      return (
+        <MenuItem color={this.props.color} title={el.title} value={el.value} />
+      )
+    });
 
     return (
       <div style={barStyle}>
@@ -58,7 +53,7 @@ export default class SideBar extends Component {
         </div>
         <div style={listItemStyle}>
           <ul>
-          {this.state.listItems}
+          {listItems}
           </ul>
         </div>
       </div>

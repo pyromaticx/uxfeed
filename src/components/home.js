@@ -7,8 +7,8 @@ export default class Home extends Component {
     var jumboTron = {
       height: '90vh',
       width: '100%',
-      borderBottom: '1px solid ' + this.props.route.color.tertiary,
-      backgroundColor: this.props.route.color.four
+      borderBottom: '1px solid ' + this.props.color.tertiary,
+      backgroundColor: this.props.color.four
     },
     landingStyle = {
       width: '100%',
@@ -30,16 +30,16 @@ export default class Home extends Component {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: this.props.route.color.primary,
+      backgroundColor: this.props.color.primary,
       padding: '40px',
-      backgroundColor: this.props.route.color.five,
+      backgroundColor: this.props.color.five,
       left: {
         width: '50%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        color: this.props.route.color.textLight
+        color: this.props.color.textLight
       },
       right: {
         width: '50%',
@@ -55,9 +55,9 @@ export default class Home extends Component {
 
         </div>
         <div style={triSpanner}>
-          <SpanItem color={this.props.route.color} title='Lorem Ipsum' content="Lorem ipsum dolor. Sit amet leo. Malesuada odio ut. Sodales pellentesque odio."/>
-          <SpanItem color={this.props.route.color} title='Lorem Ipsum' content="Suscipit arcu cras vel posuere eget. Quis ligula volutpat. Arcu nec vel."/>
-          <SpanItem color={this.props.route.color} title='Lorem Ipsum' content="Magna in aenean phasellus sodales nec egestas tortor faucibus. Nullam justo volutpat."/>
+          <SpanItem color={this.props.color} title='Lorem Ipsum' content="Lorem ipsum dolor. Sit amet leo. Malesuada odio ut. Sodales pellentesque odio."/>
+          <SpanItem color={this.props.color} title='Lorem Ipsum' content="Suscipit arcu cras vel posuere eget. Quis ligula volutpat. Arcu nec vel."/>
+          <SpanItem color={this.props.color} title='Lorem Ipsum' content="Magna in aenean phasellus sodales nec egestas tortor faucibus. Nullam justo volutpat."/>
         </div>
         <div style={twoPanel}>
           <div style={twoPanel.left}>
@@ -66,7 +66,7 @@ export default class Home extends Component {
             <h3>Just list the facts</h3>
           </div>
           <div style={twoPanel.right}>
-            <SlideBox color={this.props.route.color} />
+            <SlideBox color={this.props.color} />
           </div>
         </div>
       </div>

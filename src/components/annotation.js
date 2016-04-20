@@ -10,13 +10,12 @@ export default class Annotation extends Component {
             height: 80,
             expanded: props.expanded,
             imgScale: 2.5,
-            clicked: false
         }
     }
-    componentWillReceiveProps() {
-      if(!this.state.clicked) {
+    componentWillReceiveProps(newProps) {
+    if(newProps.expanded != this.props.expanded) {
         this.setState({
-          expanded: this.props.expanded
+          expanded: newProps.expanded
         });
       }
     }
@@ -254,7 +253,7 @@ export default class Annotation extends Component {
         this.setState({
             expanded: current,
             height: current == true ? '300' : '80',
-            clicked: true
+
         });
     }
     truncate(str) {
