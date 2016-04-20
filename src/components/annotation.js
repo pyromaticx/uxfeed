@@ -9,7 +9,6 @@ export default class Annotation extends Component {
         this.state = {
             height: 80,
             expanded: props.expanded,
-            imgScale: 2.5,
         }
     }
     componentWillReceiveProps(newProps) {

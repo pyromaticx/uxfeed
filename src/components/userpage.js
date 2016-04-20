@@ -49,7 +49,7 @@ export default class UserPage extends Component {
             expanded: false,
             getResponse: [],
             contentWidth: window.innerWidth <= 1024 ? '100%' : '85%',
-            scaleValue: window.innerWidth <= 1024 ? '5' : '4'
+            scaleValue: this.handleResize()
         };
     }
     componentWillMount() {
@@ -76,6 +76,7 @@ export default class UserPage extends Component {
             contentWidth: contentWidth,
             scaleValue: scaleValue
         });
+        return scaleValue;
     }
     updateCommentsCB(commentObj) {
       // !!! TODO: Add PATCH request to update comment array in DB !!!

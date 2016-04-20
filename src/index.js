@@ -12,8 +12,13 @@ var createHistory = require('history/lib/createHashHistory');
 var history = new createHistory({
   queryKey: false
 });
-// colorKey is used to store the current selection of UI pallete. TODO -- save and reload from local storage
-var colorKey = 'orange';
+// colorKey is used to store the current selection of UI pallete.
+var colorKey = '';
+if (localStorage.getItem('colorScheme')) {
+  colorKey = localStorage.getItem('colorScheme');
+} else {
+  colorKey = 'orange';
+}
 // returns the correct color obj according to the value of colorKey
 function color() {
   switch (colorKey) {
@@ -30,11 +35,11 @@ function color() {
       };
     case 'dark': {
       return {
-       primary: "#abc",
+       primary: "#bcd",
        secondary: "#123",
-       tertiary: "#456",
+       tertiary: "#197f7f",
        four: "#789",
-       five: "#0ab",
+       five: "#999",
        six: "#cde",
        text: "#f01",
        textLight: "#fff",
@@ -93,6 +98,7 @@ function color() {
 // the callback that is passed down to allow pallete changes
 function colorChanger(choice, callback) {
   colorKey = choice;
+  localStorage.setItem('colorScheme', choice);
   if(callback) {
     callback(color());
   }

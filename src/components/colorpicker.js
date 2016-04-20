@@ -10,9 +10,9 @@ export default class ColorPicker extends Component {
       display: 'flex',
       flexDirection: 'row',
       width: '100%',
-      padding: '20px',
+      padding: '50px',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
     },
     orange = {
       backgroundColor: '#ff875b',
