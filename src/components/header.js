@@ -17,7 +17,6 @@ export default class Header extends Component {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-around',
-
       padding: "0 16.5%",
       position: "fixed",
       zIndex: "100",
@@ -34,12 +33,17 @@ export default class Header extends Component {
             color={this.props.color}
             height={headerStyle.height} />
           </Link>
-        <HeaderItem
-          color={this.props.color}
-          title='Full View' />
-        <HeaderItem
-          color={this.props.color}
-          title='Min View' />
+
+          <HeaderItem
+            color={this.props.color}
+            height={headerStyle.height}
+            iconType='fa-home' />
+          <HeaderItem
+            linkTo='annotations'
+            color={this.props.color}
+            height={headerStyle.height}
+            iconType={'fa-rocket'} />
+
         <input
           onChange={(event) => {this.inputChange(event)}}
           style={inputStyle}

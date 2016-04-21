@@ -22,7 +22,6 @@ export default class PricingPage extends Component {
       display: "flex",
       flexDirection: "row",
       width: "100%",
-      flexWrap: "no-wrap",
       color: this.props.color.primary
     };
 
@@ -46,12 +45,11 @@ export default class PricingPage extends Component {
       backgroundColor: this.props.color.six
     };
     var couponDiv = {
-      backgroundColor: this.props.color.secondary,
+      backgroundColor: this.props.color.five,
       padding: "5px",
       display: "flex",
       justifyContent: "center",
-      marginTop: "25px",
-      boxShadow: "0 3px 15px 3px" + this.props.color.six
+      marginTop: "25px"
     };
     var couponStyles = {
       fontSize: "1.25em",
@@ -93,21 +91,22 @@ export default class PricingPage extends Component {
       alignItems: "center",
       flexDirection: "column",
       backgroundColor: this.props.color.five,
-      padding: "50px"
+      padding: "25px",
+      color: this.props.color.primary
     };
     var center = {
       display: "flex",
       justifyContent: "center"
     };
+    var textSpacing = {
+      marginTop: "25px"
+    };
     return(
       <div style={pricingPageWrapper}>
-        <div style={center}>
-          <h2>uxFeed Pricing</h2>
-        </div>
         <div style={couponDiv}>
           <p style={couponStyles}>First time user? use our coupon code "uxfeed brah" for a 2 month free trail</p>
         </div>
-        <div style={row}>
+        <div className="boxRow" style={row}>
           <PricingBoxOne
               color={this.props.color}
               text={pricingBox.free.text}
@@ -175,9 +174,9 @@ export default class PricingPage extends Component {
           </table>
         </div>
         <div style={tryItStyles}>
-          <button className="btn btn-primary">Try It Now</button>
-          <h3>Start your free trial with the coupon code "uxfeed brah"</h3>
-          <p>No credit card required. Cancel anytime</p>
+          <button style={textSpacing} className="btn btn-primary btn-lg">Try It Now</button>
+          <h3 style={textSpacing}>Start your free trial with the coupon code "uxfeed brah"</h3>
+          <p style={textSpacing}>No credit card required. Cancel anytime</p>
         </div>
       </div>
     );

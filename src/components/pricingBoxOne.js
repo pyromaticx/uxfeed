@@ -15,14 +15,18 @@ export default class PricingBoxOne extends Component {
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
-            backgroundColor: this.props.color.six
+            backgroundColor: this.props.color.six,
+            flex: "1"
+        };
+        var textSpacing = {
+            marginTop: "25px"
         };
         return(
             <div className="box1" style={box1styles}>
-                <p>{this.props.text}</p>
-                <h1>{this.props.payments}</h1>
-                <p>{this.props.pitch}</p>
-                <button className="btn btn-primary">Try Now</button>
+                <p style={textSpacing}>{this.props.text}</p>
+                <h1 style={textSpacing}>{this.props.payments}</h1>
+                <p style={textSpacing}>{this.props.pitch}</p>
+                <button style={textSpacing} className="btn btn-primary btn-lg">Try Now</button>
             </div>
         );
     }

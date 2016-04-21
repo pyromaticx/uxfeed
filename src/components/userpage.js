@@ -119,9 +119,10 @@ export default class UserPage extends Component {
     annotationRender() {
       var Annotations = this.state.getResponse.map((annotation, idx) => {
           console.log('anno', this.state.expanded)
+
           return (
               <Annotation
-                  key={idx}
+                  key={annotation.pinId}
                   user={dummyUser}
                   expanded={this.state.expanded}
                   annotation={annotation}
@@ -177,7 +178,7 @@ export default class UserPage extends Component {
                   expanded={this.state.expanded}
                   displayed={this.state.getResponse.length > 0 ? true : false}
                   color={this.props.color} />
-                  <Loader annotations={this.state.getResponse.length} color={this.props.color}/>
+                  <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : ''}
                 </div>
                 <div style={rightBarWrapper}>

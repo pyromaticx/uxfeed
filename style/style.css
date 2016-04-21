@@ -4,7 +4,7 @@ body, html{
   height: 100%;
 }
 * {
-  transition: background-color 500ms ease, color 500ms ease;
+  transition: background-color 500ms ease-in, color 500ms ease-in-out;
 }
 
 body {
@@ -20,7 +20,6 @@ table{
 td{
   text-align: center;
 }
-
 
 
 #free{
@@ -103,4 +102,9 @@ a:hover{
 .youdamnkids {
   transform-style: preserve-3d;
   transform: rotate3d(1, 2.0, 3.0, 10deg);
+}
+@media screen and (max-width: 800px){
+  .boxRow{
+    flex-wrap: wrap;
+  }
 }
