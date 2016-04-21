@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import UserComment from './usercomment.js';
-
+import AnnotationModal from './annotationmodal.js';
 export default class Annotation extends Component {
     resizeListener
     constructor(props) {
@@ -10,14 +10,13 @@ export default class Annotation extends Component {
         this.state = {
             height: 80,
             expanded: props.expanded,
-            imgScale: 2.5,
-            clicked: false
+            modalState: 'closed'
         }
     }
-    componentWillReceiveProps() {
-      if(!this.state.clicked) {
+    componentWillReceiveProps(newProps) {
+    if(newProps.expanded != this.props.expanded) {
         this.setState({
-          expanded: this.props.expanded
+          expanded: newProps.expanded
         });
       }
     }
@@ -238,24 +237,33 @@ export default class Annotation extends Component {
             <div
                 onClick={() => {this.expandAnnotation()}}
                 style={annotationWrapper}>
+                <AnnotationModal toggleModal={(event) => {this.openModal(event)}} color={this.props.color} annotation={this.props.annotation} modalState={this.state.modalState} scale={this.state.scaleValue} />
                 <div style={headingStyle}>
                     <div style={userImageStyle}></div>
                     {userModule}
                     {emojiModule}
                 </div>
-                <div style={thumbnailStyle}>
+                <div onClick={(event) => {this.openModal(event)}} style={thumbnailStyle}>
                     {this.props.annotation.image ? thumbnailDot : ''}
                 </div>
                 {this.state.expanded ? annotationFooter : ''}
             </div>
         );
     }
+    openModal(event) {
+      if(event) {
+        event.stopPropagation();
+      }
+      this.setState({
+        modalState: this.state.modalState == 'open' ? 'closed' : 'open'
+      });
+    }
     expandAnnotation() {
         var current = !this.state.expanded;
         this.setState({
             expanded: current,
             height: current == true ? '300' : '80',
-            clicked: true
+
         });
     }
     truncate(str) {

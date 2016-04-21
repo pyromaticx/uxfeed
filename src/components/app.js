@@ -9,6 +9,11 @@ export default class App extends Component {
             color: props.route.color
         }
     }
+    setColors(colorObj) {
+        this.setState({
+            color: colorObj
+        });
+    }
     render() {
         var appStyle = {
                 display: 'flex',
@@ -21,15 +26,16 @@ export default class App extends Component {
                 width: '100%',
                 paddingTop: '80px'
             };
+
         return (
             <div>
                 <div style={appStyle}>
                     <Header color={this.state.color}/>
                 </div>
                 <div style={contentWrapper}>
-                    {this.props.children}
+                    {React.cloneElement(this.props.children, { color: this.state.color })}
                 </div>
-                <Footer color={this.state.color} />
+                <Footer color={this.state.color} colorChanger={(choice) => {this.props.route.colorChanger(choice, this.setColors.bind(this))}}/>
             </div>
         );
     }

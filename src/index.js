@@ -12,48 +12,106 @@ var createHistory = require('history/lib/createHashHistory');
 var history = new createHistory({
   queryKey: false
 });
-
-// var color = {
-//   primary: '#ffffff',
-//   secondary: '#7b1cf0',
-//   tertiary: '#ccc',
-//   four: '#fc8c4b',
-//   text: '#464646',
-//   textLight: '#EEE',
-//   five: '#36BDB1',
-//   six: '#235eef',
-//   none: "none"
-// };
-/*
-
-$color1: #FF4400;
-$color2: #ff875b;
-$color3: #ff875b;
-$color4: #636363;
-$color7: #dbdbdb;
-$color5: #09c1b5;
-$color6: white;
-*/
-var color = {
-  primary: "#f9f9f9",
-  secondary: "#ff875b",
-  tertiary: "#197f7f",
-  four: "#09c1b5",
-  five: "#dbdbdb",
-  six: "#09c1b5",
-  text: "#464646",
-  textLight: "#eee",
-
+// colorKey is used to store the current selection of UI pallete.
+var colorKey = '';
+if (localStorage.getItem('colorScheme')) {
+  colorKey = localStorage.getItem('colorScheme');
+} else {
+  colorKey = 'orange';
+}
+// returns the correct color obj according to the value of colorKey
+function color() {
+  switch (colorKey) {
+    case 'orange':
+      return {
+      primary: "#f9f9f9",
+      secondary: "#ff875b",
+      tertiary: "#197f7f",
+      four: "#09c1b5",
+      five: "#dbdbdb",
+      six: "#09c1b5",
+      text: "#464646",
+      textLight: "#eee",
+      };
+    case 'dark': {
+      return {
+       primary: "#bcd",
+       secondary: "#123",
+       tertiary: "#197f7f",
+       four: "#789",
+       five: "#999",
+       six: "#cde",
+       text: "#f01",
+       textLight: "#fff",
+     };
+    }
+    case 'pink': {
+      return {
+        primary: "#fff",
+        secondary: "#FF4566",
+        tertiary: "#197f7f",
+        four: "#09c1b5",
+        five: "#dbdbdb",
+        six: "#09c1b5",
+        text: "#464646",
+        textLight: "#fff",
+      };
+    }
+    case 'green': {
+      return {
+        primary: "#fff",
+        secondary: "#4CD864",
+        tertiary: "#197f7f",
+        four: "#09c1b5",
+        five: "#dbdbdb",
+        six: "#09c1b5",
+        text: "#464646",
+        textLight: "#fff",
+      }
+    }
+    case 'teal': {
+      return {
+        primary: "#fff",
+        secondary: "#55E1B5",
+        tertiary: "#197f7f",
+        four: "#09c1b5",
+        five: "#dbdbdb",
+        six: "#09c1b5",
+        text: "#464646",
+        textLight: "#fff",
+      }
+    }
+    case 'purple': {
+      return {
+        primary: "#fff",
+        secondary: "#7B72E9",
+        tertiary: "#197f7f",
+        four: "#09c1b5",
+        five: "#dbdbdb",
+        six: "#09c1b5",
+        text: "#464646",
+        textLight: "#fff",
+      }
+    }
+  }
+}
+// the callback that is passed down to allow pallete changes
+function colorChanger(choice, callback) {
+  colorKey = choice;
+  localStorage.setItem('colorScheme', choice);
+  if(callback) {
+    callback(color());
+  }
 }
 
 var Routes = (
   <Router history={history}>
-    <Route path='/' component={App} color={color}>
-      <IndexRoute component={Home} color={color} />
-      <Route path='login' component={Login} color={color} />
-      <Route path='username/:username' component={UserPage} color={color} />
-      <Route path='annotations' component={UserPage} color={color} />
-      <Route path='/pricing' component={PricingPage} color={color} />
+    <Route path='/' component={App} color={color()} colorChanger={(choice, cb) => {colorChanger(choice, cb)}}>
+      <IndexRoute component={Home} color={color()} />
+      <Route path='login' component={Login} color={color()} />
+      <Route path='username/:username' component={UserPage} color={color()} />
+      <Route path='annotations' component={UserPage} color={color()} />
+      <Route path='pricing' component={PricingPage} color={color()} />
     </Route>
   </Router>
 );

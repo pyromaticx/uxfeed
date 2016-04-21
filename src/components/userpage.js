@@ -49,7 +49,7 @@ export default class UserPage extends Component {
             expanded: false,
             getResponse: [],
             contentWidth: window.innerWidth <= 1024 ? '100%' : '85%',
-            scaleValue: window.innerWidth <= 1024 ? '5' : '4'
+            scaleValue: this.handleResize()
         };
     }
     componentWillMount() {
@@ -75,6 +75,7 @@ export default class UserPage extends Component {
             contentWidth: contentWidth,
             scaleValue: scaleValue
         });
+        return scaleValue;
     }
     updateCommentsCB(commentObj) {
         // !!! TODO: Add PATCH request to update comment array in DB !!!
@@ -108,28 +109,30 @@ export default class UserPage extends Component {
         }
     }
     expander() {
-
+      console.log('userpage')
       this.setState({
-        expanded: !this.state.expanded
+        expanded: this.state.expanded == true ? false : true
       });
 
     }
     annotationRender() {
       var Annotations = this.state.getResponse.map((annotation, idx) => {
+          console.log('anno', this.state.expanded)
+
           return (
               <Annotation
-                  key={idx}
+                  key={annotation.pinId}
                   user={dummyUser}
                   expanded={this.state.expanded}
                   annotation={annotation}
                   scale={this.state.scaleValue}
                   updateCommentsCB={this.updateCommentsCB}
-                  color={this.props.route.color}/>);
+                  color={this.props.color}/>);
       });
       return Annotations;
     }
     render() {
-        var Annotations = this.annotationRender();
+
         var pageWrapper = {
                 width: this.state.contentWidth,
                 minHeight : '100vh',
@@ -150,7 +153,7 @@ export default class UserPage extends Component {
                 width: '45%',
                 paddingBottom: '20px',
                 display: 'flex',
-                justifyContent: Annotations.length > 0 ? 'flex-start' : 'center',
+                justifyContent: this.state.getResponse.length > 0 ? 'flex-start' : 'center',
                 alignItems: 'center',
                 flexDirection: 'column'
             },
@@ -160,25 +163,25 @@ export default class UserPage extends Component {
             <div style={pageWrapper}>
                 <div style={leftBarWrapper}>
                     <DashboardProfileCard
-                        color={this.props.route.color}
+                        color={this.props.color}
                         user={dummyUser} />
                     <SideBar
                         icon="fa-filter"
                         title=''
                         content={leftBarContent}
-                        color={this.props.route.color} />
+                        color={this.props.color} />
                 </div>
                 <div style={annotationWrapper}>
                   <FilterBar
                   expandCB={() => this.expander()}
                   expanded={this.state.expanded}
-                  displayed={Annotations.length > 0 ? true : false}
-                  color={this.props.route.color} />
-                  <Loader annotations={Annotations.length} color={this.props.route.color}/>
-                  {Annotations.length > 0 ? Annotations : ''}
+                  displayed={this.state.getResponse.length > 0 ? true : false}
+                  color={this.props.color} />
+                  <Loader annotations={this.state.getResponse.length} color={this.props.color} />
+                  {this.state.getResponse.length > 0 ? this.annotationRender() : ''}
                 </div>
                 <div style={rightBarWrapper}>
-                    <SideBar color={this.props.route.color}
+                    <SideBar color={this.props.color}
                              icon="fa-fire"
                              title=""
                              content={rightBarContent} />

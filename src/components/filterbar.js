@@ -7,12 +7,13 @@ export default class FilterBar extends Component {
       expanded: props.expanded
     }
   }
-  componentWillReceiveProps(oldProps, newProps) {
+  componentWillReceiveProps(newProps) {
     this.setState({
-      expanded: this.props.expanded
+      expanded: newProps.expanded
     });
   }
   handleClick() {
+    console.log('filterbar')
     this.props.expandCB();
   }
   render() {

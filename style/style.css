@@ -3,6 +3,9 @@ body, html{
   padding: 0;
   height: 100%;
 }
+* {
+  transition: background-color 500ms ease-in, color 500ms ease-in-out;
+}
 
 
 body {
@@ -18,7 +21,6 @@ table{
 td{
   text-align: center;
 }
-
 #free{
   width: 20%;
   text-align: center;
@@ -100,7 +102,6 @@ a:hover{
   transform-style: preserve-3d;
   transform: rotate3d(1, 2.0, 3.0, 10deg);
 }
-
 @media screen and (max-width: 800px){
   .boxRow{
     flex-wrap: wrap;
