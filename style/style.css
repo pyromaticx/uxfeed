@@ -100,3 +100,9 @@ a:hover{
   transform-style: preserve-3d;
   transform: rotate3d(1, 2.0, 3.0, 10deg);
 }
+
+@media screen and (max-width: 800px){
+  .boxRow{
+    flex-wrap: wrap;
+  }
+}

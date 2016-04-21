@@ -20,8 +20,7 @@ export default class HeaderItem extends Component {
     titleStyle = {
       fontSize: '16px',
       color: this.props.color.primary
-
-    }
+    };
 
     return (
       <Link to={'/' + this.props.linkTo}>
@@ -29,7 +28,7 @@ export default class HeaderItem extends Component {
           onMouseEnter={() => {this.mouseEnter()}}
           onMouseLeave={() => {this.mouseLeave()}}
           style={headerItemStyle}>
-            <span style={titleStyle}>{this.props.title}</span>
+            <span style={titleStyle}><i className={"fa " + this.props.icon + " " + "fa-2x"}></i></span>
         </div>
       </Link>
     );

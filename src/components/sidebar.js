@@ -25,7 +25,7 @@ export default class SideBar extends Component {
             },
             barHeading = {
                 height: '80px',
-                backgroundColor: this.props.color.secondary,
+                backgroundColor: this.props.color.five,
                 color: this.props.color.textLight,
                 width: '100%',
                 display: 'flex',

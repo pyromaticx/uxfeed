@@ -22,7 +22,6 @@ export default class PricingPage extends Component {
       display: "flex",
       flexDirection: "row",
       width: "100%",
-      flexWrap: "no-wrap",
       color: this.props.route.color.primary
     };
 
@@ -46,12 +45,11 @@ export default class PricingPage extends Component {
       backgroundColor: this.props.route.color.six
     };
     var couponDiv = {
-      backgroundColor: this.props.route.color.secondary,
+      backgroundColor: this.props.route.color.five,
       padding: "5px",
       display: "flex",
       justifyContent: "center",
-      marginTop: "25px",
-      boxShadow: "0 3px 15px 3px" + this.props.route.color.six
+      marginTop: "25px"
     };
     var couponStyles = {
       fontSize: "1.25em",
@@ -93,7 +91,8 @@ export default class PricingPage extends Component {
       alignItems: "center",
       flexDirection: "column",
       backgroundColor: this.props.route.color.five,
-      padding: "25px"
+      padding: "25px",
+      color: this.props.route.color.primary
     };
     var center = {
       display: "flex",
@@ -104,13 +103,10 @@ export default class PricingPage extends Component {
     };
     return(
       <div style={pricingPageWrapper}>
-        <div style={center}>
-          <h2>uxFeed Pricing</h2>
-        </div>
         <div style={couponDiv}>
           <p style={couponStyles}>First time user? use our coupon code "uxfeed brah" for a 2 month free trail</p>
         </div>
-        <div style={row}>
+        <div className="boxRow" style={row}>
           <PricingBoxOne
               color={this.props.route.color}
               text={pricingBox.free.text}

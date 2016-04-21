@@ -16,16 +16,14 @@ export default class Header extends Component {
       backgroundColor: this.props.color.secondary,
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-around',
-
-      padding: "0 16.5%",
+      justifyContent: "space-between",
+      padding: "0 10%",
       position: "fixed",
       zIndex: "100",
       boxShadow: '0 3px 15px 1px ' + this.props.color.five,
     },
     inputStyle = {
-      width: '219px',
-      marginRight: "10px"
+      width: '300px'
     };
     return (
       <div style={headerStyle}>
@@ -34,19 +32,25 @@ export default class Header extends Component {
             color={this.props.color}
             height={headerStyle.height} />
           </Link>
-        <HeaderItem
-          color={this.props.color}
-          title='Full View' />
-        <HeaderItem
-          color={this.props.color}
-          title='Min View' />
         <input
-          onChange={(event) => {this.inputChange(event)}}
-          style={inputStyle}
-          className='form-control'
-          type='text'
-          placeholder='🔎  Search'
-          value={this.state.searchValue}/>
+            onChange={(event) => {this.inputChange(event)}}
+            style={inputStyle}
+            className='form-control'
+            type='text'
+            placeholder='🔎  Search'
+            value={this.state.searchValue}/>
+        <HeaderItem
+          color={this.props.color}
+          icon="fa-user" />
+        <HeaderItem
+          color={this.props.color}
+          icon="fa-users" />
+        <HeaderItem
+            color={this.props.color}
+            icon="fa-globe" />
+        <HeaderItem
+            color={this.props.color}
+            icon="fa-chevron-down" />
       </div>
     );
   }

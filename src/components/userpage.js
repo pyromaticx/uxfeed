@@ -69,7 +69,6 @@ export default class UserPage extends Component {
         } else if (window.innerWidth >= 1024) {
             scaleValue = 3.5;
         } else {
-            scaleValue = 4;
         }
 
         this.setState({

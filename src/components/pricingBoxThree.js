@@ -16,7 +16,8 @@ export default class PricingBoxThree extends Component{
             display: "flex",
             alignItems: "center",
             flexDirection: "column",
-            backgroundColor: this.props.color.six
+            backgroundColor: this.props.color.six,
+            flex: "1"
         };
         var textSpacing = {
             marginTop: "25px"
