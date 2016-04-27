@@ -22,7 +22,7 @@ export default class HeaderItem extends Component {
                 fontSize: '40px',
                 color: this.props.color.textLight
 
-            }
+            };
 
         return (
             <Link to={'/' + this.props.linkTo}>

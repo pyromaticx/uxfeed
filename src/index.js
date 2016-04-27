@@ -6,6 +6,7 @@ import Home from './components/home.js';
 import UserPage from './components/userpage.js';
 import Login from './components/login.js';
 import PricingPage from './components/pricing.js';
+import ProfilePage from "./components/profile";
 
 var createHistory = require('history/lib/createHashHistory');
 
@@ -112,6 +113,9 @@ var Routes = (
       <Route path='username/:username' component={UserPage} color={color()} />
       <Route path='annotations' component={UserPage} color={color()} />
       <Route path='pricing' component={PricingPage} color={color()} />
+      <Route path='profile/:username' component={ProfilePage} color={color()} />
+      <Route path='profile/:username/about' component={ProfilePage} color={color()} />
+      <Route path='profile/:username/contact' component={ProfilePage} color={color()} />
     </Route>
   </Router>
 );
