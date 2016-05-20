@@ -80,7 +80,7 @@ export default class AnnotationModal extends Component {
       color: this.props.color.secondary,
       position: 'fixed',
       top: '10.5%',
-      left: '94.5%'
+      left: '92.5%'
 
     },
     annotationImage = {

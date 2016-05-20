@@ -1,4 +1,5 @@
-
+// https://uxfbackend-pyromaticx.c9users.io/
+// http://hrboost.herokuapp.com
 
 var myInit = { method: 'GET',
                mode: 'cors',
