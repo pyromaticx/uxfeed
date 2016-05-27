@@ -55,7 +55,7 @@ export default class UserPage extends Component {
     componentWillMount() {
         this.resizeListener = window.addEventListener('resize', () => this.handleResize())
         this.getUpdated()
-        window.setInterval(this.getUpdated.bind(this), 2000);
+        window.setInterval(this.getUpdated.bind(this), 20000);
     }
     componentWillUnmount() {
         window.removeEventListener('resize', this.resizeListener);
@@ -135,7 +135,7 @@ export default class UserPage extends Component {
     render() {
 
         var pageWrapper = {
-                width: this.state.contentWidth,
+                width: '100%',
                 minHeight : '100vh',
                 display: 'flex',
                 justifyContent: 'space-between',

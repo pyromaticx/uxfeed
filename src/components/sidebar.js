@@ -9,10 +9,8 @@ export default class SideBar extends Component {
     var barStyle = {
       width: '100%',
       minHeight: '200px',
-
       backgroundColor: this.props.color.primary,
-      boxShadow: '0 3px 15px 1px ' + this.props.color.five,
-      borderRadius: "5px"
+      boxShadow: '0 3px 15px 1px #777',
     },
     barHeading = {
       height: '80px',
@@ -22,7 +20,6 @@ export default class SideBar extends Component {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      borderRadius: "5px 5px 0 0"
     },
     listItemStyle = {
       padding: '0'

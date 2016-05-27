@@ -14,24 +14,26 @@ export default class HeaderItem extends Component {
       color: this.state.isHovered ? this.props.color.five : this.props.color.primary,
       alignItems: 'center',
       justifyContent: 'center',
-      height: this.props.height,
       transition: 'all 500ms ease',
-      textDecoration: 'none'
+      textDecoration: 'none',
+      width: '200px'
     },
     titleStyle = {
-      fontSize: '40px',
+      fontSize: '25px',
       color: this.props.color.textLight
-
+    },
+    titleText = {
+      fontFamily: 'Quicksand',
+      fontWeight: '800'
     }
 
     return (
       <Link to={'/' + this.props.linkTo}>
         <div
-          className='headerItem'
           onMouseEnter={() => {this.mouseEnter()}}
           onMouseLeave={() => {this.mouseLeave()}}
           style={headerItemStyle}>
-            <span style={titleStyle} className={'fa ' + this.props.iconType}>{this.props.title}</span>
+            <span style={titleStyle} className={'fa ' + this.props.iconType}><span style={titleText}>{this.props.title}</span></span>
         </div>
       </Link>
     );

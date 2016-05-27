@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import api from './api/api.js';
 export default class Login extends Component {
   constructor() {
     super();
@@ -56,8 +56,8 @@ export default class Login extends Component {
             <input onChange={(event) => {this.userChange(event)}} type='text' name='username' value={this.state.username} />
             <label htmlFor='pass'>Enter Password</label>
             <input onChange={(event) => {this.passChange(event)}} type='password' name='pass' value={this.state.password} />
-            <div style={googleButton} className="g-signin2" data-onsuccess="onSignIn"></div>
           </div>
+          <button type='button' onClick={(event) => (this.submitCreds(event))} className='btn btn primary'>Login</button>
         </div>
       </div>
     );
@@ -71,5 +71,8 @@ export default class Login extends Component {
     this.setState({
       password: event.target.value
     });
+  }
+  submitCreds(event) {
+    api.login(this.state.username, this.state.password)
   }
 }

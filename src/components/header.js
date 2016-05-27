@@ -1,56 +1,140 @@
 import React, {Component} from 'react';
 import Logo from './logo.js';
 import HeaderItem from './header-item.js';
+import UxpassQuote from './uxpassquote.js';
 import {Link} from 'react-router';
 export default class Header extends Component {
   constructor() {
     super();
     this.state = {
-      searchValue: ''
+      searchValue: '',
+      loginButtonState: 'Login'
     }
   }
   render() {
     var headerStyle = {
-      height: '60px',
+      height: '80px',
       width: '100%',
       backgroundColor: this.props.color.secondary,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-around',
-      padding: "0 16.5%",
       position: "fixed",
       zIndex: "100",
-      boxShadow: '0 3px 15px 1px ' + this.props.color.five,
     },
     inputStyle = {
-      width: '219px',
-      marginRight: "10px"
-    };
+      borderRadius: '0',
+      flex: '1.5',
+    },
+    uxLogo = {
+      flex: '3',
+      height: '80px',
+      backgroundImage: 'url(../../style/img/uxpasslightblue.svg)',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      backgroundSize: '65px 65px'
+    },
+    bubbleBlock = {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      flex: '1',
+    },
+    greenBub = {
+      backgroundImage: 'url(../../style/img/annotategreen.svg)',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      fontSize: '16px',
+      fontWeight: '600',
+      padding: '5px',
+      color: this.props.color.primary,
+      textAlign: 'center',
+    },
+    orangeBub = {
+      backgroundImage: 'url(../../style/img/annotateorange.svg)',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      fontSize: '16px',
+      fontWeight: '600',
+      padding: '5px',
+      color: this.props.color.primary,
+      textAlign: 'center',
+    },
+    redBub = {
+      backgroundImage: 'url(../../style/img/annotatered.svg)',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      fontSize: '16px',
+      fontWeight: '600',
+      padding: '5px',
+      color: this.props.color.primary,
+      textAlign: 'center',
+    },
+    bubbleText = {
+      position: 'relative',
+      top: '-3px'
+    },
+    loginBub = {
+      backgroundImage: 'url(../../style/img/annotationlight.svg)',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      flex: '1',
+      backgroundSize: '60px 60px',
+      height: '70px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: '#fff',
+      fontSize: '12px',
+      fontWeight: '600',
+      paddingBottom: '10px'
+    },
+    logoBub = {
+      backgroundImage: 'url(../../style/img/passlight.svg)',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      flex: '1',
+      backgroundSize: '60px 60px',
+      height: '70px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      color: '#fff',
+      fontSize: '12px',
+      fontWeight: '600',
+      paddingBottom: '10px'
+    },
+    annotationBub = {
+      stroke: '#fff',
+      strokeWidth: '2px',
+      height: '65px',
+
+    }
     return (
       <div style={headerStyle}>
-        <Link to='/'>
-          <Logo
-            color={this.props.color}
-            height={headerStyle.height} />
-          </Link>
-
           <HeaderItem
+            style={{flex: '2'}}
+            linkTo='/'
+            title='Home'
             color={this.props.color}
-            height={headerStyle.height}
             iconType='fa-home' />
-          <HeaderItem
-            linkTo='annotations'
-            color={this.props.color}
-            height={headerStyle.height}
-            iconType={'fa-rocket'} />
+            <div style={bubbleBlock}>
+              <div style={greenBub}><span style={bubbleText}>12</span></div>
+              <div style={orangeBub}><span style={bubbleText}>12</span></div>
+              <div style={redBub}><span style={bubbleText}>12</span></div>
+            </div>
+            <div style={uxLogo}></div>
+          <input
+            onChange={(event) => {this.inputChange(event)}}
+            style={inputStyle}
+            className='form-control'
+            type='text'
+            placeholder='🔎  Search'
+            value={this.state.searchValue}/>
+          <Link style={loginBub} to='/login'><div>{this.state.loginButtonState}</div></Link>
+          <div style={logoBub}>
 
-        <input
-          onChange={(event) => {this.inputChange(event)}}
-          style={inputStyle}
-          className='form-control'
-          type='text'
-          placeholder='🔎  Search'
-          value={this.state.searchValue}/>
+          </div>
       </div>
     );
   }

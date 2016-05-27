@@ -14,12 +14,12 @@ var history = new createHistory({
   queryKey: false
 });
 // colorKey is used to store the current selection of UI pallete.
-var colorKey = '';
-if (localStorage.getItem('colorScheme')) {
+var colorKey = 'uxfeed';
+/*if (localStorage.getItem('colorScheme')) {
   colorKey = localStorage.getItem('colorScheme');
 } else {
   colorKey = 'orange';
-}
+}*/
 // returns the correct color obj according to the value of colorKey
 function color() {
   switch (colorKey) {
@@ -90,6 +90,21 @@ function color() {
         four: "#09c1b5",
         five: "#dbdbdb",
         six: "#09c1b5",
+        text: "#464646",
+        textLight: "#fff",
+      }
+    }
+    case 'uxfeed': {
+      return {
+        primary: "#fff",
+        secondary: "#333E48",
+        tertiary: "#197f7f",
+        four: "#11b14b",
+        five: "#129dd9",
+        six: "#f58333",
+        seven: "#7f5a3",
+        eight: "#ef3f2d",
+        nine: "#f6ed51",
         text: "#464646",
         textLight: "#fff",
       }

@@ -13,8 +13,7 @@ export default class DashboardProfileCard extends Component{
                 display: "flex",
                 flexDirection: "row",
                 backgroundColor: this.props.color.four,
-                borderRadius: "5px",
-                marginBottom: '25px'
+                marginBottom: '15px'
             };
             var bottomSection = {
                 height: "100px",

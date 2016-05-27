@@ -2,6 +2,7 @@ body, html{
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: Quicksand;
 }
 * {
   transition: background-color 500ms ease-in, color 500ms ease-in-out;
@@ -107,4 +108,9 @@ a:hover{
   .boxRow{
     flex-wrap: wrap;
   }
+}
+.profilePicBub {
+  -webkit-clip-path: url(#clipPathBub);
+  clip-path: url(#clipPathBub);
+  z-index: 1000;
 }
