@@ -6,5 +6,5 @@ app.use(express.static('build'));
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
-
+console.log('running some new new!');
 app.listen(port);
