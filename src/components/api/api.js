@@ -32,11 +32,6 @@ var api = {
       "crossDomain": true,
       "url": "https://uxpass.herokuapp.com/user/login",
       "method": "POST",
-      "headers": {
-        "programid": "askdhfa",
-        "cache-control": "no-cache",
-        "postman-token": "0aa93dd4-2e94-7f9d-f73d-7ea82ef31c2e"
-      },
       "processData": false,
       "contentType": false,
       "mimeType": "multipart/form-data",
@@ -44,7 +39,7 @@ var api = {
     }
 
     $.ajax(settings).done(function (response) {
-    alert(respsonse);
+    alert(response);
     });
   }
 }
