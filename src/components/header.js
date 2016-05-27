@@ -29,7 +29,7 @@ export default class Header extends Component {
     uxLogo = {
       flex: '3',
       height: '80px',
-      backgroundImage: 'url(../../style/img/uxpasslightblue.svg)',
+      backgroundImage: 'url(../style/img/uxpasslightblue.svg)',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       backgroundSize: '65px 65px'
@@ -41,7 +41,7 @@ export default class Header extends Component {
       flex: '1',
     },
     greenBub = {
-      backgroundImage: 'url(../../style/img/annotategreen.svg)',
+      backgroundImage: 'url(../style/img/annotategreen.svg)',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       fontSize: '16px',
@@ -51,7 +51,7 @@ export default class Header extends Component {
       textAlign: 'center',
     },
     orangeBub = {
-      backgroundImage: 'url(../../style/img/annotateorange.svg)',
+      backgroundImage: 'url(../style/img/annotateorange.svg)',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       fontSize: '16px',
@@ -61,7 +61,7 @@ export default class Header extends Component {
       textAlign: 'center',
     },
     redBub = {
-      backgroundImage: 'url(../../style/img/annotatered.svg)',
+      backgroundImage: 'url(../style/img/annotatered.svg)',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       fontSize: '16px',
@@ -75,7 +75,7 @@ export default class Header extends Component {
       top: '-3px'
     },
     loginBub = {
-      backgroundImage: 'url(../../style/img/annotationlight.svg)',
+      backgroundImage: 'url(../style/img/annotationlight.svg)',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       flex: '1',
@@ -90,7 +90,7 @@ export default class Header extends Component {
       paddingBottom: '10px'
     },
     logoBub = {
-      backgroundImage: 'url(../../style/img/passlight.svg)',
+      backgroundImage: 'url(../style/img/passlight.svg)',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       flex: '1',
