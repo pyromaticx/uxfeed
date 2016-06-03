@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import UserComment from './usercomment.js';
-import AnnotationModal from './annotationmodal.js';
+
 export default class Annotation extends Component {
     resizeListener
     constructor(props) {
@@ -9,7 +9,8 @@ export default class Annotation extends Component {
         this.state = {
             height: 80,
             expanded: props.expanded,
-            modalState: 'closed'
+            modalState: 'closed',
+            selected: false
         }
     }
     componentWillReceiveProps(newProps) {
@@ -47,46 +48,27 @@ export default class Annotation extends Component {
         var imageH = this.props.annotation.imageH / this.props.scale + 'px';
         var annotationWrapper = {
                 width: '100%',
-                minHeight: this.state.expanded ? '300px' : '80px',
-                backgroundColor: this.props.color.primary,
-                border: '1px solid ' + this.props.color.five,
+                minHeight: this.state.expanded ? '150px' : '80px',
+                backgroundColor: 'transparent',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: this.state.expanded ? 'space-between' : 'center',
                 alignItems: 'center',
-                padding: '20px',
+                padding: '0',
                 marginBottom: '25px',
-                boxShadow: '0 3px 15px 1px ' + this.props.color.five,
-                borderRadius: '5px',
+                boxShadow: '0 3px 15px 1px #777',
                 overflow: 'hidden',
+                border: this.state.selected == false ? '' : '3px solid ' + this.props.color.five
             },
             thumbnailStyle = {
-                marginTop: '20px',
-                marginBottom: '20px',
                 display: this.state.expanded ? '' : 'none',
-                backgroundImage: this.props.annotation.image,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPostion: 'center',
-                height: imageH,
-                width: imageW,
-                border: '1px solid gray'
+                height: "100%",
+                width: '100%',
             },
             textRow = {
                 display: 'flex',
                 width: '100%',
                 alignItems: 'center'
-            },
-            userImageStyle = {
-                display: 'flex',
-                alignContent: 'center',
-                height: '50px',
-                margin: "0",
-                backgroundImage: 'url(http://s3.amazonaws.com/37assets/svn/765-default-avatar.png)',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center',
-                flex: '1'
             },
             userInfo = {
                 fontSize: "14px",
@@ -106,23 +88,48 @@ export default class Annotation extends Component {
                     fontWeight: 'bold',
                     color: this.props.color.five,
                     paddingRight: '5px'
-                }
-            },
-            headingStyle = {
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'space-between',
-                flexDirection: 'row',
-                width: '100%'
+                },
+                flex: 1,
+                alignItems: 'center',
+                paddingLeft: '20px'
             },
             annotationFooterStyle = {
                 display: 'flex',
-                justifyContent: 'center',
-                flexDirection: 'column',
+                justifyContent: 'space-around',
+                flexDirection: 'row',
                 alignItems: 'space-around',
                 width: '100%',
-                minHeight: '50px'
+                minHeight: '50px',
+                backgroundColor: this.props.color.four,
+            },
+            footerLeft = {
+              backgroundImage: 'url(/style/img/annotationlight.svg)',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              flex: '1',
+              backgroundSize: '60px 60px',
+              height: '70px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: '#fff',
+              fontSize: '12px',
+              fontWeight: '600',
+              paddingBottom: '10px',
+              typeStyle: {
+                color: '#fff',
+                marginTop: '30px',
+                fontWeight: 700,
 
+              }
+            },
+            annotationContent = {
+              display: 'flex',
+              flex: '2',
+              borderLeft: '2px solid #fff',
+              backgroundColor: 'transparent',
+              justifyContent: 'center',
+              alignItems: 'center',
             },
             emojiStyle = {
                 display: 'flex',
@@ -136,41 +143,6 @@ export default class Annotation extends Component {
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center'
             },
-            thumbnailDotStyle = {
-                position: 'relative',
-                top: this.props.annotation.thumbnailDot.top,
-                left: this.props.annotation.thumbnailDot.left,
-                width: '10px',
-                height: '10px',
-                borderRadius: '50%',
-                backgroundColor: this.props.annotation.thumbnailDot.background
-            },
-            timeSocialStyles = {
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-around',
-                alignItems: 'center',
-                marginBottom: '10px',
-                time: {
-                    flex: '5',
-                    fontSize: '12px'
-                },
-                social: {
-                    flex: '1',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
-                    pinterest: {
-                        color: '#bd081c'
-                    },
-                    facebook: {
-                        color: '#3b5998'
-                    },
-                    twitter: {
-                        color: '#55acee'
-                    }
-                }
-            },
             userCommentStyle = {
               display: 'inline-flex',
               width: '100%',
@@ -183,11 +155,6 @@ export default class Annotation extends Component {
                 color: this.props.color.five
               }
             }
-        var userModule = (
-            <div style={userInfo}>
-                <h3>{this.state.expanded ? this.props.annotation.title : this.truncate(this.props.annotation.title)}</h3>
-            </div>
-        );
         var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
         var Comments = currentComments.map((comment) => {
           return (
@@ -200,54 +167,37 @@ export default class Annotation extends Component {
         });
         var annotationFooter = (
             <div style={annotationFooterStyle}>
-                <div style={timeSocialStyles}>
-                    <div style={timeSocialStyles.time}>
-                        {moment(Date(this.props.annotation.timeStamp)).format('MMM Do YY, HH:MM')}
-                    </div>
-                    <div style={timeSocialStyles.social}>
-                        <span className='fa fa-pinterest-p' style={timeSocialStyles.social.pinterest}></span>
-                        <span className='fa fa-twitter' style={timeSocialStyles.social.twitter}></span>
-                        <span className='fa fa-facebook' style={timeSocialStyles.social.facebook}></span>
-                    </div>
-                </div>
                 <div style={mainComment}>
-                  <span style={mainComment.span}>
-                    {this.props.annotation.userId + ":"}
-                  </span>
-                  {this.props.annotation.text}
+                  <img src='/style/img/annotationWhite.svg' width='35' />
+                  <span style={footerLeft.typeStyle}>{this.props.annotation.pinType}</span>
                 </div>
-                {Comments}
-              <UserComment updateCommentsCB={this.props.updateCommentsCB}
-                user={this.props.user}
-                color={this.props.color}
-                annotation={this.props.annotation} />
-            </div>
-        );
+                <div style={annotationContent}>
+                  <span style={{color: '#fff', fontWeight: 700}}>{this.props.annotation.annotationTitle}</span>
+                </div>
 
-        var emojiModule = (
-            <div style={emojiStyle}>
             </div>
         );
-        var thumbnailDot = (
-            <div style={thumbnailDotStyle}>
-            </div>
-        );
+        //moment(Date(this.props.annotation.timeUpdated)).format('MMM Do YY, HH:MM')
+// <AnnotationModal toggleModal={(event) => {this.openModal(event)}} color={this.props.color} annotation={this.props.annotation} modalState={this.state.modalState} scale={this.state.scaleValue} />
         return (
-            <div
-                onClick={() => {this.expandAnnotation()}}
-                style={annotationWrapper}>
-                <AnnotationModal toggleModal={(event) => {this.openModal(event)}} color={this.props.color} annotation={this.props.annotation} modalState={this.state.modalState} scale={this.state.scaleValue} />
-                <div style={headingStyle}>
-                    <div style={userImageStyle}></div>
-                    {userModule}
-                    {emojiModule}
+            <div onClick={() => {this.addToCollection()}}style={annotationWrapper}>
+                <div style={thumbnailStyle}>
+                    {this.props.annotation.annotationMediaType == 'jpeg' ? <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/> : this.props.annotation.annotationMediaType == 'webm' ? <video src={this.props.annotation.annotationMedia} controls width='100%' height='auto'/> : <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column'}}> <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/> <audio controls src={this.props.annotation.annotationMediaAudio} /> </div> }
                 </div>
-                <div onClick={(event) => {this.openModal(event)}} style={thumbnailStyle}>
-                    {this.props.annotation.image ? thumbnailDot : ''}
-                </div>
-                {this.state.expanded ? annotationFooter : ''}
+                {annotationFooter}
             </div>
         );
+    }
+    addToCollection() {
+      if(this.props.addToCollection(this.props.annotation)) {
+        this.setState({
+          selected: true
+        });
+      } else {
+        this.setState({
+          selected: false
+        });
+      }
     }
     openModal(event) {
       if(event) {

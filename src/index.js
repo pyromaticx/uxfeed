@@ -15,6 +15,7 @@ var history = new createHistory({
 });
 // colorKey is used to store the current selection of UI pallete.
 var colorKey = 'uxfeed';
+var currentUser = {};
 /*if (localStorage.getItem('colorScheme')) {
   colorKey = localStorage.getItem('colorScheme');
 } else {
@@ -120,13 +121,17 @@ function colorChanger(choice, callback) {
   }
 }
 
+function userLoggedIn(userData) {
+  currentUser = userData;
+}
+
 var Routes = (
   <Router history={history}>
     <Route path='/' component={App} color={color()} colorChanger={(choice, cb) => {colorChanger(choice, cb)}}>
       <IndexRoute component={Home} color={color()} />
-      <Route path='login' component={Login} color={color()} />
-      <Route path='username/:username' component={UserPage} color={color()} />
-      <Route path='annotations' component={UserPage} color={color()} />
+      <Route path='login' component={Login} color={color()} loginCB={(userData) => {userLoggedIn(userData)}}/>
+      <Route path='username/:username' component={UserPage} color={color()} user={currentUser} />
+      <Route path='annotations' component={UserPage} color={color()} user={currentUser} />
       <Route path='/pricing' component={PricingPage} color={color()} />
       <Route path='newproject' component={NewProject} color={color()} />
     </Route>

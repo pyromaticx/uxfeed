@@ -3,12 +3,23 @@ import SpanItem from './spanitem.js';
 import SlideBox from './slidebox.js';
 
 export default class Home extends Component {
+  updatedInput(event) {
+    this.setState({
+      inputBox: event.target.value
+    });
+  }
+  submitEmail() {
+    api.emailRohit();
+  }
   render() {
     var jumboTron = {
-      height: '90vh',
+      display: 'flex',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      flexDirection: 'column',
+      height: '50vh',
       width: '100%',
-      borderBottom: '1px solid ' + this.props.color.tertiary,
-      backgroundColor: this.props.color.four
+      backgroundColor: 'transparent'
     },
     landingStyle = {
       width: '100%',
@@ -52,23 +63,12 @@ export default class Home extends Component {
     return (
       <div style={landingStyle}>
         <div style={jumboTron}>
+          <h1>Enter your email to be invited!</h1>
+          <input type='email' style={{width: '300px'}} placeholder='Enter your email address' className='text' onChange={(event) => {this.updatedInput(event)}} />
+          <button type='button' onClick={() => {this.emailSubmit()}}>Let's Go!</button>
+        </div>
 
-        </div>
-        <div style={triSpanner}>
-          <SpanItem color={this.props.color} title='Lorem Ipsum' content="Lorem ipsum dolor. Sit amet leo. Malesuada odio ut. Sodales pellentesque odio."/>
-          <SpanItem color={this.props.color} title='Lorem Ipsum' content="Suscipit arcu cras vel posuere eget. Quis ligula volutpat. Arcu nec vel."/>
-          <SpanItem color={this.props.color} title='Lorem Ipsum' content="Magna in aenean phasellus sodales nec egestas tortor faucibus. Nullam justo volutpat."/>
-        </div>
-        <div style={twoPanel}>
-          <div style={twoPanel.left}>
-            <h3>Just list the facts</h3>
-            <h3>Just list the facts</h3>
-            <h3>Just list the facts</h3>
-          </div>
-          <div style={twoPanel.right}>
-            <SlideBox color={this.props.color} />
-          </div>
-        </div>
+
       </div>
     );
   }

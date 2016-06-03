@@ -5,6 +5,7 @@ export default class MenuItem extends Component {
     super(props);
     this.state = {
       hovered: false,
+      active: false
     };
   }
   handleMouseOver() {
@@ -17,16 +18,31 @@ export default class MenuItem extends Component {
       hovered: false
     });
   }
+  exeCallback(submit) {
+    if(!this.state.active) {
+      this.setState({
+        active: true
+      });
+      this.props.callback();
+    } else {
+      this.setState({
+        active: false
+      });
+      this.props.callback(submit);
+    }
+  }
   render() {
     var menuItemStyle = {
-      display: 'inline-flex',
-      height: '50px',
+      display: 'flex',
+      flexDirection: 'column',
+      height: this.state.active ? '200px': '50px',
       width: '100%',
       alignItems: 'center',
       justifyContent: 'space-between',
-      transition: 'all 250ms ease',
+      transition: 'height 150ms ease, background-color 50ms ease, color 50ms ease',
       padding: '10px',
-      backgroundColor: this.state.hovered ? this.props.color.five : this.props.color.primary,
+      color: this.state.hovered ? this.props.color.primary : this.state.active ? this.props.color.primary : this.props.color.text,
+      backgroundColor: this.state.hovered ? this.props.color.five : this.state.active ? this.props.color.seven : this.props.color.primary,
       cursor: 'pointer',
       badge: {
         display: this.props.value > 0 ? 'flex' : 'none',
@@ -37,13 +53,25 @@ export default class MenuItem extends Component {
         height: '30px',
         width: '30px',
         justifyContent: 'center'
+      },
+      infoPane: {
+        display: 'flex',
+        visibility: this.state.active ? 'visible': 'hidden',
+        WebkitOpacity: this.state.active ? 1.0 : 0.0,
+        opacity: this.state.active ? 1.0 : 0.0,
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        height: '100%',
+        transition: 'visibility 0ms, opacity 250ms ease, -webkit-opacity 250ms ease'
       }
     }
     return (
-      <div onMouseOver={() => {this.handleMouseOver()}} onMouseLeave={() => {this.handleMouseLeave()}} style={menuItemStyle}>
-        <span>{this.props.title}</span>
-        <div style={menuItemStyle.badge}>
-        {this.props.value}
+      <div onMouseOver={() => {this.handleMouseOver()}} onMouseLeave={() => {this.handleMouseLeave()}} onClick={() => {this.exeCallback()}} style={menuItemStyle}>
+        <h5>{this.props.title}</h5>
+        <div style={menuItemStyle.infoPane}>
+        <h6>{this.props.activeText}</h6>
+        {this.props.button ? <button className='btn btn-default' type='button' onClick={() => this.exeCallback('buttonClicked')}>{this.props.buttonText}</button> : ''}
         </div>
       </div>
     );

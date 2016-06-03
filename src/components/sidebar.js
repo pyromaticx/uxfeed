@@ -8,7 +8,7 @@ export default class SideBar extends Component {
   render() {
     var barStyle = {
       width: '100%',
-      minHeight: '200px',
+      minHeight: '80px',
       backgroundColor: this.props.color.primary,
       boxShadow: '0 3px 15px 1px #777',
     },
@@ -18,8 +18,13 @@ export default class SideBar extends Component {
       color: this.props.color.textLight,
       width: '100%',
       display: 'flex',
-      justifyContent: 'center',
+      justifyContent: 'flex-start',
       alignItems: 'center',
+      paddingLeft: '10px'
+    },
+    quoteLoc = {
+      marginTop: '20px',
+      zIndex: '1000'
     },
     listItemStyle = {
       padding: '0'
@@ -34,18 +39,19 @@ export default class SideBar extends Component {
       alignItems: 'center',
     },
     boss = {
-      textShadow: '1px 1px 10px 1px ' + this.props.color.five
+      textShadow: '1px 1px 10px 1px ' + this.props.color.five,
+      fontWeight: 700,
     }
     var listItems = this.props.content.map((el, idx) => {
       return (
-        <MenuItem color={this.props.color} title={el.title} value={el.value} />
+        <MenuItem color={this.props.color} title={el.title} value={el.value} activeText={el.activeText} callback={el.callback} button={el.button} buttonText={el.buttonText} />
       )
     });
 
     return (
       <div style={barStyle}>
         <div style={barHeading}>
-          <span style={iconStyle} className={'fa ' + this.props.icon}></span>
+          <img style={quoteLoc} src="/style/img/annotationWhiteB.svg" width="80px" />
           <h5 style={boss}>{this.props.title}</h5>
         </div>
         <div style={listItemStyle}>

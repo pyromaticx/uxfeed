@@ -3,7 +3,9 @@ import React, {Component} from 'react';
 export default class DashboardProfileCard extends Component{
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+          userData: props.user
+        };
         }
 
         render(){
@@ -24,7 +26,7 @@ export default class DashboardProfileCard extends Component{
                 height: "100%",
                 flex: "3",
                 borderRadius: "5px 0 0 5px",
-                backgroundImage: "url('http://s3.amazonaws.com/37assets/svn/765-default-avatar.png')",
+                backgroundImage: this.state.userData.userPicURL || "url('http://s3.amazonaws.com/37assets/svn/765-default-avatar.png')",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center"
@@ -45,10 +47,10 @@ export default class DashboardProfileCard extends Component{
                         <div style={profilePicContainer}>
                         </div>
                         <div style={fontColor}>
-                            <h6>{this.props.user.name}</h6>
-                            <p>{this.props.user.company}</p>
-                            <p>{this.props.user.title}</p>
-                            <p>{this.props.user.location}</p>
+                            <h5>{this.state.userData.userFirstName + ' ' + this.state.userData.userLastName}</h5>
+                            <h6>{this.state.userData.userEmployer}</h6>
+                            <h6>{this.state.userData.userDesignation}</h6>
+                            <h6>{this.state.userData.userCity + ', ' + this.state.userData.userState}</h6>
                         </div>
                 </div>
             )

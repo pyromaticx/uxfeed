@@ -114,7 +114,7 @@ export default class Header extends Component {
       <div style={headerStyle}>
           <HeaderItem
             style={{flex: '2'}}
-            linkTo='/'
+            linkTo=''
             title='Home'
             color={this.props.color}
             iconType='fa-home' />

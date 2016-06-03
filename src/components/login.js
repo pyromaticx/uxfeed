@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import api from './api/api.js';
+import {Router, Route, Link, BrowserHistory, IndexRoute} from 'react-router';
 export default class Login extends Component {
   constructor() {
     super();
@@ -73,6 +74,10 @@ export default class Login extends Component {
     });
   }
   submitCreds(event) {
-    api.login(this.state.username, this.state.password)
+    api.login(this.state.username, this.state.password).done((userData) => {
+      this.props.updateUser(userData);
+      document.cookie = "userData=" + userData;
+      window.location.hash = '#/username/bclynch'
+    })
   }
 }

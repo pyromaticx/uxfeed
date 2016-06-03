@@ -5,7 +5,6 @@ var myInit = {
             "async": true,
 						"crossDomain": true,
             "mode": "cors",
-            "headers": headers,
 						"method": "GET",
 						"process-data": false,
           };
@@ -13,12 +12,12 @@ var myInit = {
 var api = {
   baseUrl: 'https://uxpass.herokuapp.com/',
   getUser: function(username) {
-    return fetch(this.baseUrl + '/users/' + username, myInit).then(function (resp) {
+    return fetch(this.baseUrl + 'annotations/user/' + username, myInit).then(function (resp) {
       return resp.json()
     });
   },
   annotations: function() {
-    return fetch(this.baseUrl + 'annotations', myInit).then(function(resp) {
+    return fetch(this.baseUrl + 'annotations/all', myInit).then(function(resp) {
       return resp.json();
     });
   },
@@ -38,9 +37,18 @@ var api = {
       "data": form
     }
 
-    $.ajax(settings).done(function (response) {
-    alert(response);
-    });
+    return $.ajax(settings);
+  },
+  html2pdf: function(htmlArray) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://pdf-service-pyromaticx.c9users.io/html2pdf",
+      "method": "POST",
+      "contentType": 'text/html',
+      "data": htmlArray.toString()
+    }
+    return $.ajax(settings);
   }
 }
 

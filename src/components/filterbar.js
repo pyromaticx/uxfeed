@@ -25,7 +25,6 @@ export default class FilterBar extends Component {
       marginBottom: '25px',
       justifyContent: 'space-around',
       alignItems: 'center',
-      borderRadius: '5px',
       color: this.props.color.primary,
       fontSize: '40px'
     };

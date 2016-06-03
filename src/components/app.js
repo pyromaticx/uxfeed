@@ -6,15 +6,38 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      color: props.route.color
+      color: props.route.color,
+      userDetails: {}
     }
+  }
+  componentWillMount() {
+    this.checkUserCookie();
+  }
+  checkUserCookie() {
+    var cookie = document.cookie.split("userData=");
+    var JSONCookie = {};
+    try {
+      JSONCookie = JSON.parse(cookie[1]);
+    } catch(e) {
+        console.warn('cookie error:', e);
+    }
+    this.setState({
+      userDetails: JSONCookie
+    });
   }
   setColors(colorObj) {
     this.setState({
       color: colorObj
     });
   }
+  updateLoggedInUser(userInfo) {
+    this.checkUserCookie();
+    this.setState({
+      userDetails: JSON.parse(userInfo)
+    });
+  }
   render() {
+
     var appStyle = {
       display: 'flex',
     },
@@ -33,7 +56,7 @@ export default class App extends Component {
           <Header color={this.state.color}/>
         </div>
         <div style={contentWrapper}>
-          {React.cloneElement(this.props.children, { color: this.state.color })}
+          {React.cloneElement(this.props.children, { color: this.state.color, userDetails: this.state.userDetails, updateUser: (userInfo) => {this.updateLoggedInUser(userInfo)} })}
         </div>
         <Footer color={this.state.color} colorChanger={(choice) => {this.props.route.colorChanger(choice, this.setColors.bind(this))}}/>
       </div>

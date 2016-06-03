@@ -1,64 +1,33 @@
 import React, {Component} from 'react';
 import Annotation from './annotation.js';
 import moment from 'moment';
-import img from './base64.js';
 import SideBar from './sidebar.js';
 import DashboardProfileCard from './dashboardProfileCard';
 import api from './api/api.js';
 import Loader from './loader.js';
 import FilterBar from './filterbar.js';
-var dummyAnnotation = {
-    userId: 'pyromaticx',
-    userImage: '',
-    websiteId: 1,
-    domain: 'https://www.homestarrunner.com',
-    title: "Needs to be adjusted",
-    text: "Lorem Ipsum delo mumbo jumbo. Her the do to the left and bring a widget this Thurs.",
-    timeStamp: moment(Date.now()).format('MMM Do YY, HH:MM'),
-    type: "Business Review",
-    pinAttribute: '123456',
-    pinX: '123',
-    pinY: '456',
-    emoji: 'emoji',
-    image: img,
-    imageH: 683,
-    imageW: 1301,
-    comments: [{username: 'SimpleSara', comment: 'this is lame...', timestamp: moment(Date.now()).format('MMM Do YY, HH:MM') }],
-    isPrivate: false,
-    thumbnailDot: {
-        top: '35%',
-        left: '35%'
-    }
-}
-var dummyUser = {
-    name: "Derpy Dan",
-    company: "Go Live Labs",
-    title: "UI/UX Experts",
-    location: "Sunnyvale, CA",
-    following: ["brendon", "james", "kelly"],
-    followers: ["steve", "dan", "somebooty"]
-}
-
-
+import PDFTemplate from './pdftemplate.js';
+import PDFModal from './pdfmodal.js';
 export default class UserPage extends Component {
     intervalID
     resizeListener
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            expanded: false,
+            expanded: true,
             getResponse: [],
             contentWidth: window.innerWidth <= 1024 ? '100%' : '85%',
-            scaleValue: this.handleResize()
+            scaleValue: this.handleResize(),
+            collect: false,
+            collectedAnnotations: [],
+            modalActive: false,
+            modal: {}
         };
     }
-    componentWillMount() {
-        this.resizeListener = window.addEventListener('resize', () => this.handleResize())
-        this.getUpdated()
+
+    componentDidMount() {
+        this.getUpdated();
         window.setInterval(this.getUpdated.bind(this), 20000);
-    }
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.resizeListener);
     }
     handleResize() {
         var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%';
@@ -87,7 +56,7 @@ export default class UserPage extends Component {
             case 'annotations': {
                 api.annotations().then((data) => {
                     var sortedByPinId = data.sort(function(a, b) {
-                        return a.pinId - b.pinId;
+                        return a.annotationId - b.annotationId;
                     }).reverse();
                     this.setState({
                         getResponse: sortedByPinId
@@ -97,9 +66,9 @@ export default class UserPage extends Component {
             }
             case 'username/:username': {
                 api.getUser(this.props.params.username).then((data) => {
-
+                    console.log(data);
                     var sortedByPinId = data.sort(function(a, b) {
-                        return a.pinId - b.pinId;
+                          return a.annotationId - b.annotationId;
                     }).reverse();
                     this.setState({
                         getResponse: sortedByPinId
@@ -118,19 +87,72 @@ export default class UserPage extends Component {
     }
     annotationRender() {
       var Annotations = this.state.getResponse.map((annotation, idx) => {
-          console.log('anno', this.state.expanded)
-
           return (
               <Annotation
-                  key={annotation.pinId}
-                  user={dummyUser}
+                  key={annotation.annotationId}
                   expanded={this.state.expanded}
                   annotation={annotation}
                   scale={this.state.scaleValue}
                   updateCommentsCB={this.updateCommentsCB}
+                  addToCollection={this.addToCollection.bind(this)}
                   color={this.props.color}/>);
       });
       return Annotations;
+    }
+    beginCollecting(submit) {
+      if(!this.state.collect) {
+        this.setState({
+          collect: true
+        });
+      } else {
+        this.setState({
+          collect: false
+        });
+        if (submit == 'buttonClicked') {
+
+            var strings = PDFTemplate(this.state.collectedAnnotations);
+            
+            api.html2pdf(strings).done(function(resp) {
+              console.log(resp);
+            });
+            /*
+            this.setState({
+              modalActive: true,
+              modal: (<PDFModal />)
+            });
+            */
+        }
+
+      }
+    }
+    addToCollection(annotation) {
+      if(this.state.collect == false) {
+        return false;
+      } else {
+        var collected = this.state.collectedAnnotations;
+        var exists = collected.filter(function(anno, idx) {
+          if(anno.annotationId === annotation.annotationId) {
+            return true;
+          }
+          return false;
+        });
+        if(exists.length == 0) {
+          collected.push(annotation);
+          //console.log(collected);
+          this.setState({
+            collectedAnnotations: collected
+          });
+          return true;
+        } else {
+          var removed = collected.filter(function(anno) {
+            return anno.annotationId != annotation.annotationId;
+          });
+          this.setState({
+            collectedAnnotations: removed
+          });
+          return false;
+        }
+      }
     }
     render() {
 
@@ -158,36 +180,45 @@ export default class UserPage extends Component {
                 alignItems: 'center',
                 flexDirection: 'column'
             },
-            leftBarContent = [{title: 'All Users', value: ''}, {title: 'My Feeds', value: ''}, {title: 'Followed Users', value: dummyUser.following.length}, {title: 'My Followers', value: dummyUser.followers.length}, {title: 'Companies', value: ''}],
+            leftBarContent = [{
+              title: 'Export Annotations to PDF',
+              callback: (event) => {this.beginCollecting(event)},
+              activeText: 'After selecting the annotations you would like exported, click below to finish',
+              button: true,
+              buttonText: 'Create PDF'
+            }],
             rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
         return (
             <div style={pageWrapper}>
+                {this.state.modalActive ? this.state.modal : ''}
                 <div style={leftBarWrapper}>
                     <DashboardProfileCard
                         color={this.props.color}
-                        user={dummyUser} />
+                        user={this.props.userDetails} />
                     <SideBar
                         icon="fa-filter"
-                        title=''
+                        title='Tools'
                         content={leftBarContent}
                         color={this.props.color} />
                 </div>
                 <div style={annotationWrapper}>
-                  <FilterBar
-                  expandCB={() => this.expander()}
-                  expanded={this.state.expanded}
-                  displayed={this.state.getResponse.length > 0 ? true : false}
-                  color={this.props.color} />
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : ''}
                 </div>
                 <div style={rightBarWrapper}>
                     <SideBar color={this.props.color}
                              icon="fa-fire"
-                             title=""
+                             title="Trending Topics"
                              content={rightBarContent} />
                 </div>
             </div>
         );
+        /*
+        <FilterBar
+        expandCB={() => this.expander()}
+        expanded={this.state.expanded}
+        displayed={this.state.getResponse.length > 0 ? true : false}
+        color={this.props.color} />
+        */
     }
 }
