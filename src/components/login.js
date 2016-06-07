@@ -77,7 +77,7 @@ export default class Login extends Component {
     api.login(this.state.username, this.state.password).done((userData) => {
       this.props.updateUser(userData);
       document.cookie = "userData=" + userData;
-      window.location.hash = '#/username/bclynch'
+      window.location.hash = '#/username/' + this.state.username;
     })
   }
 }

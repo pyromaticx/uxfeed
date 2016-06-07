@@ -43,7 +43,7 @@ var api = {
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://htmln2pdf.herokuapp.com/",
+      "url": "https://htmln2pdf.herokuapp.com/html2pdf",
       "method": "POST",
       "contentType": 'application/json',
       "data": JSON.stringify({
