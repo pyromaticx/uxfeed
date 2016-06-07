@@ -55,11 +55,13 @@ export default function PDFTemplate(annotations, userData) {
             "<h5 style='font-family: Quicksand;'>" + moment(Date.now()).format('MM/DD/YYYY') + "</h5>" +
           "</div>" +
           "<div style='width: 100%; height: 99%; display: -webkit-flex; -webkit-justify-content: flex-start; -webkit-align-items: flex-start; -webkit-flex-direction: column;'>" +
-            "<p style='font-family: Quicksand; font-weight: 700; font-size: 15px;'>Annotation Title: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationTitle + "</span></p>" +
-            "<p style='font-family: Quicksand; font-weight: 700;'>Annotation Description: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationText + "</span></p>" +
-            "<p style='font-family: Quicksand; font-weight: 700;'>Annotation Type: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.pinType + "</span></p>" +
-            "<p style='font-family: Quicksand; font-weight: 700; margin-bottom: 10px;'>Annotation Domain: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.specificURL + "</span></p>" +
-            "<img style='' src='" + annotation.annotationMedia + "' width='100%' />" +
+            "<p style='word-break: break-all; font-family: Quicksand; font-weight: 700; font-size: 15px;'>Annotation Title: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationTitle + "</span></p>" +
+            "<p style='word-break: break-all; font-family: Quicksand; font-weight: 700;'>Annotation Description: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationText + "</span></p>" +
+            "<p style='word-break: break-all; font-family: Quicksand; font-weight: 700;'>Annotation Type: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.pinType + "</span></p>" +
+            "<p style='word-break: break-all; font-family: Quicksand; font-weight: 700; margin-bottom: 10px;'>Annotation Domain: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.specificURL + "</span></p>" +
+            "<div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: center;'>" +
+              "<img style='' src='" + annotation.annotationMedia + "' height='225px' />" +
+            "</div>" +
             "<div style='height: 40px; width: 100%; display: -webkit-flex; -webkit-justify-content: space-between; -webkit-align-items: center; background-color: " + colorByType(annotation.annotationType) + ";'><div style='width:500px; display: -webkit-flex; -webkit-justify-content: flex-start; -webkit-align-items: center;'><img style='position: relative; margin-left: 10px;' src='https://s3-us-west-1.amazonaws.com/uxpjpeg/svg/annotationWhiteB.svg' width='50px'><h3 style='color: #fff; font-family: Quicksand; font-weight: 700; margin-top: 30px; margin-left: 10px;'>" + annotation.annotationType + "</h3></div></div>" +
             "<div style='border-bottom: 1px solid #666; width: 100%; margin-bottom: 20px; margin-top: 20px;'><span style='font-family: Quicksand;'>Comments:</span></div>" +
             "<div style='border-bottom: 1px solid #666; width: 100%; margin-bottom: 20px;'></div>" +
