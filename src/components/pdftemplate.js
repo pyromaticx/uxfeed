@@ -49,16 +49,16 @@ export default function PDFTemplate(annotations, userData) {
     //  return "<div style='width: 100%; height: 100%;'><div style='width: 100%; height: 50%; background-color: #f9f9f9;'><img style='position: relative; top: 15%; left: 2.5%; margin-top: 10px; margin-bottom: 10px;' src='" + annotation.annotationMedia + "' width='95%' /><div style='height: 40px; width: 100%; display: -webkit-flex; -webkit-justify-content: space-between; -webkit-align-items: center; background-color: " + colorByType(annotation.annotationType) + ";'><div style='width:500px; display: -webkit-flex; -webkit-justify-content: flex-start; -webkit-align-items: center;'><img style='position: relative; margin-left: 10px;' src='https://s3-us-west-1.amazonaws.com/uxpjpeg/svg/annotationWhiteB.svg' width='50px'><h3 style='color: #fff; font-family: Quicksand; font-weight: 700; margin-top: 30px; margin-left: 10px;'>" + annotation.annotationType + "</h3></div><div style='display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: center; font-family: Quicksand; color: #fff; width: 100%;'><h3>" + annotation.pinType + "</h3></div></div><div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: center; -webkit-flex-direction: column; font-family: Quicksand; color: #333;'><h4>Title: " + annotation.annotationTitle + "<h5>Description: " + annotation.annotationText + "</h5><h5>Domain: <a target='_blank' href='" + annotation.specificURL + "'>" + annotation.specificURL + "</a></h5></div></div></div>"
     return (
       "<div style='width: 100%; height: 102%;'>" +
-          "<div id='header' style='position: relative; top: 0; height: 60px; width: 100%; border-top: 2px solid #333; box-sizing: border-box; display: -webkit-flex; -webkit-justify-content: space-between; -webkit-align-items: center;'>" +
+          "<div id='header' style='position: relative; top: 0; height: 60px; width: 100%; border-bottom: 2px solid #333; box-sizing: border-box; display: -webkit-flex; -webkit-justify-content: space-between; -webkit-align-items: center;'>" +
             "<h3 style='font-family: Quicksand;'>" + userData.collectionTitle + "</h3>" +
             "<h3 style='font-family: Quicksand;'>" + userData.companyName + "</h3>" +
             "<h5 style='font-family: Quicksand;'>" + moment(Date.now()).format('MM/DD/YYYY') + "</h5>" +
           "</div>" +
           "<div style='width: 100%; height: 99%; display: -webkit-flex; -webkit-justify-content: flex-start; -webkit-align-items: flex-start; -webkit-flex-direction: column;'>" +
-            "<p style='word-break: break-all; font-family: Quicksand; font-weight: 700; font-size: 15px;'>Annotation Title: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationTitle + "</span></p>" +
-            "<p style='word-break: break-all; font-family: Quicksand; font-weight: 700;'>Annotation Description: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationText + "</span></p>" +
-            "<p style='word-break: break-all; font-family: Quicksand; font-weight: 700;'>Annotation Type: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.pinType + "</span></p>" +
-            "<p style='word-break: break-all; font-family: Quicksand; font-weight: 700; margin-bottom: 10px;'>Annotation Domain: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.specificURL + "</span></p>" +
+            "<p style='word-break: break-all; font-family: Quicksand; font-weight: bold; font-size: 15px;'>Annotation Title: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationTitle + "</span></p>" +
+            "<p style='word-break: break-all; font-family: Quicksand; font-weight: bold;'>Annotation Description: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationText + "</span></p>" +
+            "<p style='word-break: break-all; font-family: Quicksand; font-weight: bold;'>Annotation Type: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.pinType + "</span></p>" +
+            "<p style='word-break: break-all; font-family: Quicksand; font-weight: bold; margin-bottom: 10px;'>Annotation URL: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.specificURL + "</span></p>" +
             "<div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: center;'>" +
               "<img style='' src='" + annotation.annotationMedia + "' height='225px' />" +
             "</div>" +
@@ -66,7 +66,7 @@ export default function PDFTemplate(annotations, userData) {
             "<div style='border-bottom: 1px solid #666; width: 100%; margin-bottom: 20px; margin-top: 20px;'><span style='font-family: Quicksand;'>Comments:</span></div>" +
             "<div style='border-bottom: 1px solid #666; width: 100%; margin-bottom: 20px;'></div>" +
             "<div style='border-bottom: 1px solid #666; width: 100%; margin-bottom: 20px;'></div>" +
-            "<div style='position: relative; height: 60px; width: 100%; top: -3px; border-bottom: 2px solid #333; box-sizing: border-box; display: -webkit-flex; -webkit-justify-content: space-between; -webkit-align-items: center; -webkit-flex-direction: row;'>" +
+            "<div style='position: relative; height: 60px; width: 100%; top: -3px; border-top: 2px solid #333; box-sizing: border-box; display: -webkit-flex; -webkit-justify-content: space-between; -webkit-align-items: center; -webkit-flex-direction: row;'>" +
               "<h5 style='font-family: Quicksand;'>Confidential</h5>" +
               "<h5 style='font-family: Quicksand;'>Prepared by Go Live Labs</h5>" +
               "<h5 style='font-family: Quicksand;'>Page: " + (idx+1) + " of " + annotations.length + "</h5>" +
@@ -80,27 +80,27 @@ export default function PDFTemplate(annotations, userData) {
     recsPage = (
       "<div style='border-bottom: 2px solid #333; border-bottom: 2px solid #333; width: 100%; height: 99%; font-family: Quicksand; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: center; -webkit-flex-direction: column;'>" +
         "<div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: flex-start; -webkit-flex-direction: column;'>" +
-          "<h2>Cognitive Walkthrough:</h2>" +
+          "<div style='width: 100%; text-align: center;'><h2>Cognitive Walkthrough</h2></div>" +
           "<p>" + userData.cogWalk + "</p>" +
         "</div>" +
         "<div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: flex-start; -webkit-flex-direction: column;'>" +
-          "<h2>Heuristic Evaluation:</h2>" +
+          "<div style='width: 100%; text-align: center;'><h2>Heuristic Evaluation</h2></div>" +
           "<p>" + userData.herEval + "</p>" +
         "</div>" +
         "<div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: flex-start; -webkit-flex-direction: column;'>" +
-          "<h2>Information Architecture Review:</h2>" +
+          "<div style='width: 100%; text-align: center;'><h2>Information Architecture Review</h2></div>" +
           "<p>" + userData.infoArch + "</p>" +
         "</div>"+
         "<div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: flex-start; -webkit-flex-direction: column;'>" +
-          "<h2>Interaction Design Review:</h2>" +
+          "<div style='width: 100%; text-align: center;'><h2>Interaction Design Review</h2></div>" +
           "<p>" + userData.intDesign + "</p>" +
         "</div>"+
         "<div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: flex-start; -webkit-flex-direction: column;'>" +
-          "<h2>Visual Design Review:</h2>" +
+          "<div style='width: 100%; text-align: center;'><h2>Visual Design Review</h2></div>" +
           "<p>" + userData.visDesign + "</p>" +
         "</div>"+
         "<div style='width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: flex-start; -webkit-flex-direction: column;'>" +
-          "<h2>Javascript Optimization:</h2>" +
+          "<div style='width: 100%; text-align: center;'><h2>Javascript Optimization</h2></div>" +
           "<p>" + userData.jsOpts + "</p>" +
         "</div>"+
 
