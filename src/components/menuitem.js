@@ -38,7 +38,7 @@ export default class MenuItem extends Component {
       height: this.state.active ? '200px': '50px',
       width: '100%',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: this.state.active ? 'space-between' : 'center',
       transition: 'height 150ms ease, background-color 50ms ease, color 50ms ease',
       padding: '10px',
       color: this.state.hovered ? this.props.color.primary : this.state.active ? this.props.color.primary : this.props.color.text,
@@ -68,7 +68,7 @@ export default class MenuItem extends Component {
     }
     return (
       <div onMouseOver={() => {this.handleMouseOver()}} onMouseLeave={() => {this.handleMouseLeave()}} onClick={() => {this.exeCallback()}} style={menuItemStyle}>
-        <h5>{this.props.title}</h5>
+        <h6>{this.props.title}</h6>
         <div style={menuItemStyle.infoPane}>
         <h6>{this.props.activeText}</h6>
         {this.props.button ? <button className='btn btn-default' type='button' onClick={() => this.exeCallback('buttonClicked')}>{this.props.buttonText}</button> : ''}

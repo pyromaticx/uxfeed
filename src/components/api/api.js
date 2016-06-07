@@ -39,14 +39,33 @@ var api = {
 
     return $.ajax(settings);
   },
-  html2pdf: function(htmlArray) {
+  html2pdf: function(htmlArray, fileName) {
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://pdf-service-pyromaticx.c9users.io/html2pdf",
+      "url": "https://htmln2pdf.herokuapp.com/",
       "method": "POST",
-      "contentType": 'text/html',
-      "data": htmlArray.toString()
+      "contentType": 'application/json',
+      "data": JSON.stringify({
+        htmlString: htmlArray.toString(),
+        fileName: fileName
+      })
+    }
+    return $.ajax(settings);
+  },
+  emailRohit: function(name, email) {
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://pdf-service-pyromaticx.c9users.io/signup",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "cache-control": "no-cache",
+          "postman-token": "3bbf058e-f6cc-d519-27ee-e6d676428e3d"
+        },
+        "processData": false,
+        "data": JSON.stringify({name: name, email: email})
     }
     return $.ajax(settings);
   }

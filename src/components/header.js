@@ -13,14 +13,14 @@ export default class Header extends Component {
   }
   render() {
     var headerStyle = {
-      height: '80px',
+      height: '60px',
       width: '100%',
       backgroundColor: this.props.color.secondary,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-around',
       position: "fixed",
-      zIndex: "100",
+      zIndex: "2000",
     },
     inputStyle = {
       borderRadius: '0',
@@ -118,19 +118,7 @@ export default class Header extends Component {
             title='Home'
             color={this.props.color}
             iconType='fa-home' />
-            <div style={bubbleBlock}>
-              <div style={greenBub}><span style={bubbleText}>12</span></div>
-              <div style={orangeBub}><span style={bubbleText}>12</span></div>
-              <div style={redBub}><span style={bubbleText}>12</span></div>
-            </div>
             <div style={uxLogo}></div>
-          <input
-            onChange={(event) => {this.inputChange(event)}}
-            style={inputStyle}
-            className='form-control'
-            type='text'
-            placeholder='🔎  Search'
-            value={this.state.searchValue}/>
           <Link style={loginBub} to='/login'><div>{this.state.loginButtonState}</div></Link>
           <div style={logoBub}>
 

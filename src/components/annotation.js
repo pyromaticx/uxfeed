@@ -20,6 +20,7 @@ export default class Annotation extends Component {
         });
       }
     }
+  
     emojiPicker(emoji) {
         var type;
         switch (emoji) {
@@ -169,7 +170,7 @@ export default class Annotation extends Component {
             <div style={annotationFooterStyle}>
                 <div style={mainComment}>
                   <img src='/style/img/annotationWhite.svg' width='35' />
-                  <span style={footerLeft.typeStyle}>{this.props.annotation.pinType}</span>
+                  <span style={footerLeft.typeStyle}>{this.props.annotation.annotationType}</span>
                 </div>
                 <div style={annotationContent}>
                   <span style={{color: '#fff', fontWeight: 700}}>{this.props.annotation.annotationTitle}</span>

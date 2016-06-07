@@ -109,18 +109,11 @@ export default class UserPage extends Component {
           collect: false
         });
         if (submit == 'buttonClicked') {
-
-            var strings = PDFTemplate(this.state.collectedAnnotations);
-            
-            api.html2pdf(strings).done(function(resp) {
-              console.log(resp);
-            });
-            /*
             this.setState({
               modalActive: true,
-              modal: (<PDFModal />)
+              modal: (<PDFModal close={() => this.closeModal()} callback={(data) => {this.submitCollection(data)}}/>)
             });
-            */
+
         }
 
       }
@@ -154,6 +147,36 @@ export default class UserPage extends Component {
         }
       }
     }
+    closeModal() {
+      this.setState({
+        collect: false,
+        collectedAnnotations: [],
+        modalActive: false,
+        modal: {}
+      });
+
+    }
+    submitCollection(data) {
+      this.setState({
+        modalActive: false,
+        modal: {},
+
+      });
+
+      var strings = PDFTemplate(this.state.collectedAnnotations, data);
+
+      api.html2pdf(strings, data.fileName).done(function(resp) {
+        setTimeout(function() {
+          var a = document.createElement('a');
+          document.body.appendChild(a);
+          a.style = 'display: none';
+          a.href = resp;
+          a.download = 'title.pdf';
+          a.click();
+        }, 3000)
+      });
+
+    }
     render() {
 
         var pageWrapper = {
@@ -164,16 +187,13 @@ export default class UserPage extends Component {
 
             },
             leftBarWrapper = {
-                width: '25%',
-
-            },
-            rightBarWrapper = {
-                width: '25%',
+                width: '30%',
+                marginRight: '25px'
 
             },
             annotationWrapper = {
                 minWidth: '300px',
-                width: '45%',
+                width: '100%',
                 paddingBottom: '20px',
                 display: 'flex',
                 justifyContent: this.state.getResponse.length > 0 ? 'flex-start' : 'center',
@@ -181,20 +201,20 @@ export default class UserPage extends Component {
                 flexDirection: 'column'
             },
             leftBarContent = [{
-              title: 'Export Annotations to PDF',
+              title: 'Create a collection',
               callback: (event) => {this.beginCollecting(event)},
-              activeText: 'After selecting the annotations you would like exported, click below to finish',
+              activeText: 'After selecting the annotations you would like in your collection, click below to export them to PDF',
               button: true,
-              buttonText: 'Create PDF'
+              buttonText: 'Create Collection'
             }],
-            rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
+            rightBar = {
+              width: '30%'
+            };
+            //rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
         return (
             <div style={pageWrapper}>
                 {this.state.modalActive ? this.state.modal : ''}
                 <div style={leftBarWrapper}>
-                    <DashboardProfileCard
-                        color={this.props.color}
-                        user={this.props.userDetails} />
                     <SideBar
                         icon="fa-filter"
                         title='Tools'
@@ -205,12 +225,7 @@ export default class UserPage extends Component {
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : ''}
                 </div>
-                <div style={rightBarWrapper}>
-                    <SideBar color={this.props.color}
-                             icon="fa-fire"
-                             title="Trending Topics"
-                             content={rightBarContent} />
-                </div>
+                <div style={rightBar}></div>
             </div>
         );
         /*

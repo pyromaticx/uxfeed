@@ -1,15 +1,27 @@
 import React, {Component} from 'react';
 import SpanItem from './spanitem.js';
 import SlideBox from './slidebox.js';
-
+import api from './api/api.js';
 export default class Home extends Component {
+  constructor() {
+    super();
+    this.state = {
+      inputBox: '',
+      nameBox: ''
+    }
+  }
   updatedInput(event) {
     this.setState({
       inputBox: event.target.value
     });
   }
-  submitEmail() {
-    api.emailRohit();
+  updatedNameInput(event) {
+    this.setState({
+      nameBox: event.target.value
+    })
+  }
+  submitEmail(name, email) {
+    api.emailRohit(name, email);
   }
   render() {
     var jumboTron = {
@@ -65,7 +77,8 @@ export default class Home extends Component {
         <div style={jumboTron}>
           <h1>Enter your email to be invited!</h1>
           <input type='email' style={{width: '300px'}} placeholder='Enter your email address' className='text' onChange={(event) => {this.updatedInput(event)}} />
-          <button type='button' onClick={() => {this.emailSubmit()}}>Let's Go!</button>
+          <input type='text' style={{width: '300px'}} placeholder='Enter your name' className='text' onChange={(event) => {this.updatedNameInput(event)}} />
+          <button type='button' onClick={() => {this.submitEmail(this.state.nameBox, this.state.inputBox)}}>Let's Go!</button>
         </div>
 
 
