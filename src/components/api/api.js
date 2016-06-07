@@ -43,7 +43,7 @@ var api = {
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://pdf-service-pyromaticx.c9users.io/html2pdf",
+      "url": "https://htmln2pdf.herokuapp.com/html2pdf",
       "method": "POST",
       "contentType": 'application/json',
       "data": JSON.stringify({
