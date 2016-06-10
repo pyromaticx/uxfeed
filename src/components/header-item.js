@@ -16,7 +16,8 @@ export default class HeaderItem extends Component {
       justifyContent: 'center',
       transition: 'all 500ms ease',
       textDecoration: 'none',
-      width: '200px'
+      width: '75px',
+      marginLeft: '20px'
     },
     titleStyle = {
       fontSize: '25px',

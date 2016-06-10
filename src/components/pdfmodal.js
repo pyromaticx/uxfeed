@@ -148,9 +148,15 @@ export default class PDFModal extends Component {
     });
   }
   enableRecs() {
-    this.setState({
-      recs: true,
-    });
+    if(!this.state.recs) {
+      this.setState({
+        recs: true,
+      });
+    } else {
+      this.setState({
+        recs: false,
+      });
+    }
   }
   submit() {
 

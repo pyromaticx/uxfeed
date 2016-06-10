@@ -18,7 +18,7 @@ export default class Header extends Component {
       backgroundColor: this.props.color.secondary,
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-around',
+      justifyContent: 'space-between',
       position: "fixed",
       zIndex: "2000",
     },
@@ -27,58 +27,22 @@ export default class Header extends Component {
       flex: '1.5',
     },
     uxLogo = {
-      flex: '3',
+      width: '75px',
       height: '80px',
       backgroundImage: 'url(/style/img/uxpasslightblue.svg)',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      backgroundSize: '65px 65px'
-    },
-    bubbleBlock = {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      flex: '1',
-    },
-    greenBub = {
-      backgroundImage: 'url(/style/img/annotategreen.svg)',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      fontSize: '16px',
-      fontWeight: '600',
-      padding: '5px',
-      color: this.props.color.primary,
-      textAlign: 'center',
-    },
-    orangeBub = {
-      backgroundImage: 'url(/style/img/annotateorange.svg)',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      fontSize: '16px',
-      fontWeight: '600',
-      padding: '5px',
-      color: this.props.color.primary,
-      textAlign: 'center',
-    },
-    redBub = {
-      backgroundImage: 'url(/style/img/annotatered.svg)',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      fontSize: '16px',
-      fontWeight: '600',
-      padding: '5px',
-      color: this.props.color.primary,
-      textAlign: 'center',
-    },
-    bubbleText = {
-      position: 'relative',
-      top: '-3px'
+      backgroundSize: '65px 65px',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
     },
     loginBub = {
       backgroundImage: 'url(/style/img/annotationlight.svg)',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
-      flex: '1',
+      width: '75px',
       backgroundSize: '60px 60px',
       height: '70px',
       display: 'flex',
@@ -113,16 +77,12 @@ export default class Header extends Component {
     return (
       <div style={headerStyle}>
           <HeaderItem
-            style={{flex: '2'}}
             linkTo=''
             title='Home'
             color={this.props.color}
             iconType='fa-home' />
             <div style={uxLogo}></div>
           <Link style={loginBub} to='/login'><div>{this.state.loginButtonState}</div></Link>
-          <div style={logoBub}>
-
-          </div>
       </div>
     );
   }

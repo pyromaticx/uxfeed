@@ -165,15 +165,16 @@ export default class UserPage extends Component {
 
       var strings = PDFTemplate(this.state.collectedAnnotations, data);
 
-      api.html2pdf(strings, data.fileName).done(function(resp) {
-        setTimeout(function() {
+      api.html2pdf(strings, data.fileName).done((resp) => {
+        setTimeout(() => {
           var a = document.createElement('a');
           document.body.appendChild(a);
           a.style = 'display: none';
           a.href = resp;
           a.download = 'title.pdf';
           a.click();
-        }, 3000)
+          api.addToUserCollections(this.props.userDetails.userId, this.state.collectedAnnotations, data, resp).done(function() {console.log('Collection posted to ', this.props.userDetails.userId)})
+        }, 100)
       });
 
     }

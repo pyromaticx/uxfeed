@@ -20,7 +20,37 @@ export default class Annotation extends Component {
         });
       }
     }
-  
+    colorByType(type) {
+      switch(type) {
+        case 'Visual Design':
+          return 'red';
+          break;
+        case 'User Research':
+          return 'orange';
+          break;
+        case 'Product Design':
+          return 'yellow';
+          break;
+        case 'Information Architecture':
+          return 'green';
+          break;
+        case 'Interaction Design':
+          return 'blue';
+          break;
+        case 'UI Engineer':
+          return 'purple';
+          break;
+        case 'Manager':
+          return 'pink';
+          break;
+        case 'Sales':
+          return 'black';
+          break;
+       default:
+         return '#333'
+      }
+    }
+
     emojiPicker(emoji) {
         var type;
         switch (emoji) {
@@ -65,6 +95,7 @@ export default class Annotation extends Component {
                 display: this.state.expanded ? '' : 'none',
                 height: "100%",
                 width: '100%',
+                minHeight: '300px'
             },
             textRow = {
                 display: 'flex',
@@ -101,7 +132,9 @@ export default class Annotation extends Component {
                 alignItems: 'space-around',
                 width: '100%',
                 minHeight: '50px',
-                backgroundColor: this.props.color.four,
+                backgroundColor: this.colorByType(this.props.annotation.annotationType),
+                textShadow: '0 0 3px #333',
+                fontWeight: '700'
             },
             footerLeft = {
               backgroundImage: 'url(/style/img/annotationlight.svg)',
@@ -131,6 +164,7 @@ export default class Annotation extends Component {
               backgroundColor: 'transparent',
               justifyContent: 'center',
               alignItems: 'center',
+              fontWeight: '700',
             },
             emojiStyle = {
                 display: 'flex',
@@ -155,8 +189,17 @@ export default class Annotation extends Component {
                 fontWeight: 'bold',
                 color: this.props.color.five
               }
-            }
-        var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
+            },
+            annotationPanel = {
+              minHeight: '100px',
+              width: '100%',
+              backgroundColor: '#f9f9f9',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            };
+      /*  var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
         var Comments = currentComments.map((comment) => {
           return (
             <div style={userCommentStyle}>
@@ -164,28 +207,33 @@ export default class Annotation extends Component {
               <span>{comment.comment}</span>
 
             </div>
-          );
-        });
-        var annotationFooter = (
-            <div style={annotationFooterStyle}>
-                <div style={mainComment}>
-                  <img src='/style/img/annotationWhite.svg' width='35' />
-                  <span style={footerLeft.typeStyle}>{this.props.annotation.annotationType}</span>
-                </div>
-                <div style={annotationContent}>
-                  <span style={{color: '#fff', fontWeight: 700}}>{this.props.annotation.annotationTitle}</span>
-                </div>
+          ); */
 
-            </div>
-        );
-        //moment(Date(this.props.annotation.timeUpdated)).format('MMM Do YY, HH:MM')
-// <AnnotationModal toggleModal={(event) => {this.openModal(event)}} color={this.props.color} annotation={this.props.annotation} modalState={this.state.modalState} scale={this.state.scaleValue} />
+
         return (
             <div onClick={() => {this.addToCollection()}}style={annotationWrapper}>
+
                 <div style={thumbnailStyle}>
                     {this.props.annotation.annotationMediaType == 'jpeg' ? <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/> : this.props.annotation.annotationMediaType == 'webm' ? <video src={this.props.annotation.annotationMedia} controls width='100%' height='auto'/> : <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column'}}> <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/> <audio controls src={this.props.annotation.annotationMediaAudio} /> </div> }
                 </div>
-                {annotationFooter}
+                <div style={annotationPanel}>
+                  <div style={{width: '75%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center'}}>
+                    <span style={{color: '#333', fontWeight: 700}}>Title:<span style={{color: '#333', fontWeight: 400, marginLeft: '10px'}}>{this.props.annotation.annotationTitle}</span></span>
+                    <span style={{color: '#333', fontWeight: 700}}>Description:<span style={{color: '#333', fontWeight: 400, marginLeft: '10px'}}>{this.props.annotation.annotationText}</span></span>
+                  </div>
+                  <div style={{width: '10%', height: '100%'}}>
+                    {this.props.annotation.emojiId ? <img src={this.emojiPicker(this.props.annotation.emojiId)} width='100%' /> : ''}
+                  </div>
+                </div>
+                <div style={annotationFooterStyle}>
+                    <div style={mainComment}>
+                      <img src='/style/img/annotationWhite.svg' width='35' />
+                      <span style={footerLeft.typeStyle}>{this.props.annotation.annotationType}</span>
+                    </div>
+                    <div style={annotationContent}>
+                      <span style={{color: '#fff', fontWeight: 700}}>{this.props.annotation.annotationTitle}</span>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -53,16 +53,31 @@ var api = {
     }
     return $.ajax(settings);
   },
+  addToUserCollections: function(userId, annotations, userData, exportURI) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://uxpass.herokuapp.com/user/" + userId + "/collections",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      "data": {
+        annotations: JSON.stringify(annotations),
+        exportURI: exportURI
+      }
+  }
+  return $.ajax(settings);
+  },
   emailRohit: function(name, email) {
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://pdf-service-pyromaticx.c9users.io/signup",
+        "url": "https://htmln2pdf.herokuapp.com/signup",
         "method": "POST",
         "headers": {
           "content-type": "application/json",
           "cache-control": "no-cache",
-          "postman-token": "3bbf058e-f6cc-d519-27ee-e6d676428e3d"
         },
         "processData": false,
         "data": JSON.stringify({name: name, email: email})
