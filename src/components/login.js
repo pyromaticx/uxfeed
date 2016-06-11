@@ -67,17 +67,27 @@ export default class Login extends Component {
     this.setState({
       username: event.target.value
     });
+    if(event.keyCode == 13) {
+      this.submitCreds();
+    }
   }
   passChange(event) {
     this.setState({
       password: event.target.value
     });
+    if(event.keyCode == 13) {
+      this.submitCreds();
+    }
   }
   submitCreds(event) {
+    if(this.state.username.length < 1 || this.state.password.length < 1) {
+      return;
+    }
     api.login(this.state.username, this.state.password).done((userData) => {
-      this.props.updateUser(userData);
+      //this.props.updateUser(userData);
       var data = JSON.parse(userData);
       api.setToken(data.token);
+      console.log(data.token);
       document.cookie = "userData=" + userData;
       window.location.hash = '#/username/' + this.state.username;
     })

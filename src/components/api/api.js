@@ -17,6 +17,7 @@ var api = {
   setToken: function(token) {
     localStorage.clear();
     localStorage.setItem('auth', token);
+
   },
   getUser: function(username) {
     return fetch(this.baseUrl + 'annotations/user/' + username, myInit).then(function (resp) {
