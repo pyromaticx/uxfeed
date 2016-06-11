@@ -76,6 +76,8 @@ export default class Login extends Component {
   submitCreds(event) {
     api.login(this.state.username, this.state.password).done((userData) => {
       this.props.updateUser(userData);
+      var data = JSON.parse(userData);
+      api.setToken(data.token);
       document.cookie = "userData=" + userData;
       window.location.hash = '#/username/' + this.state.username;
     })

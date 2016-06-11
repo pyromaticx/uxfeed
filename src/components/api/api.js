@@ -7,10 +7,17 @@ var myInit = {
             "mode": "cors",
 						"method": "GET",
 						"process-data": false,
+            "headers": {
+              "authorization": localStorage.getItem('auth')
+            }
           };
 
 var api = {
-  baseUrl: 'https://uxpass.herokuapp.com/',
+  baseUrl: 'https://uxpass-server.herokuapp.com/',
+  setToken: function(token) {
+    localStorage.clear();
+    localStorage.setItem('auth', token);
+  },
   getUser: function(username) {
     return fetch(this.baseUrl + 'annotations/user/' + username, myInit).then(function (resp) {
       return resp.json()
@@ -29,7 +36,7 @@ var api = {
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://uxpass.herokuapp.com/user/login",
+      "url": "https://uxpass-server.herokuapp.com/user/login",
       "method": "POST",
       "processData": false,
       "contentType": false,
@@ -43,7 +50,7 @@ var api = {
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://htmln2pdf.herokuapp.com/html2pdf",
+      "url": "https://htmlntopdf.herokuapp.com/html2pdf",
       "method": "POST",
       "contentType": 'application/json',
       "data": JSON.stringify({
@@ -57,10 +64,11 @@ var api = {
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://uxpass.herokuapp.com/user/" + userId + "/collections",
+      "url": "https://uxpass-server.herokuapp.com/user/" + userId + "/collections",
       "method": "POST",
       "headers": {
         "content-type": "application/x-www-form-urlencoded",
+        "authorization": localStorage.getItem('auth'),
       },
       "data": {
         annotations: JSON.stringify(annotations),
@@ -73,7 +81,7 @@ var api = {
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://htmln2pdf.herokuapp.com/signup",
+        "url": "https://htmlntopdf.herokuapp.com/signup",
         "method": "POST",
         "headers": {
           "content-type": "application/json",
