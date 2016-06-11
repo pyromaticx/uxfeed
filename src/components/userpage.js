@@ -224,7 +224,7 @@ export default class UserPage extends Component {
                 </div>
                 <div style={annotationWrapper}>
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
-                  {this.state.getResponse.length > 0 ? this.annotationRender() : ''}
+                  {this.state.getResponse.length > 0 ? this.annotationRender() : 'You have not annotated anything yet!'}
                 </div>
                 <div style={rightBar}></div>
             </div>

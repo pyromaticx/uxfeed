@@ -69,6 +69,12 @@ export default class Annotation extends Component {
             case 'aghast': {
                 return './img/emoji/aghast.png'
             }
+            case 'disappointed': {
+                return './img/emoji/disappointedEmo.png'
+            }
+            case 'angry': {
+                return './img/emoji/angryEmo.png'
+            }
             default: {
                 return '';
             }
@@ -95,7 +101,7 @@ export default class Annotation extends Component {
                 display: this.state.expanded ? '' : 'none',
                 height: "100%",
                 width: '100%',
-                minHeight: '300px'
+                minHeight: '200px'
             },
             textRow = {
                 display: 'flex',
@@ -222,7 +228,7 @@ export default class Annotation extends Component {
                     <span style={{color: '#333', fontWeight: 700}}>Description:<span style={{color: '#333', fontWeight: 400, marginLeft: '10px'}}>{this.props.annotation.annotationText}</span></span>
                   </div>
                   <div style={{width: '10%', height: '100%'}}>
-                    {this.props.annotation.emojiId ? <img src={this.emojiPicker(this.props.annotation.emojiId)} width='100%' /> : ''}
+                    {this.props.annotation.emojiId != '' ? <img src={this.emojiPicker(this.props.annotation.emojiId)} width='100%' /> : ''}
                   </div>
                 </div>
                 <div style={annotationFooterStyle}>
