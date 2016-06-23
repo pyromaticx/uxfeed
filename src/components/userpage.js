@@ -85,11 +85,26 @@ export default class UserPage extends Component {
       });
 
     }
+    isSelected(annotation) {
+
+      var selected = this.state.collectedAnnotations.filter(function(collectedAnno) {
+        if(collectedAnno.annotationId === annotation.annotationId) {
+          return true;
+        }
+        return false;
+      })
+      if(selected.length > 0) {
+        return true;
+      }
+      return false;
+    }
     annotationRender() {
       var Annotations = this.state.getResponse.map((annotation, idx) => {
+          console.warn(this.isSelected(annotation))
           return (
               <Annotation
                   key={annotation.annotationId}
+                  selected={this.isSelected(annotation)}
                   expanded={this.state.expanded}
                   annotation={annotation}
                   scale={this.state.scaleValue}
@@ -160,7 +175,7 @@ export default class UserPage extends Component {
       this.setState({
         modalActive: false,
         modal: {},
-
+        collectedAnnotations: [],
       });
 
       var strings = PDFTemplate(this.state.collectedAnnotations, data);
@@ -188,7 +203,7 @@ export default class UserPage extends Component {
 
             },
             leftBarWrapper = {
-                width: '30%',
+                width: '40%',
                 marginRight: '25px'
 
             },

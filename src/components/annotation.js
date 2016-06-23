@@ -81,8 +81,7 @@ export default class Annotation extends Component {
         }
     }
     render() {
-        var imageW = this.props.annotation.imageW / this.props.scale + 'px';
-        var imageH = this.props.annotation.imageH / this.props.scale + 'px';
+
         var annotationWrapper = {
                 width: '100%',
                 minHeight: this.state.expanded ? '150px' : '80px',
@@ -95,7 +94,7 @@ export default class Annotation extends Component {
                 marginBottom: '25px',
                 boxShadow: '0 3px 15px 1px #777',
                 overflow: 'hidden',
-                border: this.state.selected == false ? '' : '3px solid ' + this.props.color.five
+                border: this.props.selected === false ? '' : '3px solid ' + this.props.color.five
             },
             thumbnailStyle = {
                 display: this.state.expanded ? '' : 'none',
