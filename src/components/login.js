@@ -4,12 +4,14 @@ import {Router, Route, Link, BrowserHistory, IndexRoute} from 'react-router';
 export default class Login extends Component {
   constructor() {
     super();
+
     this.state = {
         username: '',
         password: ''
     }
   }
   render() {
+
     var loginWrapper = {
       display: 'flex',
       height: '100%',
@@ -86,8 +88,10 @@ export default class Login extends Component {
     api.login(this.state.username, this.state.password).done((userData) => {
       //this.props.updateUser(userData);
       var data = JSON.parse(userData);
-
-      localStorage.setItem('auth', data.token);
+      if(localStorage.auth) {
+        localStorage.auth = '';
+      }
+      localStorage.auth = data.token;
       console.log(localStorage.getItem('auth'));
       window.location.hash = '#/username/' + this.state.username;
     })
