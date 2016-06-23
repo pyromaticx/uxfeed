@@ -86,9 +86,8 @@ export default class Login extends Component {
     api.login(this.state.username, this.state.password).done((userData) => {
       //this.props.updateUser(userData);
       var data = JSON.parse(userData);
-      api.setToken(data.token);
-      console.log(data.token);
-      document.cookie = "userData=" + userData;
+
+      localStorage.setItem('auth', userData.token);
       window.location.hash = '#/username/' + this.state.username;
     })
   }

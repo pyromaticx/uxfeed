@@ -50,7 +50,7 @@ export default class PDFModal extends Component {
     if(this.state.recs) {
       backButton = this.state.modalPage == '1' ? <button className='btn btn-default' type='button' onClick={() => {this.changePage('2')}}>Recommendations</button> : <button className='btn btn-default' type='button' onClick={() => {this.changePage('1')}}>Title</button>
     }
-    var fileName = 'Go Live Labs UxPass ' + this.state.companyName + ' ' + this.state.collectionTitle + ' ' + moment(Date.now()).format('MM-DD-YY h.mm.ss a');
+    var fileName = 'GoLiveLabs UxPass ' + this.state.companyName + ' ' + this.state.collectionTitle + ' ' + moment(Date.now()).format('MM-DD-YY h.mm.ss a');
     return (
       <div style={wrapper}>
         <div style={modalBox}>

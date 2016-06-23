@@ -1,184 +1,108 @@
 import React, {Component} from 'react';
-import PricingBoxOne from './pricingBoxOne';
-import PricingBoxTwo from './pricingBoxTwo';
-import PricingBoxThree from './pricingBoxThree';
-
+import PaymentForm from './payment-form.js';
 export default class PricingPage extends Component {
-  constructor(props){
-    super(props);
-    this.state = {};
+  constructor() {
+    super();
+    this.state = {
+      planChosen: '',
+    }
   }
-
   render() {
-    var pricingPageWrapper = {
+    var pricingBoxWrapper = {
+      border: '3px solid #e8e8e8',
+      width: '90vw',
+      position: 'relative',
+      left: '50%',
+      transform: 'translateX(-50%)',
       display: 'flex',
-      color: '#333',
-      minHeight: '100vh',
-      width: '80%',
-      flexDirection: "column"
-    };
+      textAlign: 'center',
+      flexDirection: window.innerWidth < 850 ? 'column' : 'row'
+    },
+    box1 = {
+      backgroundColor: '#aaa',
+      height: '100%',
+      width: '100%',
+      flex: 1,
+    },
+    box2 = {
+      backgroundColor: '#ccc',
+      height: '100%',
+      width: '100%',
+      flex: 1
+    },
+    box3 = {
+      backgroundColor: '#eee',
+      height: '100%',
+      width: '100%',
+      flex: 1
+    },
+    lines = {
+      paddingTop: '20px',
+      paddingBottom: '20px'
+    },
+    buttonFree = {
+      width: '90%',
+      height: '100px',
+      backgroundColor: '#ddd',
+      marginBottom: '30px'
+    },
+    buttonPower = {
+      width: '90%',
+      height: '100px',
+      backgroundColor: '#bbb',
+      marginBottom: '30px'
+    },
+    buttonPro = {
+      width: '90%',
+      height: '100px',
+      backgroundColor: '#999',
+      marginBottom: '30px'
+    },
+    headings = {
+      marginTop: '20px',
+      marginBottom: '20px'
+    }
 
-    var row ={
-      display: "flex",
-      flexDirection: "row",
-      width: "100%",
-      color: this.props.color.primary
-    };
 
-    var featuresStyles = {
-      display: "flex",
-      justifyContent: "center",
-      marginTop: "50px"
-    };
-    var checkIconColor = {
-      color: this.props.color.secondary
-    }
-    var box1styles = {
-      marginTop: "25px",
-      padding: "15px",
-      border: "1px solid" + this.props.color.primary,
-      width: "100%",
-      height: "20em",
-      display: "flex",
-      alignItems: "center",
-      flexDirection: "column",
-      backgroundColor: this.props.color.six
-    };
-    var couponDiv = {
-      backgroundColor: this.props.color.five,
-      padding: "5px",
-      display: "flex",
-      justifyContent: "center",
-      marginTop: "25px"
-    };
-    var couponStyles = {
-      fontSize: "1.25em",
-      fontWeight: "300",
-      color: this.props.color.primary
-    };
-    var membershipStyles = {
-      backgroundColor: this.props.color.tertiary,
-      color: this.props.color.primary,
-      border: "1px solid" + this.props.color.primary
-    }
-    var tableRowBGColor ={
-      backgroundColor: this.props.color.four,
-      border: "1px solid" + this.props.color.primary
-    }
-    var pricingBox = {
-      free: {
-        text: "Free Membership",
-        payments: "$0/Month",
-        salePitch: "Free Membership is good"
-      },
-      private: {
-        text: "Private Membership",
-        payments: "$15/Month",
-        salePitch: "Private Membership is good"
-      },
-      superPrivate: {
-        text: "Super Private",
-        payments: "$30/Month",
-        salePitch: "Super Private Membership is good"
-      }
-    };
-    var borderWhite = {
-      border: "1px solid" + this.props.color.primary
-    };
-    var tryItStyles = {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexDirection: "column",
-      backgroundColor: this.props.color.five,
-      padding: "25px",
-      color: this.props.color.primary
-    };
-    var center = {
-      display: "flex",
-      justifyContent: "center"
-    };
-    var textSpacing = {
-      marginTop: "25px"
-    };
-    return(
-      <div style={pricingPageWrapper}>
-        <div style={couponDiv}>
-          <p style={couponStyles}>First time user? use our coupon code "uxfeed brah" for a 2 month free trail</p>
+    return (
+      <div>
+        <h1 style={headings}>Choose a plan</h1>
+        <div style={pricingBoxWrapper}>
+          <div style={box1}>
+            <h1 style={headings}>Free</h1>
+            <ul>
+              <li style={lines}>Only Public Annotations</li>
+              <li style={lines}>Another Feature</li>
+              <li style={lines}>Limited number of annotations</li>
+            </ul>
+            <button id='Free' type='button' className='btn' style={buttonFree} onClick={(event) => {this.planChoose(event)}}>Free</button>
+          </div>
+          <div style={box2}>
+            <h1 style={headings}>Power User</h1>
+            <ul>
+              <li style={lines}>All Free Features</li>
+              <li style={lines}>More Annotations</li>
+              <li style={lines}>Report Generation</li>
+            </ul>
+            <button id='Power-User' type='button' className='btn' style={buttonPower} onClick={(event) => {this.planChoose(event)}}>Power User</button>
+          </div>
+          <div style={box3}>
+            <h1 style={headings}>UX Pro</h1>
+            <ul>
+              <li style={lines}>All Power User Features</li>
+              <li style={lines}>Unlimited Annotations</li>
+              <li style={lines}>Some Secret Features</li>
+            </ul>
+            <button id='UXpro' type='button' className='btn' style={buttonPro} onClick={(event) => {this.planChoose(event)}}>UX Pro</button>
+          </div>
         </div>
-        <div className="boxRow" style={row}>
-          <PricingBoxOne
-              color={this.props.color}
-              text={pricingBox.free.text}
-              payments={pricingBox.free.payments}
-              pitch={pricingBox.free.salePitch}
-          />
-          <PricingBoxTwo
-              color={this.props.color}
-              text={pricingBox.private.text}
-              payments={pricingBox.private.payments}
-              pitch={pricingBox.private.salePitch}
-          />
-          <PricingBoxThree
-              color={this.props.color}
-              text={pricingBox.superPrivate.text}
-              payments={pricingBox.superPrivate.payments}
-              pitch={pricingBox.superPrivate.salePitch}
-          />
-        </div>
-        <div style={featuresStyles}>
-          <h3>All Features</h3>
-        </div>
-        <div className="tableContainer">
-          <table>
-            <thead>
-              <tr>
-                <th id="features">Features</th>
-                <th style={membershipStyles} id="free">Free Membership</th>
-                <th style={membershipStyles} id="private">Private Membership</th>
-                <th style={membershipStyles} id="superPrivate">Super Private Membership</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={tableRowBGColor}>
-                <th>Feature 1</th>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-              </tr>
-              <tr>
-                <th>Feature 2</th>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-              </tr>
-              <tr style={tableRowBGColor}>
-                <th>Feature 3</th>
-                <td style={borderWhite}>asdf1</td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-              </tr>
-              <tr>
-                <th>Feature 4</th>
-                <td style={borderWhite}>asdf1</td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-              </tr>
-              <tr style={tableRowBGColor}>
-                <th>Feature 5</th>
-                <td style={borderWhite}>asdf1</td>
-                <td style={borderWhite}>asdf2</td>
-                <td style={borderWhite}><i style={checkIconColor} className="fa fa-check"></i></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div style={tryItStyles}>
-          <button style={textSpacing} className="btn btn-primary btn-lg">Try It Now</button>
-          <h3 style={textSpacing}>Start your free trial with the coupon code "uxfeed brah"</h3>
-          <p style={textSpacing}>No credit card required. Cancel anytime</p>
-        </div>
+        <PaymentForm plan={this.state.planChosen}/>
       </div>
     );
+  }
+  planChoose(event) {
+    this.setState({
+      planChosen: event.target.id
+    });
   }
 }

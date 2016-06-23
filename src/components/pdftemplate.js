@@ -11,7 +11,13 @@ export default function PDFTemplate(annotations, userData) {
     console.warn(contribs)
     return contribs.join('');
   }
-
+ function truncate(str) {
+   var arr = str.split('');
+   if (arr.length >= 40) {
+     return arr.slice(0, 40).join('');
+   }
+   return str;
+ }
  function colorByType(type) {
    switch(type) {
      case 'Visual Design':
@@ -60,7 +66,7 @@ export default function PDFTemplate(annotations, userData) {
                 "<p style='line-height: 90%; font-family: Quicksand; font-weight: 700; font-size: 15px;'>Annotation Title: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationTitle + "</span></p>" +
                 "<p style='line-height: 90%; font-family: Quicksand; font-weight: 700;'>Annotation Description: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.annotationText + "</span></p>" +
                 "<p style='line-height: 90%; font-family: Quicksand; font-weight: 700;'>Annotation Pin Type: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.pinType + "</span></p>" +
-                "<p style='line-height: 90%; word-break: break-all; font-family: Quicksand; font-weight: 700; margin-bottom: 10px;'>Annotation URL: <span style='font-family: Quicksand; font-weight: 400;'>" + annotation.specificURL + "</span></p>" +
+                "<p style='line-height: 90%; word-break: break-all; font-family: Quicksand; font-weight: 700; margin-bottom: 10px;'>Annotation URL: <span style='font-family: Quicksand; font-weight: 400;'><a href=" + annotation.specificURL +">" + truncate(annotation.specificURL) + "</a></span></p>" +
               "</div></div>" +
             "<div style='margin-top: 10px; width: 100%; display: -webkit-flex; -webkit-justify-content: center; -webkit-align-items: center;'>" +
               "<img style='' src='" + annotation.annotationMedia + "' height='225px' />" +
@@ -122,7 +128,7 @@ export default function PDFTemplate(annotations, userData) {
       "</div>"
     );
   }
-  return font + coverPage + strings.join('') + recsPage;
+  return font + coverPage + strings.join('') + recsPage + '<video src="https://s3-us-west-1.amazonaws.com/uxpwebm/0163e497-34a9-4995-b48d-4563cb36a148.webm" />';
 }
 //title - larger font
 //sub heading - client and product name

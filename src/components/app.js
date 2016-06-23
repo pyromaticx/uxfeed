@@ -14,16 +14,7 @@ export default class App extends Component {
     this.checkUserCookie();
   }
   checkUserCookie() {
-    var cookie = document.cookie.split("userData=");
-    var JSONCookie = {};
-    try {
-      JSONCookie = JSON.parse(cookie[1]);
-    } catch(e) {
-        console.warn('cookie error:', e);
-    }
-    this.setState({
-      userDetails: JSONCookie
-    });
+  
   }
   setColors(colorObj) {
     this.setState({

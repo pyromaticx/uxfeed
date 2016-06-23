@@ -14,11 +14,7 @@ var myInit = {
 
 var api = {
   baseUrl: 'https://uxpass-server.herokuapp.com/',
-  setToken: function(token) {
-    localStorage.clear();
-    localStorage.setItem('auth', token);
 
-  },
   getUser: function(username) {
     return fetch(this.baseUrl + 'annotations/user/' + username, myInit).then(function (resp) {
       return resp.json()
@@ -69,7 +65,7 @@ var api = {
       "method": "POST",
       "headers": {
         "content-type": "application/x-www-form-urlencoded",
-        "authorization": localStorage.getItem('auth'),
+        "authorization": localStorage.getItem('auth')
       },
       "data": {
         annotations: JSON.stringify(annotations),
