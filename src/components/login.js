@@ -87,7 +87,8 @@ export default class Login extends Component {
       //this.props.updateUser(userData);
       var data = JSON.parse(userData);
 
-      localStorage.setItem('auth', userData.token);
+      localStorage.setItem('auth', data.token);
+      console.log(localStorage.getItem('auth'));
       window.location.hash = '#/username/' + this.state.username;
     })
   }
