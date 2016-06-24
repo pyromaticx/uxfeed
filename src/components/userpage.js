@@ -21,7 +21,8 @@ export default class UserPage extends Component {
             collect: false,
             collectedAnnotations: [],
             modalActive: false,
-            modal: {}
+            modal: {},
+            loading: false
         };
     }
 
@@ -126,7 +127,7 @@ export default class UserPage extends Component {
         if (submit == 'buttonClicked') {
             this.setState({
               modalActive: true,
-              modal: (<PDFModal close={() => this.closeModal()} callback={(data) => {this.submitCollection(data)}}/>)
+              modal: (<PDFModal close={() => this.closeModal()} loading={this.state.loading} callback={(data) => {this.submitCollection(data)}}/>)
             });
 
         }
@@ -173,9 +174,7 @@ export default class UserPage extends Component {
     }
     submitCollection(data) {
       this.setState({
-        modalActive: false,
-        modal: {},
-        collectedAnnotations: [],
+        loading: true
       });
 
       var strings = PDFTemplate(this.state.collectedAnnotations, data);
@@ -189,6 +188,12 @@ export default class UserPage extends Component {
           a.download = 'title.pdf';
           a.click();
           api.addToUserCollections(this.props.userDetails.userId, this.state.collectedAnnotations, data, resp).done(function() {console.log('Collection posted to ', this.props.userDetails.userId)})
+          this.setState({
+            loading: false,
+            modalActive: false,
+            modal: {},
+            collectedAnnotations: []
+          })
         }, 100)
       });
 

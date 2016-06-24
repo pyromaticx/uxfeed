@@ -52,6 +52,7 @@ export default class PDFModal extends Component {
       backButton = this.state.modalPage == '1' ? <button className='btn btn-default' type='button' onClick={() => {this.changePage('2')}}>Recommendations</button> : <button className='btn btn-default' type='button' onClick={() => {this.changePage('1')}}>Title</button>
     }
     var fileName = 'GoLiveLabs UxPass ' + this.state.companyName + ' ' + this.state.collectionTitle + ' ' + moment(Date.now()).format('MM-DD-YY h.mm.ss a') + '.pdf';
+    console.log('loading:', this.props.loading)
     return (
       <div style={wrapper}>
         <div style={modalBox}>
@@ -80,14 +81,15 @@ export default class PDFModal extends Component {
             <label htmlFor='jsOpts'>Programming Optimization</label>
             <input name='jsOpts' type='text' style={inputs} value={this.state.jsOpts} onChange={(event) => {this.jsOptsChange(event)}} />
           </div>}
+
           <span>
             <label style={{marginRight: '5px'}} htmlFor='recs'>Enable Recommendations  </label>
             <input name='recs' type='checkbox' onChange={(event) => {this.enableRecs(event)}}/>
           </span>
-          <button className='btn btn-primary' type='button' onClick={() => {
+          {this.state.loading === true ? "Preparing your PDF Report..." : <button className='btn btn-primary' type='button' onClick={() => {
             this.setState({
               loading: true
-            });
+            })
             this.props.callback({
               companyName: this.state.companyName,
               collectionTitle: this.state.collectionTitle,
@@ -99,7 +101,7 @@ export default class PDFModal extends Component {
               intDesign: this.state.intDesign,
               visDesign: this.state.visDesign,
               jsOpts: this.state.jsOpts,
-          })}}>Prepare PDF file</button>
+          })}}>Prepare PDF file</button>}
 
           <p>File Name: {fileName}</p>
           {backButton}
