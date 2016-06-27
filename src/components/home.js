@@ -27,13 +27,12 @@ export default class Home extends Component {
     event.stopPropagation();
 
     var formDataArr = $(event.target).serializeArray();
-    var formData = {
-      email: formDataArr[0],
-      name: formDataArr[1],
-      captchaResp: formDataArr[2]
-    }
+    var formData = {};
+    formDataArr.map(function(elem) {
+      formData[elem.name] = elem.value
+    })
     console.log(formData);
-    if(formData.captchaResp) {
+    if(formData['g-recaptcha-response'].length > 0) {
       api.emailRohit(formData.name, formData.email);
       this.setState({
         modal: (<ModalGeneric title='Thanks!' content="We will be in touch with you soon!" close={() => {this.closeModal()}}/>)
@@ -109,8 +108,8 @@ export default class Home extends Component {
           <h1>Enter your email to be invited!</h1>
           <input name='email' type='email' style={{width: '300px'}} placeholder='Enter your email address' value={this.state.inputBox} className='text' onChange={(event) => {this.updatedInput(event)}} />
           <input name='name' type='text' style={{width: '300px'}} placeholder='Enter your name' value={this.state.nameBox} className='text' onChange={(event) => {this.updatedNameInput(event)}} />
-          <button type='submit'>Let's Go!</button>
           <div style={showHide} className="g-recaptcha" data-sitekey="6LfLpCMTAAAAAMBfqgxFnvKLCf2OntVNQ0bAzzy2"></div>
+          <button type='submit'>Let's Go!</button>
         </form>
         {this.state.modal}
 
