@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import SpanItem from './spanitem.js';
 import SlideBox from './slidebox.js';
 import api from './api/api.js';
+import ModalGeneric from './modal-generic.js';
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
       inputBox: '',
-      nameBox: ''
+      nameBox: '',
+      modal: ''
     }
   }
   updatedInput(event) {
@@ -20,8 +22,33 @@ export default class Home extends Component {
       nameBox: event.target.value
     })
   }
-  submitEmail(name, email) {
-    api.emailRohit(name, email);
+  submitEmail(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    var formDataArr = $(event.target).serializeArray();
+    var formData = {
+      email: formDataArr[0],
+      name: formDataArr[1],
+      captchaResp: formDataArr[2]
+    }
+    console.log(formData);
+    if(formData.captchaResp) {
+      api.emailRohit(formData.name, formData.email);
+      this.setState({
+        modal: (<ModalGeneric title='Thanks!' content="We will be in touch with you soon!" close={() => {this.closeModal()}}/>)
+      });
+    } else {
+      alert('Please complete all fields before submitting');
+    }
+  }
+  closeModal() {
+    this.setState({
+      modal: '',
+      inputBox: '',
+      nameBox: ''
+    });
+    grecaptcha.reset();
   }
   render() {
     var jumboTron = {
@@ -71,16 +98,21 @@ export default class Home extends Component {
         justifyContent: 'center',
         alignItems: 'center',
       }
-    }
+    },
+    showHide = {
+      opacity: (this.state.inputBox.length + this.state.nameBox.length) > 0 ? '1.0' : '0.0',
+      transition: 'opacity 500ms ease'
+    };
     return (
       <div style={landingStyle}>
-        <div style={jumboTron}>
+        <form style={jumboTron} onSubmit={(event) => {this.submitEmail(event)}}>
           <h1>Enter your email to be invited!</h1>
-          <input type='email' style={{width: '300px'}} placeholder='Enter your email address' className='text' onChange={(event) => {this.updatedInput(event)}} />
-          <input type='text' style={{width: '300px'}} placeholder='Enter your name' className='text' onChange={(event) => {this.updatedNameInput(event)}} />
-          <button type='button' onClick={() => {this.submitEmail(this.state.nameBox, this.state.inputBox)}}>Let's Go!</button>
-        </div>
-
+          <input name='email' type='email' style={{width: '300px'}} placeholder='Enter your email address' value={this.state.inputBox} className='text' onChange={(event) => {this.updatedInput(event)}} />
+          <input name='name' type='text' style={{width: '300px'}} placeholder='Enter your name' value={this.state.nameBox} className='text' onChange={(event) => {this.updatedNameInput(event)}} />
+          <button type='submit'>Let's Go!</button>
+          <div style={showHide} className="g-recaptcha" data-sitekey="6LfLpCMTAAAAAMBfqgxFnvKLCf2OntVNQ0bAzzy2"></div>
+        </form>
+        {this.state.modal}
 
       </div>
     );
