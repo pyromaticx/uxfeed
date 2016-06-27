@@ -78,7 +78,7 @@ var api = {
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://htmlntopdf.herokuapp.com/signupp",
+        "url": "https://htmlntopdf.herokuapp.com/signup",
         "method": "POST",
         "headers": {
           "content-type": "application/json",
