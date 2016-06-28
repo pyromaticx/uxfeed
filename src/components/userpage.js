@@ -86,7 +86,7 @@ export default class UserPage extends Component {
                 })
                 break;
             }
-            case 'collection/:collectionId': {
+            case 'collections/:collectionId': {
                 api.getCollectionAnnotations(this.props.params.collectionId).then((data) => {
                   var sortedByPinId = data.annotations.sort(function(a, b) {
                         return a.annotationId - b.annotationId;
