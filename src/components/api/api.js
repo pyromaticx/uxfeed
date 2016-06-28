@@ -57,11 +57,11 @@ var api = {
     }
     return $.ajax(settings);
   },
-  addToUserCollections: function(userId, annotations, userData, exportURI) {
+  addToUserCollections: function(userName, annotations, exportURI, fileName) {
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "https://uxpass-server.herokuapp.com/user/" + userId + "/collections",
+      "url": "https://uxpass-server.herokuapp.com/user/" + userName + "/collections",
       "method": "POST",
       "headers": {
         "content-type": "application/x-www-form-urlencoded",
@@ -69,11 +69,36 @@ var api = {
       },
       "data": {
         annotations: JSON.stringify(annotations),
-        exportURI: exportURI
+        exportURI: exportURI,
+        fileName: fileName
       }
   }
   return $.ajax(settings);
   },
+  getUserCollections: function(userName) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://uxpass-server.herokuapp.com/user/" + userName + "/collections",
+      "method": "GET",
+      "headers": {
+        "authorization": localStorage.getItem('auth')
+      }
+  }
+  return $.ajax(settings);
+  },
+  getCollectionAnnotations: function(collectionId) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://uxpass-server.herokuapp.com/user/collections/" + collectionId,
+      "method": "GET",
+      "headers": {
+        "authorization": localStorage.getItem('auth')
+      }
+  }
+  return $.ajax(settings);
+},
   emailRohit: function(name, email) {
       var settings = {
         "async": true,

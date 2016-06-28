@@ -9,20 +9,14 @@ export default class App extends Component {
       color: props.route.color,
       userDetails: {}
     }
-  }
-  componentWillMount() {
-    this.checkUserCookie();
-  }
-  checkUserCookie() {
-  
-  }
+  }  
   setColors(colorObj) {
     this.setState({
       color: colorObj
     });
   }
   updateLoggedInUser(userInfo) {
-    this.checkUserCookie();
+
     this.setState({
       userDetails: JSON.parse(userInfo)
     });

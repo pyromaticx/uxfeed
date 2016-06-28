@@ -35,14 +35,14 @@ export default class MenuItem extends Component {
     var menuItemStyle = {
       display: 'flex',
       flexDirection: 'column',
-      height: this.state.active ? '200px': '50px',
+      maxHeight: this.state.active ? '600px': '50px',
       width: '100%',
       alignItems: 'center',
       justifyContent: this.state.active ? 'space-between' : 'center',
-      transition: 'height 150ms ease, background-color 50ms ease, color 50ms ease',
+      transition: 'max-height 150ms ease, background-color 50ms ease, color 50ms ease',
       padding: '10px',
       color: this.state.hovered ? this.props.color.primary : this.state.active ? this.props.color.primary : this.props.color.text,
-      backgroundColor: this.state.hovered ? this.props.color.five : this.state.active ? this.props.color.seven : this.props.color.primary,
+      backgroundColor: this.state.hovered ? this.props.activeColor || this.props.color.five : this.state.active ? this.props.activeColor || this.props.color.five : this.props.color.primary,
       cursor: 'pointer',
       badge: {
         display: this.props.value > 0 ? 'flex' : 'none',

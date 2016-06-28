@@ -131,6 +131,7 @@ var Routes = (
       <IndexRoute component={Home} color={color()} />
       <Route path='login' component={Login} color={color()} loginCB={(userData) => {userLoggedIn(userData)}}/>
       <Route path='username/:username' component={UserPage} color={color()} user={currentUser} />
+      <Route path='collection/:collectionId' component={UserPage} color={color()} user={currentUser} />
       <Route path='annotations' component={UserPage} color={color()} user={currentUser} />
       <Route path='/pricing' component={PricingPage} color={color()} />
       <Route path='newproject' component={NewProject} color={color()} />

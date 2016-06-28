@@ -22,13 +22,14 @@ export default class UserPage extends Component {
             collectedAnnotations: [],
             modalActive: false,
             modal: {},
-            loading: false
+            loading: false,
+            userCollections: []
         };
     }
 
     componentDidMount() {
         this.getUpdated();
-        window.setInterval(this.getUpdated.bind(this), 20000);
+        window.setInterval(this.getUpdated.bind(this), 2000);
     }
     handleResize() {
         var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%';
@@ -75,6 +76,32 @@ export default class UserPage extends Component {
                         getResponse: sortedByPinId
                     });
                 });
+
+                api.getUserCollections(this.props.params.username).then((data) => {
+                  console.log(data)
+                  this.setState({
+                    userCollections: data
+                  });
+
+                })
+                break;
+            }
+            case 'collection/:collectionId': {
+                api.getCollectionAnnotations(this.props.params.collectionId).then((data) => {
+                  var sortedByPinId = data.annotations.sort(function(a, b) {
+                        return a.annotationId - b.annotationId;
+                  }).reverse();
+                  this.setState({
+                      getResponse: sortedByPinId
+                  });
+                })
+                api.getUserCollections(this.props.params.username).then((data) => {
+                  console.log(data)
+                  this.setState({
+                    userCollections: data
+                  });
+
+                })
                 break;
             }
         }
@@ -187,7 +214,7 @@ export default class UserPage extends Component {
           a.href = resp;
           a.download = 'title.pdf';
           a.click();
-          api.addToUserCollections(this.props.userDetails.userId, this.state.collectedAnnotations, data, resp).done(function() {console.log('Collection posted to ', this.props.userDetails.userId)})
+          api.addToUserCollections(this.props.params.username, this.state.collectedAnnotations, resp, data.fileName).done(function(response) {console.log(response)})
           this.setState({
             loading: false,
             modalActive: false,
@@ -197,6 +224,51 @@ export default class UserPage extends Component {
         }, 100)
       });
 
+    }
+    downloadFile(file) {
+      var a = document.createElement('a');
+      document.body.appendChild(a);
+      a.style = 'display: none';
+      a.href = file.exportURI;
+      a.download = 'title.pdf';
+      a.click();
+    }
+    listFiles() {
+      var files = this.state.userCollections.filter(function(col) {
+        if(col.fileName) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      var displayFiles = files.map((file, idx) => {
+        return (
+          <div onClick={() => {this.downloadFile(file)}} key={idx+file} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+            <p>{file.fileName}</p>
+          </div>
+        );
+      })
+      return displayFiles;
+    }
+    listCollections() {
+      var files = this.state.userCollections.filter(function(col) {
+        if(col.fileName) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      var displayCols = files.map((col, idx) => {
+        return (
+          <div onClick={() => {this.gotoCollection(col.collectionId)}} key={idx+col+'col'} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+            <p>{col.fileName}</p>
+          </div>
+        );
+      })
+      return displayCols;
+    }
+    gotoCollection(id) {
+      window.location = 'http://uxpass.com/#/collections/' + id
     }
     render() {
 
@@ -227,6 +299,19 @@ export default class UserPage extends Component {
               activeText: 'After selecting the annotations you would like in your collection, click below to export them to PDF',
               button: true,
               buttonText: 'Create Collection'
+            },
+            {
+              title: 'My Files',
+              callback: () => {},
+              activeText: this.listFiles(),
+              button: false,
+              activeColor: this.props.color.six
+            },{
+              title: 'Collections',
+              callback: () => {},
+              activeText: this.listCollections(),
+              button: false,
+              activeColor: this.props.color.four
             }],
             rightBar = {
               width: '30%'

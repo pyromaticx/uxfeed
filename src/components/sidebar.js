@@ -44,7 +44,7 @@ export default class SideBar extends Component {
     }
     var listItems = this.props.content.map((el, idx) => {
       return (
-        <MenuItem color={this.props.color} title={el.title} value={el.value} activeText={el.activeText} callback={el.callback} button={el.button} buttonText={el.buttonText} />
+        <MenuItem color={this.props.color} activeColor={el.activeColor} title={el.title} value={el.value} activeText={el.activeText} callback={el.callback} button={el.button} buttonText={el.buttonText} />
       )
     });
 
