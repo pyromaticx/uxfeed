@@ -34,7 +34,7 @@ export default class UserPage extends Component {
 
     componentDidMount() {
         this.getUpdated();
-        window.setInterval(this.getUpdated.bind(this), 2000);
+        window.setInterval(this.getUpdated.bind(this), 20000);
     }
     handleResize() {
         var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%';
@@ -324,8 +324,8 @@ export default class UserPage extends Component {
             },
             leftBarWrapper = {
                 width: '40%',
-                marginRight: '25px'
-
+                marginRight: '25px',
+                minWidth: '300px'
             },
             annotationWrapper = {
                 minWidth: '300px',
@@ -369,7 +369,7 @@ export default class UserPage extends Component {
             <div style={pageWrapper}>
                 {this.state.modalActive ? this.state.modal : ''}
                 <div style={leftBarWrapper}>
-                    <DashboardProfileCard />
+                    <DashboardProfileCard color={this.props.color}/>
                     <SideBar
                         icon="fa-filter"
                         title='Tools'

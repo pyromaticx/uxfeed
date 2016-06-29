@@ -39,16 +39,17 @@ export default class Header extends Component {
       transform: 'translate(-50%, -50%)'
     },
     loginBub = {
-      width: '75px',
-      height: '70px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       color: '#fff',
       fontSize: '12px',
       fontWeight: '600',
-      paddingBottom: '10px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      marginRight: '20px',
+      borderRadius: '5%',
+      padding: '10px',
+      border: '2px solid #fff'
     },
     logoBub = {
       backgroundImage: 'url(/style/img/passlight.svg)',

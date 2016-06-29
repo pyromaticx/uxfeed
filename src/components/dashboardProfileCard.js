@@ -14,7 +14,7 @@ export default class DashboardProfileCard extends Component{
                 height: "150px",
                 display: "flex",
                 flexDirection: "row",
-                backgroundColor: this.props.color.four,
+                backgroundColor: this.props.color.secondary,
                 marginBottom: '15px'
             };
             var bottomSection = {
@@ -26,7 +26,7 @@ export default class DashboardProfileCard extends Component{
                 height: "100%",
                 flex: "3",
                 borderRadius: "5px 0 0 5px",
-                backgroundImage: this.state.userData.userPicURL || "url('http://s3.amazonaws.com/37assets/svn/765-default-avatar.png')",
+                backgroundImage: "url('http://s3.amazonaws.com/37assets/svn/765-default-avatar.png')",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
                 backgroundPosition: "center"
@@ -42,7 +42,9 @@ export default class DashboardProfileCard extends Component{
                 paddingLeft: "10px",
                 borderRadius: "5px"
             }
+            console.log(this.state.userData)
             return(
+
                 <div style={profileCardWrapper}>
                         <div style={profilePicContainer}>
                         </div>
