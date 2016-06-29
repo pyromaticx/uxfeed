@@ -54,13 +54,13 @@ export default class Login extends Component {
           <div style={header}>
             <span>Login</span>
           </div>
-          <div style={formStyle}>
+          <form style={formStyle} onSubmit={(event) => (this.submitCreds(event))}>
             <label htmlFor='username'>Enter Username</label>
             <input onChange={(event) => {this.userChange(event)}} type='text' name='username' value={this.state.username} />
             <label htmlFor='pass'>Enter Password</label>
             <input onChange={(event) => {this.passChange(event)}} type='password' name='pass' value={this.state.password} />
-          </div>
-          <button type='button' onClick={(event) => (this.submitCreds(event))} className='btn btn primary'>Login</button>
+          </form>
+          <button type='submit' className='btn btn primary'>Login</button>
         </div>
       </div>
     );
@@ -82,6 +82,8 @@ export default class Login extends Component {
     }
   }
   submitCreds(event) {
+    event.preventDefault();
+    event.stopPropagation();
     if(this.state.username.length < 1 || this.state.password.length < 1) {
       return;
     }
