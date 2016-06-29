@@ -90,25 +90,25 @@ export default class Annotation extends Component {
         var type;
         switch (emoji) {
             case 'delighted': {
-                return './img/emoji/delighted.png'
+                return 'https://s3-us-west-2.amazonaws.com/uxpattach/delighted.png'
             }
             case 'annoyed': {
-                return './img/emoji/annoyed.png'
+                return 'https://s3-us-west-2.amazonaws.com/uxpattach/annoyed.png'
             }
             case 'idea': {
-                return './img/emoji/idea.png'
+                return 'https://s3-us-west-2.amazonaws.com/uxpattach/idea.png'
             }
             case 'thinking': {
-                return './img/emoji/thinking.png'
+                return 'https://s3-us-west-2.amazonaws.com/uxpattach/thinking.png'
             }
             case 'aghast': {
-                return './img/emoji/aghast.png'
+                return 'https://s3-us-west-2.amazonaws.com/uxpattach/aghast.png'
             }
             case 'disappointed': {
-                return './img/emoji/disappointedEmo.png'
+                return 'https://s3-us-west-2.amazonaws.com/uxpattach/disappointedEmo.png'
             }
             case 'angry': {
-                return './img/emoji/angryEmo.png'
+                return 'https://s3-us-west-2.amazonaws.com/uxpattach/angryEmo.png'
             }
             default: {
                 return '';
