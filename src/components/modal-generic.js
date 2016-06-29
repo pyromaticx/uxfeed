@@ -40,7 +40,8 @@ export default class ModalGeneric extends Component {
       color: '#333',
       fontSize: '30px',
       height: '30px',
-      width: '30px'
+      width: '30px',
+      cursor: 'pointer'
     };
     return(
       <div style={modalOverlay}>

@@ -20,6 +20,41 @@ export default class Annotation extends Component {
         });
       }
     }
+    annotationTypeSwitch() {
+      switch (this.props.annotation.annotationMediaType) {
+        case 'jpeg': {
+          return (
+            <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/>
+          );
+        }
+        case 'webm': {
+          return (
+            <video src={this.props.annotation.annotationMedia} controls width='100%' height='auto'/>
+          );
+        }
+        case 'webcam': {
+          return (
+            <div>
+              <video src={this.props.annotation.annotationMedia} width='100%' height='auto'>
+
+              </video>
+            </div>
+          );
+        }
+        case 'audio': {
+          return (
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column'}}>
+              <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/>
+              <audio controls src={this.props.annotation.annotationMediaAudio} />
+            </div>
+          );
+        }
+        default: {
+
+        }
+      }
+
+    }
     colorByType(type) {
       switch(type) {
         case 'Visual Design':
@@ -55,25 +90,25 @@ export default class Annotation extends Component {
         var type;
         switch (emoji) {
             case 'delighted': {
-                return '/img/emoji/delighted.png'
+                return './img/emoji/delighted.png'
             }
             case 'annoyed': {
-                return '/img/emoji/annoyed.png'
+                return './img/emoji/annoyed.png'
             }
             case 'idea': {
-                return '/img/emoji/idea.png'
+                return './img/emoji/idea.png'
             }
             case 'thinking': {
-                return '/img/emoji/thinking.png'
+                return './img/emoji/thinking.png'
             }
             case 'aghast': {
-                return '/img/emoji/aghast.png'
+                return './img/emoji/aghast.png'
             }
             case 'disappointed': {
-                return '/img/emoji/disappointedEmo.png'
+                return './img/emoji/disappointedEmo.png'
             }
             case 'angry': {
-                return '/img/emoji/angryEmo.png'
+                return './img/emoji/angryEmo.png'
             }
             default: {
                 return '';
@@ -204,6 +239,7 @@ export default class Annotation extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             };
+
       /*  var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
         var Comments = currentComments.map((comment) => {
           return (
@@ -219,7 +255,7 @@ export default class Annotation extends Component {
             <div onClick={() => {this.addToCollection()}}style={annotationWrapper}>
 
                 <div style={thumbnailStyle}>
-                    {this.props.annotation.annotationMediaType == 'jpeg' ? <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/> : this.props.annotation.annotationMediaType == 'webm' ? <video src={this.props.annotation.annotationMedia} controls width='100%' height='auto'/> : <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column'}}> <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/> <audio controls src={this.props.annotation.annotationMediaAudio} /> </div> }
+                    {this.annotationTypeSwitch()}
                 </div>
                 <div style={annotationPanel}>
                   <div style={{width: '75%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center'}}>

@@ -61,7 +61,7 @@ export default class Home extends Component {
       modal: '',
       inputBox: '',
       nameBox: '',
-      company: ''
+      companyBox: ''
     });
     grecaptcha.reset();
   }

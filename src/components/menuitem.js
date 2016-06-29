@@ -5,7 +5,8 @@ export default class MenuItem extends Component {
     super(props);
     this.state = {
       hovered: false,
-      active: false
+      active: false,
+      page: 1
     };
   }
   handleMouseOver() {
@@ -18,6 +19,7 @@ export default class MenuItem extends Component {
       hovered: false
     });
   }
+
   exeCallback(submit) {
     if(!this.state.active) {
       this.setState({
@@ -31,6 +33,23 @@ export default class MenuItem extends Component {
       this.props.callback(submit);
     }
   }
+  buttonSwitch() {
+    switch (this.props.button) {
+      case 'true': {
+        return (
+          <button className='btn btn-default' type='button' onClick={() => this.exeCallback('buttonClicked')}>{this.props.buttonText}</button>
+        );
+      }
+      case 'page': {
+        return (
+          <div style={{display: 'flex', flexDirection: 'row'}}>
+            <button type='button' style={{}} onClick={() => {this.setState({page: this.state.page--})}}>less</button>
+            <button type='button' style={{}} onClick={() => {this.setState({page: this.state.page++})}}>more</button>
+          </div>
+        );
+      }
+    }
+  }
   render() {
     var menuItemStyle = {
       display: 'flex',
@@ -41,7 +60,9 @@ export default class MenuItem extends Component {
       justifyContent: this.state.active ? 'space-between' : 'center',
       transition: 'max-height 150ms ease, background-color 50ms ease, color 50ms ease',
       padding: '10px',
-      color: this.state.hovered ? this.props.color.primary : this.state.active ? this.props.color.primary : this.props.color.text,
+      color: this.props.color.text,
+      borderTop: this.state.active ? '3px solid rgba(0,0,0,0.3)' : '',
+      borderBottom: this.state.active ? '3px solid rgba(0,0,0,0.3)' : '',
       backgroundColor: this.state.hovered ? this.props.activeColor || this.props.color.five : this.state.active ? this.props.activeColor || this.props.color.five : this.props.color.primary,
       cursor: 'pointer',
       badge: {
@@ -71,7 +92,7 @@ export default class MenuItem extends Component {
         <h6>{this.props.title}</h6>
         <div style={menuItemStyle.infoPane}>
         <h6>{this.props.activeText}</h6>
-        {this.props.button ? <button className='btn btn-default' type='button' onClick={() => this.exeCallback('buttonClicked')}>{this.props.buttonText}</button> : ''}
+        {this.buttonSwitch()}
         </div>
       </div>
     );

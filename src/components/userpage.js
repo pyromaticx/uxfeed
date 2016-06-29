@@ -241,24 +241,40 @@ export default class UserPage extends Component {
       a.download = 'title.pdf';
       a.click();
     }
-    listFiles() {
-      var files = this.state.userCollections.filter(function(col) {
+    listFiles(page) {
+      var pageStart = (page - 1) * 5;
+      var pageEnd = page * 5;
+      var files = this.state.userCollections.filter(function(col, idx) {
         if(col.fileName) {
           return true;
         } else {
           return false;
         }
       });
-      var displayFiles = files.map((file, idx) => {
+      if(files.length == 0) {
         return (
-          <div onClick={() => {this.downloadFile(file)}} key={idx+file} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
-            <p>{file.fileName}</p>
+          <div style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+            <p>You have not created any files yet.</p>
           </div>
-        );
-      })
+        )
+      }
+      var displayFiles = files.map((file, idx) => {
+        if(idx > pageStart && idx < pageEnd) {
+          return (
+            <div onClick={() => {this.downloadFile(file)}} key={idx+file} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+              <p>{file.fileName}</p>
+            </div>
+          );
+        } else {
+          return;
+        }
+      });
+
       return displayFiles.reverse();
     }
-    listCollections() {
+    listCollections(page) {
+      var pageStart = (page - 1) * 5;
+      var pageEnd = page * 5;
       var files = this.state.userCollections.filter(function(col) {
         if(col.fileName) {
           return true;
@@ -266,18 +282,30 @@ export default class UserPage extends Component {
           return false;
         }
       });
-      var displayCols = files.map((col, idx) => {
+      if(files.length == 0) {
         return (
-          <div onClick={() => {this.gotoCollection(col.collectionId)}} key={idx+col+'col'} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
-            <p>{col.fileName}</p>
+          <div style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+            <p>You have not created a collection yet.</p>
           </div>
-        );
+        )
+      }
+      var displayCols = files.map((col, idx) => {
+        if(idx > pageStart && idx < pageEnd) {
+        return (
+            <div onClick={() => {this.gotoCollection(col.collectionId)}} key={idx+col+'col'} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+              <p>{col.fileName}</p>
+            </div>
+          );
+        } else {
+          return;
+        }
       })
       return displayCols.reverse();
     }
     gotoCollection(id) {
       window.location = 'http://uxpass.com/#/collections/' + id
     }
+
     render() {
 
         var pageWrapper = {
@@ -305,21 +333,26 @@ export default class UserPage extends Component {
               title: 'Create a collection',
               callback: (event) => {this.beginCollecting(event)},
               activeText: 'After selecting the annotations you would like in your collection, click below to export them to PDF',
-              button: true,
-              buttonText: 'Create Collection'
+              button: 'true',
+              buttonText: 'Create Collection',
+              activeColor: this.props.color.primary
             },
             {
               title: 'My Files',
               callback: () => {},
-              activeText: this.listFiles(),
-              button: false,
-              activeColor: this.props.color.six
+              activeText: this.listFiles(1),
+              button: 'page',
+              id: 'files',
+              activeColor: this.props.color.primary
+
             },{
               title: 'Collections',
               callback: () => {},
-              activeText: this.listCollections(),
+              activeText: this.listCollections(1),
               button: false,
-              activeColor: this.props.color.four
+              id: 'collections',
+              activeColor: this.props.color.primary,
+
             }],
             rightBar = {
               width: '30%'

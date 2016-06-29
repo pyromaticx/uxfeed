@@ -51,7 +51,7 @@ export default class PDFModal extends Component {
     if(this.state.recs) {
       backButton = this.state.modalPage == '1' ? <button className='btn btn-default' type='button' onClick={() => {this.changePage('2')}}>Recommendations</button> : <button className='btn btn-default' type='button' onClick={() => {this.changePage('1')}}>Title</button>
     }
-    var fileName = 'GoLiveLabs UxPass ' + this.state.companyName + ' ' + this.state.collectionTitle + ' ' + moment(Date.now()).format('MM-DD-YY h.mm.ss a') + '.pdf';
+    var fileName = 'GoLiveLabs UxPass ' + this.state.companyName + ' ' + this.state.collectionTitle + ' ' + moment(Date.now()).format('MM-DD-YY h.mm.ss a');
     console.log('loading:', this.props.loading)
     return (
       <div style={wrapper}>
@@ -165,7 +165,7 @@ export default class PDFModal extends Component {
       });
     }
   }
-  
+
   enableRecs() {
     if(!this.state.recs) {
       this.setState({
