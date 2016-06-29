@@ -45,7 +45,8 @@ export default class Login extends Component {
       justifyContent: 'space-between',
       alignItems: 'space-between',
       flexDirection: 'column',
-      padding: '30px'
+      padding: '30px',
+      height: '100%'
     },
     googleButton = {}
     return (
