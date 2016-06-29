@@ -13,6 +13,9 @@ export default class UserPage extends Component {
     resizeListener
     constructor(props) {
         super(props);
+        if(localStorage.getItem('auth') == '') {
+          return window.location = 'http://uxpass.com/#/login';
+        }
         this.state = {
             expanded: true,
             getResponse: [],
