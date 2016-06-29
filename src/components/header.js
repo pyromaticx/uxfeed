@@ -8,7 +8,7 @@ export default class Header extends Component {
     super();
     this.state = {
       searchValue: '',
-      loginButtonState: 'Login'
+      loginButtonState: localStorage.getItem('auth') == '' ? 'Login' : 'Logout'
     }
   }
   render() {
@@ -39,11 +39,7 @@ export default class Header extends Component {
       transform: 'translate(-50%, -50%)'
     },
     loginBub = {
-      backgroundImage: 'url(/style/img/annotationlight.svg)',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
       width: '75px',
-      backgroundSize: '60px 60px',
       height: '70px',
       display: 'flex',
       justifyContent: 'center',
@@ -51,7 +47,8 @@ export default class Header extends Component {
       color: '#fff',
       fontSize: '12px',
       fontWeight: '600',
-      paddingBottom: '10px'
+      paddingBottom: '10px',
+      cursor: 'pointer'
     },
     logoBub = {
       backgroundImage: 'url(/style/img/passlight.svg)',
@@ -93,9 +90,20 @@ export default class Header extends Component {
             <div style={downloadLink}>
               <a style={{color: '#fff'}} href='https://chrome.google.com/webstore/detail/ux-pass/mipcbibmecemipbooafkmlglpjbbmojb?utm_source=chrome-app-launcher-info-dialog'>Download UxPass!</a>
             </div>
-          <Link style={loginBub} to='/login'><div>{this.state.loginButtonState}</div></Link>
+          <div style={loginBub} onClick={this.loginOut()}>
+            {this.state.loginButtonState}
+          </div>
       </div>
     );
+  }
+  loginOut() {
+    var toke = localStorage.getItem('auth');
+    if(toke) {
+      localStorage.setItem('auth', '');
+      window.location = 'http://uxpass.com';
+    } else {
+      window.location = 'http://uxpass.com/#/login'
+    }
   }
   inputChange(event) {
     this.setState({
