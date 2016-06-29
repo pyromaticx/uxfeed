@@ -35,9 +35,8 @@ export default class Annotation extends Component {
         case 'webcam': {
           return (
             <div>
-              <video src={this.props.annotation.annotationMedia} width='100%' height='auto'>
-
-              </video>
+              <video src={this.props.annotation.annotationMedia} width='100%' height='auto' />
+              <video src={this.props.annotation.userVideo} width='100%' height='auto' />
             </div>
           );
         }
