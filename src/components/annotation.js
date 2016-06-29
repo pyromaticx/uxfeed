@@ -10,13 +10,37 @@ export default class Annotation extends Component {
             height: 80,
             expanded: props.expanded,
             modalState: 'closed',
-            selected: false
+            selected: false,
+            playing: false
         }
     }
     componentWillReceiveProps(newProps) {
     if(newProps.expanded != this.props.expanded) {
         this.setState({
           expanded: newProps.expanded
+        });
+      }
+    }
+    playBoth(event) {
+      var vidz = document.getElementsByClassName(this.props.annotation.annotationId);
+      var vids = [];
+      for(var i = 0; i < vidz.length; i++) {
+        vids.push(vidz[i]);
+      }
+      console.log(vids);
+      if(this.state.playing) {
+        vids.forEach(function(el) {
+          el.pause();
+        });
+        this.setState({
+          playing: false
+        });
+      } else {
+        vids.forEach(function(el) {
+          el.play();
+        });
+        this.setState({
+          playing: true
         });
       }
     }
@@ -35,8 +59,9 @@ export default class Annotation extends Component {
         case 'webcam': {
           return (
             <div>
-              <video src={this.props.annotation.annotationMedia} width='100%' height='auto' />
-              <video src={this.props.annotation.userVideo} width='100%' height='auto' />
+              <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} width='100%' height='auto' />
+              <video className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} width='100%' height='auto' />
+              <button className='btn btn-default' style={{position: 'relative', left: '50%', transform: 'translateX(-50%)'}} type='button' onClick={(event) => {this.playBoth(event)}}>play</button>
             </div>
           );
         }
