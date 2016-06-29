@@ -92,7 +92,7 @@ export default class Login extends Component {
         localStorage.auth = '';
       }
       localStorage.auth = data.token;
-      alert(userData.toString())
+      localStorage.user = userData.toString();
       window.location = 'http://uxpass.com/#/username/' + this.state.username;
     })
   }

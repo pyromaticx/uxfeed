@@ -4,7 +4,7 @@ export default class DashboardProfileCard extends Component{
     constructor(props){
         super(props);
         this.state = {
-          userData: props.user
+          userData: JSON.parse(localStorage.getItem('user'))
         };
         }
 

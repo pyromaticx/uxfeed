@@ -8,6 +8,7 @@ import Loader from './loader.js';
 import FilterBar from './filterbar.js';
 import PDFTemplate from './pdftemplate.js';
 import PDFModal from './pdfmodal.js';
+
 export default class UserPage extends Component {
     intervalID
     resizeListener
@@ -368,6 +369,7 @@ export default class UserPage extends Component {
             <div style={pageWrapper}>
                 {this.state.modalActive ? this.state.modal : ''}
                 <div style={leftBarWrapper}>
+                    <DashboardProfileCard />
                     <SideBar
                         icon="fa-filter"
                         title='Tools'
