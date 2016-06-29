@@ -99,7 +99,7 @@ var api = {
   }
   return $.ajax(settings);
 },
-  emailRohit: function(name, email) {
+  emailRohit: function(name, email, company) {
       var settings = {
         "async": true,
         "crossDomain": true,
@@ -110,7 +110,7 @@ var api = {
           "cache-control": "no-cache",
         },
         "processData": false,
-        "data": JSON.stringify({name: name, email: email})
+        "data": JSON.stringify({name: name, email: email, company: company})
     }
     return $.ajax(settings);
   }

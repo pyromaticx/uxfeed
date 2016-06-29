@@ -73,6 +73,14 @@ export default class Header extends Component {
       strokeWidth: '2px',
       height: '65px',
 
+    },
+    downloadLink = {
+      position: 'absolute',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      left: '70%',
+      width: '20%',
+
     }
     return (
       <div style={headerStyle}>
@@ -82,6 +90,9 @@ export default class Header extends Component {
             color={this.props.color}
             iconType='fa-home' />
             <div style={uxLogo}></div>
+            <div style={downloadLink}>
+              <a style={{color: '#fff'}} href='https://chrome.google.com/webstore/detail/ux-pass/mipcbibmecemipbooafkmlglpjbbmojb?utm_source=chrome-app-launcher-info-dialog'>Download UxPass!</a>
+            </div>
           <Link style={loginBub} to='/login'><div>{this.state.loginButtonState}</div></Link>
       </div>
     );

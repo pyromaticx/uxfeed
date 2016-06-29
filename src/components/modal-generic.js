@@ -27,9 +27,11 @@ export default class ModalGeneric extends Component {
     modalContent = {
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       alignItems: 'center',
-      fontSize: '20px'
+      fontSize: '20px',
+      padding: '30px',
+      textAlign: 'center'
     },
     closer = {
       position: 'relative',

@@ -23,7 +23,8 @@ export default class UserPage extends Component {
             modalActive: false,
             modal: {},
             loading: false,
-            userCollections: []
+            userCollections: [],
+            status: 'You have not annotated anything yet!'
         };
     }
 
@@ -61,7 +62,8 @@ export default class UserPage extends Component {
                         return a.annotationId - b.annotationId;
                     }).reverse();
                     this.setState({
-                        getResponse: sortedByPinId
+                        getResponse: sortedByPinId,
+                        status: ''
                     });
                 });
                 break;
@@ -69,6 +71,12 @@ export default class UserPage extends Component {
             case 'username/:username': {
                 api.getUser(this.props.params.username).then((data) => {
                     console.log(data);
+                    if(data.error) {
+                      this.setState({
+                        status: 'You are not authorized to view this resource'
+                      });
+                      return;
+                    }
                     var sortedByPinId = data.sort(function(a, b) {
                           return a.annotationId - b.annotationId;
                     }).reverse();
@@ -248,7 +256,7 @@ export default class UserPage extends Component {
           </div>
         );
       })
-      return displayFiles;
+      return displayFiles.reverse();
     }
     listCollections() {
       var files = this.state.userCollections.filter(function(col) {
@@ -265,7 +273,7 @@ export default class UserPage extends Component {
           </div>
         );
       })
-      return displayCols;
+      return displayCols.reverse();
     }
     gotoCollection(id) {
       window.location = 'http://uxpass.com/#/collections/' + id
@@ -329,7 +337,7 @@ export default class UserPage extends Component {
                 </div>
                 <div style={annotationWrapper}>
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
-                  {this.state.getResponse.length > 0 ? this.annotationRender() : 'You have not annotated anything yet!'}
+                  {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}
                 </div>
                 <div style={rightBar}></div>
             </div>
