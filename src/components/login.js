@@ -59,8 +59,9 @@ export default class Login extends Component {
             <input onChange={(event) => {this.userChange(event)}} type='text' name='username' value={this.state.username} />
             <label htmlFor='pass'>Enter Password</label>
             <input onChange={(event) => {this.passChange(event)}} type='password' name='pass' value={this.state.password} />
+            <button type='submit' className='btn btn primary'>Login</button>
           </form>
-          <button type='submit' className='btn btn primary'>Login</button>
+
         </div>
       </div>
     );
