@@ -55,6 +55,9 @@ export default class UserPage extends Component {
       console.log(commentObj)
     }
     getUpdated() {
+        if(localStorage.getItem('auth') == '') {
+          return window.location = 'http://uxpass.com/#/login';
+        }
         switch (this.props.route.path) {
             case 'annotations': {
                 api.annotations().then((data) => {
