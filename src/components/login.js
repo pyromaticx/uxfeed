@@ -97,7 +97,7 @@ export default class Login extends Component {
       }
       localStorage.auth = data.token;
       localStorage.user = userData.toString();
-      window.location = 'https://uxpass.com/#/username/' + this.state.username;
+      window.location = 'http://uxpass.com/#/username/' + this.state.username;
     })
   }
 }
