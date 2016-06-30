@@ -76,9 +76,11 @@ export default class UserPanel extends Component {
         localStorage.auth = '';
         localStorage.user = '';
         window.location = 'http://uxpass.com'
+        break;
       }
       default: {
         alert('default');
+        break;
       }
 
     }
