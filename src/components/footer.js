@@ -23,7 +23,12 @@ export default class Footer extends Component {
             }
         return (
             <div style={footerStyle}>
-                <FooterItem title='Copyright Info' content={(<span style={injectedJsxStyle}><h3>Other stuff</h3><h5>Some more stuff</h5></span>)} color={this.props.color}/>
+                <FooterItem title='UXPass' content={(
+                  <span style={injectedJsxStyle}>
+                    <a style={{color: '#fff', textDecoration: 'none'}} href='https://chrome.google.com/webstore/detail/ux-pass/mipcbibmecemipbooafkmlglpjbbmojb?utm_source=chrome-app-launcher-info-dialog'>
+                      <h4>Get the Chrome extension</h4>
+                    </a>
+                  </span>)} color={this.props.color}/>
                 <FooterItem content={(<FooterSocial color={this.props.color} />)} color={this.props.color}/>
                 <FooterItem title='UI Colors' content={(<ColorPicker colorChanger={this.props.colorChanger}/>)} color={this.props.color}/>
             </div>

@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import Logo from './logo.js';
 import HeaderItem from './header-item.js';
 import UxpassQuote from './uxpassquote.js';
+import UserPanel from './userpanel.js';
 import {Link} from 'react-router';
 export default class Header extends Component {
   constructor() {
     super();
     this.state = {
       searchValue: '',
-      loginButtonState: localStorage.getItem('auth') == '' ? 'Login' : 'Logout'
+      loginButtonState: localStorage.getItem('auth') == '' ? 'Login' : <UserPanel />
     }
   }
   render() {
@@ -47,8 +48,9 @@ export default class Header extends Component {
       fontWeight: '600',
       cursor: 'pointer',
       marginRight: '20px',
-      borderRadius: '5%',
-      padding: '10px',
+      borderRadius: '50%',
+      width: '50px',
+      height: '50px',
       border: '2px solid #fff'
     },
     logoBub = {
@@ -99,6 +101,7 @@ export default class Header extends Component {
   }
   loginOut() {
     var toke = localStorage.getItem('auth');
+
     if(toke) {
       localStorage.setItem('auth', '');
       window.location = 'http://uxpass.com';
