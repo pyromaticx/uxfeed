@@ -81,29 +81,20 @@ export default class Annotation extends Component {
     }
     colorByType(type) {
       switch(type) {
-        case 'Visual Design':
+        case 'UX Pro':
           return 'red';
           break;
-        case 'User Research':
-          return 'orange';
-          break;
-        case 'Product Design':
-          return 'yellow';
-          break;
-        case 'Information Architecture':
+        case 'User':
           return 'green';
           break;
-        case 'Interaction Design':
+        case 'Product Team':
+          return 'yellow';
+          break;
+        case 'UI Pro':
+          return 'orange';
+          break;
+        case 'Customer':
           return 'blue';
-          break;
-        case 'UI Engineer':
-          return 'purple';
-          break;
-        case 'Manager':
-          return 'pink';
-          break;
-        case 'Sales':
-          return 'black';
           break;
        default:
          return '#333'

@@ -28,7 +28,8 @@ export default class UserPage extends Component {
             modal: {},
             loading: false,
             userCollections: [],
-            status: 'You have not annotated anything yet!'
+            status: 'You have not annotated anything yet!',
+            page: 0
         };
     }
 
@@ -76,7 +77,7 @@ export default class UserPage extends Component {
                 break;
             }
             case 'username/:username': {
-                api.getUser(this.props.params.username).then((data) => {
+                api.getUser(this.props.params.username, this.state.page).then((data) => {
                     console.log(data);
                     if(data.error) {
                       this.setState({
@@ -312,7 +313,23 @@ export default class UserPage extends Component {
     gotoCollection(id) {
       window.location = 'http://uxpass.com/#/collections/' + id
     }
-
+    turnPage(dir) {
+      if(dir === 'less') {
+        if(this.state.page < 1) {
+          this.setState({
+            page: 0
+          }, this.getUpdated());
+        } else {
+          this.setState({
+            page: this.state.page--
+          }, this.getUpdated());
+        }
+      } else {
+        this.setState({
+          page: this.state.page++
+        }, this.getUpdated());
+      }
+    }
     render() {
 
         var pageWrapper = {
@@ -363,6 +380,11 @@ export default class UserPage extends Component {
             }],
             rightBar = {
               width: '30%'
+            },
+            pageButtons = {
+              position: 'relative',
+              marginTop: '30px',
+
             };
             //rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
         return (
@@ -379,6 +401,9 @@ export default class UserPage extends Component {
                 <div style={annotationWrapper}>
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}
+                  <div style={pageButtons}>
+                    {this.state.page > 0 ? (<span><button onClick={() => {this.turnPage('less')}} type='button'>Less</button><button  onClick={() => {this.turnPage('more')}} type='button'>More</button></span>) : <button  onClick={() => {this.turnPage('more')}} type='button'>More</button>}
+                  </div>
                 </div>
                 <div style={rightBar}></div>
             </div>

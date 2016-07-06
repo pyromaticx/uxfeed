@@ -15,8 +15,23 @@ var myInit = {
 var api = {
   baseUrl: 'https://uxpass-server.herokuapp.com/',
 
-  getUser: function(username) {
-    return fetch(this.baseUrl + 'annotations/user/' + username, myInit).then(function (resp) {
+  getUser: function(username, page) {
+    if(!page) {
+      var page = 0;
+    }
+    var config = {
+                "async": true,
+    						"crossDomain": true,
+                "mode": "cors",
+    						"method": "GET",
+    						"process-data": false,
+                "headers": {
+                  "authorization": localStorage.getItem('auth'),
+                  "page": page
+                }
+              };
+
+    return fetch(this.baseUrl + 'annotations/user/' + username, config).then(function (resp) {
       return resp.json()
     });
   },
@@ -99,6 +114,19 @@ var api = {
   }
   return $.ajax(settings);
 },
+  deleteAnnotation: function(id) {
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://uxpass-server.herokuapp.com/annotations/delete" + id,
+        "method": "POST",
+        "headers": {
+          "content-type": "application/x-www-form-urlencoded",
+          "authorization": localStorage.getItem('auth')
+        }
+    }
+    return $.ajax(settings);
+  },
   emailRohit: function(name, email, company) {
       var settings = {
         "async": true,
