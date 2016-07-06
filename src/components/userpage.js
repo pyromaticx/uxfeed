@@ -329,6 +329,7 @@ export default class UserPage extends Component {
           page: this.state.page++
         }, this.getUpdated());
       }
+      window.scrollTo(0,0);
     }
     render() {
 
