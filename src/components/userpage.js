@@ -35,7 +35,6 @@ export default class UserPage extends Component {
 
     componentDidMount() {
         this.getUpdated();
-        window.setInterval(this.getUpdated.bind(this), 20000);
     }
     handleResize() {
         var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%';
@@ -123,7 +122,6 @@ export default class UserPage extends Component {
         }
     }
     expander() {
-      console.log('userpage')
       this.setState({
         expanded: this.state.expanded == true ? false : true
       });
