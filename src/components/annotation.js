@@ -285,7 +285,7 @@ export default class Annotation extends Component {
               position: 'absolute',
               left: '80%',
               width: '30px',
-
+              marginTop: '20px',
               textAlign: 'center',
               fontSize: '30px',
               color: 'red'

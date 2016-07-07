@@ -8,6 +8,8 @@ import Loader from './loader.js';
 import FilterBar from './filterbar.js';
 import PDFTemplate from './pdftemplate.js';
 import PDFModal from './pdfmodal.js';
+import SearchBox from './searchbox.js';
+
 
 export default class UserPage extends Component {
     intervalID
@@ -29,7 +31,8 @@ export default class UserPage extends Component {
             loading: false,
             userCollections: [],
             status: 'You have not annotated anything yet!',
-            page: 0
+            page: 0,
+
         };
     }
 
@@ -326,6 +329,13 @@ export default class UserPage extends Component {
       $("html, body").animate({ scrollTop: "0px" });
 
     }
+    annotationLoader(annotations) {
+      if(annotations.length > 0) {
+        this.setState({
+          getResponse: annotations
+        });
+      }
+    }
     render() {
 
         var pageWrapper = {
@@ -380,6 +390,10 @@ export default class UserPage extends Component {
             pageButtons = {
 
 
+            },
+            searchBox = {
+              marginTop: '20px',
+              boxShadow: '0 3px 15px 1px #777',
             };
             //rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
         return (
@@ -387,11 +401,13 @@ export default class UserPage extends Component {
                 {this.state.modalActive ? this.state.modal : ''}
                 <div style={leftBarWrapper}>
                     <DashboardProfileCard color={this.props.color}/>
+                    <SearchBox color={this.props.route.color} callback={(annotations) => {this.annotationLoader(annotations)}} />
                     <SideBar
                         icon="fa-filter"
                         title='Tools'
                         content={leftBarContent}
                         color={this.props.color} />
+
                 </div>
                 <div style={annotationWrapper}>
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
@@ -400,7 +416,8 @@ export default class UserPage extends Component {
                     {this.state.page < 1 ? <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : <span><button onClick={() => {this.turnPage(this.state.page - 1)}} type='button'>Less</button><button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button></span>}
 
                 </div>
-                <div style={rightBar}></div>
+                <div style={rightBar}>
+                </div>
             </div>
         );
         /*

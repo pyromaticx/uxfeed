@@ -114,6 +114,19 @@ var api = {
   }
   return $.ajax(settings);
 },
+  searchAnnotations: function(term) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://uxpass-server.herokuapp.com/annotations/search/" + term,
+      "method": "GET",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "authorization": localStorage.getItem('auth')
+      }
+  }
+  return $.ajax(settings);
+  },
   deleteAnnotation: function(id) {
       var settings = {
         "async": true,
