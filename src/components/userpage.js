@@ -35,6 +35,7 @@ export default class UserPage extends Component {
 
     componentDidMount() {
         this.getUpdated();
+
     }
     handleResize() {
         var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%';
@@ -56,12 +57,13 @@ export default class UserPage extends Component {
     }
     updateCommentsCB(commentObj) {
       // !!! TODO: Add PATCH request to update comment array in DB !!!
-      console.log(commentObj)
+
     }
     getUpdated() {
         if(localStorage.getItem('auth') == '') {
           return window.location = 'http://uxpass.com/#/login';
         }
+
         switch (this.props.route.path) {
             case 'annotations': {
                 api.annotations().then((data) => {
@@ -77,7 +79,7 @@ export default class UserPage extends Component {
             }
             case 'username/:username': {
                 api.getUser(this.props.params.username, this.state.page).then((data) => {
-                    console.log(data);
+
                     if(data.error) {
                       this.setState({
                         status: 'You are not authorized to view this resource'
@@ -93,7 +95,7 @@ export default class UserPage extends Component {
                 });
 
                 api.getUserCollections(this.props.params.username).then((data) => {
-                  console.log(data)
+
                   this.setState({
                     userCollections: data
                   });
@@ -111,7 +113,7 @@ export default class UserPage extends Component {
                   });
                 })
                 api.getUserCollections(this.props.params.username).then((data) => {
-                  console.log(data)
+
                   this.setState({
                     userCollections: data
                   });
@@ -120,6 +122,7 @@ export default class UserPage extends Component {
                 break;
             }
         }
+        this.render();
     }
     expander() {
       this.setState({
@@ -142,10 +145,11 @@ export default class UserPage extends Component {
     }
     annotationRender() {
       var Annotations = this.state.getResponse.map((annotation, idx) => {
-          console.warn(this.isSelected(annotation))
+
           return (
               <Annotation
                   key={annotation.annotationId}
+                  refresh={this.getUpdated}
                   selected={this.isSelected(annotation)}
                   expanded={this.state.expanded}
                   annotation={annotation}
@@ -188,7 +192,7 @@ export default class UserPage extends Component {
         });
         if(exists.length == 0) {
           collected.push(annotation);
-          //console.log(collected);
+
           this.setState({
             collectedAnnotations: collected
           });
@@ -311,23 +315,16 @@ export default class UserPage extends Component {
     gotoCollection(id) {
       window.location = 'http://uxpass.com/#/collections/' + id
     }
-    turnPage(dir) {
-      if(dir === 'less') {
-        if(this.state.page < 1) {
-          this.setState({
-            page: 0
-          }, this.getUpdated());
-        } else {
-          this.setState({
-            page: this.state.page--
-          }, this.getUpdated());
-        }
-      } else {
-        this.setState({
-          page: this.state.page++
-        }, this.getUpdated());
+    turnPage(newPage) {
+      if(newPage < 0) {
+        newPage = 0;
       }
-      window.scrollTo(0,0);
+      this.setState({
+        page: newPage
+      });
+      setTimeout(this.getUpdated.bind(this),0);
+      $("html, body").animate({ scrollTop: "0px" });
+
     }
     render() {
 
@@ -381,8 +378,7 @@ export default class UserPage extends Component {
               width: '30%'
             },
             pageButtons = {
-              position: 'relative',
-              marginTop: '30px',
+
 
             };
             //rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
@@ -400,9 +396,9 @@ export default class UserPage extends Component {
                 <div style={annotationWrapper}>
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}
-                  <div style={pageButtons}>
-                    {this.state.page > 0 ? (<span><button onClick={() => {this.turnPage('less')}} type='button'>Less</button><button  onClick={() => {this.turnPage('more')}} type='button'>More</button></span>) : <button  onClick={() => {this.turnPage('more')}} type='button'>More</button>}
-                  </div>
+
+                    {this.state.page < 1 ? <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : <span><button onClick={() => {this.turnPage(this.state.page - 1)}} type='button'>Less</button><button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button></span>}
+
                 </div>
                 <div style={rightBar}></div>
             </div>

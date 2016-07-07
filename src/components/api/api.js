@@ -118,7 +118,7 @@ var api = {
       var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "https://uxpass-server.herokuapp.com/annotations/delete" + id,
+        "url": "https://uxpass-server.herokuapp.com/annotations/delete/" + id,
         "method": "POST",
         "headers": {
           "content-type": "application/x-www-form-urlencoded",

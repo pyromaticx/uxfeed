@@ -7,7 +7,7 @@ export default class ModalGeneric extends Component {
       top: '0',
       left: '0',
       zIndex: '500',
-      backgroundColor: 'rgba(0,0,0,0.3)',
+      backgroundColor: 'rgba(0,0,0,0.5)',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

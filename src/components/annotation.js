@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 import UserComment from './usercomment.js';
-
+import api from './api/api.js';
 export default class Annotation extends Component {
     resizeListener
     constructor(props) {
@@ -11,13 +11,26 @@ export default class Annotation extends Component {
             expanded: props.expanded,
             modalState: 'closed',
             selected: false,
-            playing: false
+            playing: false,
+            hover: false,
+            deleted: false
         }
     }
     componentWillReceiveProps(newProps) {
     if(newProps.expanded != this.props.expanded) {
         this.setState({
           expanded: newProps.expanded
+        });
+      }
+    }
+    handleHover(type) {
+      if(type == 'enter') {
+        this.setState({
+          hover: true
+        });
+      } else {
+        this.setState({
+          hover: false
         });
       }
     }
@@ -130,13 +143,26 @@ export default class Annotation extends Component {
             }
         }
     }
+    deleteAnnotation() {
+      if(confirm('Are you sure that you want to delete this annotation?')) {
+        api.deleteAnnotation(this.props.annotation.annotationId).done((resp) => {
+          if(resp.status) {
+            this.setState({
+              deleted: true
+            });
+
+          }
+          setTimeout(this.props.refresh, 0);
+        });
+      }
+    }
     render() {
 
         var annotationWrapper = {
                 width: '100%',
                 minHeight: this.state.expanded ? '150px' : '80px',
                 backgroundColor: 'transparent',
-                display: 'flex',
+                display: this.state.deleted == true ? 'none' : 'flex',
                 flexDirection: 'column',
                 justifyContent: this.state.expanded ? 'space-between' : 'center',
                 alignItems: 'center',
@@ -253,6 +279,16 @@ export default class Annotation extends Component {
               flexDirection: 'row',
               justifyContent: 'center',
               alignItems: 'center',
+            },
+            annoTools = {
+              display: this.state.hover ? 'flex' : 'none',
+              position: 'absolute',
+              left: '80%',
+              width: '30px',
+
+              textAlign: 'center',
+              fontSize: '30px',
+              color: 'red'
             };
 
       /*  var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
@@ -267,9 +303,10 @@ export default class Annotation extends Component {
 
 
         return (
-            <div onClick={() => {this.addToCollection()}}style={annotationWrapper}>
+            <div onMouseOver={() => {this.handleHover('enter')}} onMouseLeave={() => {this.handleHover('leave')}} onClick={() => {this.addToCollection()}}style={annotationWrapper}>
 
                 <div style={thumbnailStyle}>
+                    <span style={annoTools} className='fa fa-trash' onClick={() => {this.deleteAnnotation()}}></span>
                     {this.annotationTypeSwitch()}
                 </div>
                 <div style={annotationPanel}>
@@ -278,6 +315,7 @@ export default class Annotation extends Component {
                     <span style={{color: '#333', fontWeight: 700}}>Description:<span style={{color: '#333', fontWeight: 400, marginLeft: '10px'}}>{this.props.annotation.annotationText}</span></span>
                   </div>
                   <div style={{width: '10%', height: '100%'}}>
+
                     {this.props.annotation.emojiId != '' ? <img src={this.emojiPicker(this.props.annotation.emojiId)} width='100%' /> : ''}
                   </div>
                 </div>

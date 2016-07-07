@@ -38,7 +38,7 @@ export default class Home extends Component {
       formData[elem.name] = elem.value
     })
     console.log(formData);
-    if(formData['g-recaptcha-response'].length > 0) {
+
       api.emailRohit(formData.name, formData.email, formData.company).done((resp) => {
         if(resp.error) {
           this.setState({
@@ -51,10 +51,6 @@ export default class Home extends Component {
           });
         }
       });
-
-    } else {
-      alert('Please complete all fields before submitting');
-    }
   }
   closeModal() {
     this.setState({
