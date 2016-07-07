@@ -18,7 +18,11 @@ export default class SearchBox extends Component {
   handleInputChange(event) {
     this.setState({
       searchTerm: event.target.value
-    });
+    },
+    api.searchAnnotations(event.target.value).done((resp) => {
+      console.log(resp);
+      this.props.callback(resp);
+    }))
   }
   render() {
     var searchBox = {

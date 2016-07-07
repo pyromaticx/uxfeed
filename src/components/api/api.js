@@ -140,6 +140,33 @@ var api = {
     }
     return $.ajax(settings);
   },
+  editProfile: function(changes, id) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://uxpass-server.herokuapp.com/user/" + id + "/userProfile",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "authorization": localStorage.getItem('auth')
+      },
+      "data": changes
+  }
+  return $.ajax(settings);
+  },
+  getUserProfile: function(userName) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://uxpass-server.herokuapp.com/user/" + userName,
+      "method": "GET",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "authorization": localStorage.getItem('auth')
+      }
+  }
+  return $.ajax(settings);
+  },
   emailRohit: function(name, email, company) {
       var settings = {
         "async": true,
