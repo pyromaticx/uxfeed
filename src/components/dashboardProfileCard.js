@@ -8,7 +8,7 @@ export default class DashboardProfileCard extends Component{
           userData: JSON.parse(localStorage.getItem('user')),
           editOpen: false
         };
-        }
+    }
 
         render(){
             var profileCardWrapper = {
@@ -52,7 +52,7 @@ export default class DashboardProfileCard extends Component{
               color: '#fff',
 
             }
-            console.log(this.state.userData)
+            
             return(
 
                 <div style={profileCardWrapper}>

@@ -83,7 +83,7 @@ export default class PDFModal extends Component {
           </div>}
 
           <span>
-            <label style={{marginRight: '5px'}} htmlFor='recs'>Enable Recommendations  </label>
+            <label style={{marginRight: '5px'}} htmlFor='recs'>Enable Executive Summary</label>
             <input name='recs' type='checkbox' onChange={(event) => {this.enableRecs(event)}}/>
           </span>
           {this.state.loading === true ? "Preparing your PDF Report..." : <button className='btn btn-primary' type='button' onClick={() => {

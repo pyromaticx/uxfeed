@@ -41,7 +41,7 @@ export default class EditProfile extends Component {
       justifyContent: 'space-around',
       alignItems: 'center',
       flexDirection: 'column',
-
+      color: '#333'
     },
     closeButton = {
       position: 'absolute',
@@ -55,6 +55,7 @@ export default class EditProfile extends Component {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
+      color: '#333'
     },
     inputRows = {
       display: 'flex',
@@ -76,7 +77,7 @@ export default class EditProfile extends Component {
       return (<div></div>);
     }
     return (
-      <div style={modalOverlay}>
+      <div style={modalOverlay} onClick={(event) => {event.stopPropagation()}}>
         <div style={editProfileWrapper}>
           <span className='fa fa-close' style={closeButton} onClick={() => {this.props.switchCB()}}></span>
           <h3>Edit Profile information:</h3>
@@ -108,6 +109,7 @@ export default class EditProfile extends Component {
       </div>
     );
   }
+
   picChange(event) {
     var reader = new window.FileReader();
     reader.readAsDataURL(event.target.files[0]);
@@ -116,7 +118,7 @@ export default class EditProfile extends Component {
       this.setState({
         picURL: base64data
       });
-  }
+    }
   //  console.log(event.target.files)
   }
   submitChanges(event) {

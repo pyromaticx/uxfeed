@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-
+import EditProfile from './editprofile.js';
 export default class UserPanel extends Component {
   constructor() {
     super();
 
     this.state = {
       panelOpen: false,
-      user: JSON.parse(localStorage.user)
+      user: JSON.parse(localStorage.user),
+      modal: false,
+      editOpen: false
     }
   }
   togglePanel(event) {
@@ -34,7 +36,7 @@ export default class UserPanel extends Component {
       display: this.state.panelOpen ? 'flex' : 'none',
       width: this.state.panelOpen ? '300px': '0px',
       height: this.state.panelOpen ? '200px': '0px',
-      backgroundColor: 'rgba(0,0,0,0.3)',
+      backgroundColor: 'rgba(0,0,0,0.5)',
       border: '3px solid #444',
       transition: 'all 3000ms ease',
       position: 'absolute',
@@ -49,8 +51,11 @@ export default class UserPanel extends Component {
       marginLeft: '20px',
       cursor: 'pointer'
     };
+
+
     return (
       <div style={bubbleStyle} onClick={(event) => {this.togglePanel(event)}}>
+        {this.state.editOpen ? <EditProfile active={this.state.editOpen} switchCB={() => {this.editProfileSwitch()}}/> : ''}
         <h3>{this.state.user.userName.substring(0,1).toUpperCase()}</h3>
         <div style={panelStyle}>
           <h5 style={panelItem} id='gohome' onClick={(event) => {this.panelRouter(event)}}>Goto my Annotations</h5>
@@ -69,7 +74,7 @@ export default class UserPanel extends Component {
         break;
       }
       case 'editpro': {
-        alert('coming soon');
+        this.editProfileSwitch();
         break;
       }
       case 'logout' : {
@@ -83,6 +88,17 @@ export default class UserPanel extends Component {
         break;
       }
 
+    }
+  }
+  editProfileSwitch() {
+    if(this.state.editOpen == false) {
+      this.setState({
+        editOpen: true
+      });
+    } else {
+      this.setState({
+        editOpen: false
+      });
     }
   }
 }
