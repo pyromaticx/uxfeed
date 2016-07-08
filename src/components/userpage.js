@@ -32,7 +32,7 @@ export default class UserPage extends Component {
             userCollections: [],
             status: 'You have not annotated anything yet!',
             page: 0,
-
+            user: JSON.parse(localStorage.user)
         };
     }
 
@@ -97,7 +97,7 @@ export default class UserPage extends Component {
                     });
                 });
 
-                api.getUserCollections(this.props.params.username).then((data) => {
+                api.getUserCollections(this.state.user.userName).then((data) => {
                   console.warn(data);
                   this.setState({
                     userCollections: data
@@ -117,7 +117,7 @@ export default class UserPage extends Component {
                       getResponse: sortedByPinId
                   });
                 })
-                api.getUserCollections(this.props.params.username).then((data) => {
+                api.getUserCollections(this.state.user.userName).then((data) => {
                   console.warn(data);
                   this.setState({
                     userCollections: data
