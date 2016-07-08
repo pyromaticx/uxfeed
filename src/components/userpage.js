@@ -237,7 +237,7 @@ export default class UserPage extends Component {
           a.href = resp;
           a.download = 'title.pdf';
           a.click();
-          api.addToUserCollections(this.props.params.username, this.state.collectedAnnotations, resp, data.fileName).done(function(response) {console.log(response)})
+          api.addToUserCollections(this.state.user.userName, this.state.collectedAnnotations, resp, data.fileName).done(function(response) {console.log(response)})
           this.setState({
             loading: false,
             modalActive: false,
