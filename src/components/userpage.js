@@ -274,7 +274,7 @@ export default class UserPage extends Component {
         )
       }
       var displayFiles = files.map((file, idx) => {
-        if(idx > pageStart && idx < pageEnd) {
+        if(idx >= pageStart && idx < pageEnd) {
           return (
             <div onClick={() => {this.downloadFile(file)}} key={idx+file} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
               <p>{file.fileName}</p>
@@ -285,7 +285,7 @@ export default class UserPage extends Component {
         }
       });
 
-      return displayFiles;
+      return displayFiles.reverse();
     }
     listCollections(page) {
       var pageStart = (page - 1) * 5;
@@ -305,7 +305,7 @@ export default class UserPage extends Component {
         )
       }
       var displayCols = files.map((col, idx) => {
-        if(idx > pageStart && idx < pageEnd) {
+        if(idx >= pageStart && idx < pageEnd) {
         return (
             <div onClick={() => {this.gotoCollection(col.collectionId)}} key={idx+col+'col'} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
               <p>{col.fileName}</p>
@@ -315,7 +315,7 @@ export default class UserPage extends Component {
           return;
         }
       })
-      return displayCols;
+      return displayCols.reverse();
     }
     gotoCollection(id) {
       window.location = 'http://uxpass.com/#/collections/' + id
