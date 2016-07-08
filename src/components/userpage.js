@@ -372,7 +372,7 @@ export default class UserPage extends Component {
             {
               title: 'My Files',
               callback: () => {},
-              activeText: this.listFiles(1),
+              activeText: this.listFiles(0),
               button: 'page',
               id: 'files',
               activeColor: this.props.color.primary
@@ -380,7 +380,7 @@ export default class UserPage extends Component {
             },{
               title: 'Collections',
               callback: () => {},
-              activeText: this.listCollections(1),
+              activeText: this.listCollections(0),
               button: false,
               id: 'collections',
               activeColor: this.props.color.primary,
