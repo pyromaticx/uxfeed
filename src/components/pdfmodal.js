@@ -53,6 +53,7 @@ export default class PDFModal extends Component {
     }
     var fileName = 'GoLiveLabs UxPass ' + this.state.companyName + ' ' + this.state.collectionTitle + ' ' + moment(Date.now()).format('MM-DD-YY h.mm.ss a');
     console.log('loading:', this.props.loading)
+    console.log("exe summary", this.state.recs);
     return (
       <div style={wrapper}>
         <div style={modalBox}>
@@ -167,7 +168,7 @@ export default class PDFModal extends Component {
   }
 
   enableRecs() {
-    console.log("enabling exe summary", this.state.recs);
+
     if(this.state.recs == false) {
       this.setState({
         recs: true,
@@ -177,6 +178,7 @@ export default class PDFModal extends Component {
         recs: false,
       });
     }
+    this.forceUpdate();
   }
   submit() {
 
