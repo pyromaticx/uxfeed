@@ -7,6 +7,7 @@ export default class EditProfile extends Component {
       return window.location = 'http://uxpass.com/#/login';
     } else {
       var user = JSON.parse(localStorage.user);
+      console.warn(user);
       this.state = {
         id: user.userId,
         userName: user.userName,
