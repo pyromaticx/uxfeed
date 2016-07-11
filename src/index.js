@@ -13,6 +13,12 @@ var createHistory = require('history/lib/createHashHistory');
 var history = new createHistory({
   queryKey: false
 });
+if(!localStorage.auth && !localStorage.user) {
+  console.log('bad auth')
+  localStorage.user = "";
+  localStorage.auth = "";
+}
+
 // colorKey is used to store the current selection of UI pallete.
 var colorKey = 'uxfeed';
 var currentUser = {};
@@ -125,14 +131,7 @@ function userLoggedIn(userData) {
   currentUser = userData;
 }
 
-try {
-  JSON.parse(localStorage.user);
-  JSON.parse(localStorage.auth);
-} catch(e) {
-  console.warn('bad auth',e);
-  localStorage.user = "";
-  localStorage.auth = "";
-}
+
 
 var Routes = (
   <Router history={history}>
