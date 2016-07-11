@@ -125,6 +125,15 @@ function userLoggedIn(userData) {
   currentUser = userData;
 }
 
+try {
+  JSON.parse(localStorage.user);
+  JSON.parse(localStorage.auth);
+} catch(e) {
+  console.warn('bad auth',e);
+  localStorage.user = "";
+  localStorage.auth = "";
+}
+
 var Routes = (
   <Router history={history}>
     <Route path='/' component={App} color={color()} colorChanger={(choice, cb) => {colorChanger(choice, cb)}}>
