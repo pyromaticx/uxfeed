@@ -5,11 +5,19 @@ import Footer from './footer.js';
 export default class App extends Component {
   constructor(props) {
     super(props);
+    try {
+      JSON.parse(localStorage.user);
+      JSON.parse(localStorage.auth);
+    } catch(e) {
+      console.warn('bad auth',e);
+      localStorage.user = '';
+      localStorage.auth = '';
+    }
     this.state = {
       color: props.route.color,
       userDetails: {}
     }
-  }  
+  }
   setColors(colorObj) {
     this.setState({
       color: colorObj
