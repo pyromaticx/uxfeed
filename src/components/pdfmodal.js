@@ -156,12 +156,10 @@ export default class PDFModal extends Component {
     });
     if(!this.state.recs) {
       this.setState({
-        recs: true,
         modalPage: page
       });
     } else {
       this.setState({
-        recs: false,
         modalPage: page
       });
     }
