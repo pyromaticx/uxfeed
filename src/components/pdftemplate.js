@@ -1,6 +1,6 @@
 import moment from 'moment';
 export default function PDFTemplate(annotations, userData) {
-
+  console.log("Template user data: ", userData);
   function contributers(annotations) {
     var contribs = [];
     annotations.forEach(function(anno) {
