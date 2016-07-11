@@ -167,7 +167,8 @@ export default class PDFModal extends Component {
   }
 
   enableRecs() {
-    if(!this.state.recs) {
+    console.log("enabling exe summary");
+    if(this.state.recs == false) {
       this.setState({
         recs: true,
       });
