@@ -72,8 +72,8 @@ export default class Annotation extends Component {
         case 'webcam': {
           return (
             <div>
-              <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} height='50%' />
-              <video className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} height='50%' />
+              <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} width='100%' />
+              <video className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} width='100%' />
               <button className='btn btn-default' style={{position: 'relative', left: '50%', transform: 'translateX(-50%)'}} type='button' onClick={(event) => {this.playBoth(event)}}>{this.state.playing ? 'Pause' : 'Play'}</button>
             </div>
           );
