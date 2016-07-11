@@ -10,8 +10,8 @@ export default class App extends Component {
       JSON.parse(localStorage.auth);
     } catch(e) {
       console.warn('bad auth',e);
-      localStorage.user = '';
-      localStorage.auth = '';
+      localStorage.user = {};
+      localStorage.auth = {};
     }
     this.state = {
       color: props.route.color,
