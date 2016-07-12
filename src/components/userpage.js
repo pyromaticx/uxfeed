@@ -108,13 +108,14 @@ export default class UserPage extends Component {
             }
             case 'collections/:collectionId': {
                 api.getCollectionAnnotations(this.props.params.collectionId).then((data) => {
-
+                  console.warn(data);
                   var sortedByPinId = JSON.parse(data.annotations).sort(function(a, b) {
                         return a.annotationId - b.annotationId;
                   }).reverse();
                   console.log(sortedByPinId)
                   this.setState({
-                      getResponse: sortedByPinId
+                      getResponse: sortedByPinId,
+                      collectionData: JSON.parse(data)
                   });
                 })
                 api.getUserCollections(this.state.user.userName).then((data) => {
@@ -399,9 +400,9 @@ export default class UserPage extends Component {
             };
 
             var collectionDetail = [{
-              title: 'Share',
+              title: 'Sharing',
               callback: () => {},
-              activeText: "nothing to see here, move along",
+              activeText: {<SocialOptions collection=/>},
               button: false,
               id: 'collectionsTools',
               activeColor: this.props.color.primary,
@@ -413,7 +414,11 @@ export default class UserPage extends Component {
                 <div style={leftBarWrapper}>
                     <DashboardProfileCard color={this.props.color}/>
                     <SearchBox color={this.props.route.color} callback={(annotations) => {this.annotationLoader(annotations)}} />
-                    {this.props.route.path == 'collections/:collectionId' ? <SideBar title="Collection Details" content={collectionDetail} color={this.props.color} /> : ''}
+                    {this.props.route.path == 'collections/:collectionId' ?
+                        <SideBar
+                            title="Collection Details"
+                            content={collectionDetail}
+                            color={this.props.color} /> : ''}
                     <SideBar
                         icon="fa-filter"
                         title='Tools'
