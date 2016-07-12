@@ -397,6 +397,8 @@ export default class UserPage extends Component {
               marginTop: '20px',
               boxShadow: '0 3px 15px 1px #777',
             };
+
+            var collectionDetail = {};
             //rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
         return (
             <div style={pageWrapper}>
@@ -409,6 +411,7 @@ export default class UserPage extends Component {
                         title='Tools'
                         content={leftBarContent}
                         color={this.props.color} />
+                    {this.props.route.path == 'collections/:collectionId' ? <SideBar title="Collection Details" content={collectionDetail} color={this.props.color} /> : ''}
 
                 </div>
                 <div style={annotationWrapper}>
