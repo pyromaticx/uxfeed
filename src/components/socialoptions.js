@@ -12,6 +12,8 @@ export default class SocialOptions extends Component {
     return (
       <div>
         <span style={{fontSize: '20px', color: '#00aced'}} className='fa fa-twitter'></span>
+        <span style={{fontSize: '20px', color: '#00aced'}} className='fa fa-facebook'></span>
+        <span style={{fontSize: '20px', color: '#00aced'}} className='fa fa-linkedin'></span>
       </div>
     );
   }
