@@ -413,12 +413,13 @@ export default class UserPage extends Component {
                 <div style={leftBarWrapper}>
                     <DashboardProfileCard color={this.props.color}/>
                     <SearchBox color={this.props.route.color} callback={(annotations) => {this.annotationLoader(annotations)}} />
+                    {this.props.route.path == 'collections/:collectionId' ? <SideBar title="Collection Details" content={collectionDetail} color={this.props.color} /> : ''}
                     <SideBar
                         icon="fa-filter"
                         title='Tools'
                         content={leftBarContent}
                         color={this.props.color} />
-                    {this.props.route.path == 'collections/:collectionId' ? <SideBar title="Collection Details" content={collectionDetail} color={this.props.color} /> : ''}
+
 
                 </div>
                 <div style={annotationWrapper}>

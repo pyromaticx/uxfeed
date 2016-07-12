@@ -9,3 +9,12 @@ app.get('/', function(req, res) {
 });
 console.log('running server at', port);
 app.listen(port);
+
+/*
+
+webpack -p
+git add .
+git commit -am 'yaaa'
+git push heroku master
+
+*/
