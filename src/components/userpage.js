@@ -9,7 +9,7 @@ import FilterBar from './filterbar.js';
 import PDFTemplate from './pdftemplate.js';
 import PDFModal from './pdfmodal.js';
 import SearchBox from './searchbox.js';
-
+import SocialOptions from './socialoptions.js';
 
 export default class UserPage extends Component {
     intervalID
@@ -32,7 +32,8 @@ export default class UserPage extends Component {
             userCollections: [],
             status: 'You have not annotated anything yet!',
             page: 0,
-            user: JSON.parse(localStorage.user)
+            user: JSON.parse(localStorage.user),
+            collectionData: {}
         };
     }
 
@@ -402,7 +403,7 @@ export default class UserPage extends Component {
             var collectionDetail = [{
               title: 'Sharing',
               callback: () => {},
-              activeText: {<SocialOptions collection=/>},
+              activeText: (<SocialOptions collection={this.state.collectionData}/>),
               button: false,
               id: 'collectionsTools',
               activeColor: this.props.color.primary,
