@@ -11,7 +11,7 @@ export default class SocialOptions extends Component {
 
   }
   postTwitter() {
-    window.open('https://twitter.com/intent/tweet', 'height=500,width=600');
+    window.open('https://twitter.com/intent/tweet', 'name', 'height=500,width=600');
   }
   postLinkedin() {
 
