@@ -109,14 +109,14 @@ export default class UserPage extends Component {
             }
             case 'collections/:collectionId': {
                 api.getCollectionAnnotations(this.props.params.collectionId).then((data) => {
-                  console.warn(data);
+
                   var sortedByPinId = JSON.parse(data.annotations).sort(function(a, b) {
                         return a.annotationId - b.annotationId;
                   }).reverse();
                   console.log(sortedByPinId)
                   this.setState({
                       getResponse: sortedByPinId,
-                      collectionData: JSON.parse(data)
+                      collectionData: data
                   });
                 })
                 api.getUserCollections(this.state.user.userName).then((data) => {
