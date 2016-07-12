@@ -181,7 +181,7 @@ var api = {
         "data": JSON.stringify({name: name, email: email, company: company})
     }
     return $.ajax(settings);
-  }
+  },
 }
 
 export default api;
