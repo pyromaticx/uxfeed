@@ -403,7 +403,7 @@ export default class UserPage extends Component {
             var collectionDetail = [{
               title: 'Sharing',
               callback: () => {},
-              activeText: (<SocialOptions collection={this.state.collectionData}/>),
+              activeText: (<div><p>Share this collection on:</p><SocialOptions collection={this.state.collectionData}/>),
               button: false,
               id: 'collectionsTools',
               activeColor: this.props.color.primary,
