@@ -12,7 +12,7 @@ export default class SocialOptions extends Component {
   }
   postTwitter() {
     var tweet = 'text=These are some annotations from UxPass.com&url=' + window.location + '&hashtags=uxpass'
-    window.open('https://twitter.com/intent/tweet?', 'name', 'height=300,width=600');
+    window.open('https://twitter.com/intent/tweet?' + encodeURIComponent(tweet), 'name', 'height=300,width=600');
   }
   postLinkedin() {
 
