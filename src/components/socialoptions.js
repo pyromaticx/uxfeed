@@ -21,7 +21,7 @@ export default class SocialOptions extends Component {
       method: 'feed',
       name: 'UxPass Collection',
       link: window.location.href,
-      picture: this.props.collection[0].annotationMedia,
+      picture: JSON.parse(this.props.collection.annotations)[0].annotationMedia,
       caption: 'Caption Placeholder',
       description: 'These are some annotations that I collected!'
       }, function(response){
