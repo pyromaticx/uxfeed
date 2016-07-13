@@ -94,8 +94,9 @@ export default class UserPage extends Component {
                           return a.annotationId - b.annotationId;
                     }).reverse();
                     var oldCopy = this.state.getResponse;
-                    
+
                       oldCopy.concat(sortedByPinId);
+                      console.log('OLD:', this.state.getResponse)
                       console.log('OLD and NEW', oldCopy)
                       this.setState({
                           getResponse: oldCopy
