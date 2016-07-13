@@ -93,6 +93,8 @@ export default class UserPage extends Component {
                     var sortedByPinId = data.sort(function(a, b) {
                           return a.annotationId - b.annotationId;
                     }).reverse();
+                    var fullResp = this.state.getResponse.push(sortedByPinId);
+
                     this.setState({
                         getResponse: sortedByPinId
                     });
@@ -335,7 +337,7 @@ export default class UserPage extends Component {
         page: newPage
       });
       setTimeout(this.getUpdated.bind(this),0);
-      $("html, body").animate({ scrollTop: "0px" });
+      //$("html, body").animate({ scrollTop: "0px" });
 
     }
     annotationLoader(annotations) {
