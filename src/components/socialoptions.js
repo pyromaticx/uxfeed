@@ -42,9 +42,13 @@ export default class SocialOptions extends Component {
     }
   }
   render() {
-
+    var socialWrapper = {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    };
     return (
-      <div>
+      <div style={socialWrapper}>
         <meta property="og:title" content="Collection Title" />
         <meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
         <span id='twitter' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-twitter'></span>
