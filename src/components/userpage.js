@@ -94,17 +94,13 @@ export default class UserPage extends Component {
                           return a.annotationId - b.annotationId;
                     }).reverse();
                     var oldCopy = this.state.getResponse;
-                    if(oldCopy.length < 1) {
-                      this.setState({
-                          getResponse: sortedByPinId
-                      });
-                    } else {
+                    
                       oldCopy.concat(sortedByPinId);
                       console.log('OLD and NEW', oldCopy)
                       this.setState({
                           getResponse: oldCopy
                       });
-                    }
+
                 });
 
                 api.getUserCollections(this.state.user.userName).then((data) => {
