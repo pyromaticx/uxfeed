@@ -83,8 +83,14 @@ export default class SocialOptions extends Component {
     };
     return (
       <div style={socialWrapper}>
-        <meta property="og:title" content="Collection Title" />
-        <meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
+      <html prefix="og: http://ogp.me/ns#">
+      <head>
+        <meta property="og:title" content="My Shared Article Title" />
+        <meta property="og:description" content="Description of shared article" />
+        <meta property="og:url" content="http://example.com/my_article.html" />
+        <meta property="og:image" content="http://example.com/foo.jpg" />
+      </head>
+      </html>
         <span id='twitter' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-twitter'></span>
         <span id='facebook' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-facebook'></span>
         <span id='linkedin' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-linkedin'></span>
