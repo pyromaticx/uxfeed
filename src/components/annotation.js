@@ -80,7 +80,7 @@ export default class Annotation extends Component {
         }
         case 'audio': {
           return (
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column'}}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column', margin: '20px'}}>
               <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/>
               <audio controls src={this.props.annotation.annotationMediaAudio} />
             </div>
