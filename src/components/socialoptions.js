@@ -8,10 +8,14 @@ export default class SocialOptions extends Component {
     }
   }
   postFacebook() {
-
+    FB.ui({
+        method: 'share',
+        href: 'https://developers.facebook.com/docs/'
+      }, function(response){
+        console.log(response)
+      });
   }
   postTwitter() {
-    alert(window.location.href);
     var tweet = 'text=These are some annotations from UxPass.com&url=' + encodeURIComponent(window.location.href) + '&hashtags=uxpass'
     window.open('https://twitter.com/intent/tweet?' + tweet, 'name', 'height=300,width=600');
   }
