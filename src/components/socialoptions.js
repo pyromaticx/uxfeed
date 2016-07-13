@@ -33,7 +33,9 @@ export default class SocialOptions extends Component {
     window.open('https://twitter.com/intent/tweet?' + tweet, 'name', 'height=300,width=600');
   }
   postLinkedin() {
-    var payload = {
+    var linkedinURL = "https://www.linkedin.com/shareArticle?mini=true&url=http://developer.linkedin.com&title=LinkedIn%20Developer%20Network&summary=My%20favorite%20developer%20program&source=LinkedIn";
+    window.open(linkedinURL, "name", 'height=520, width=570');
+  /*  var payload = {
        "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
        "visibility": {
          "code": "anyone"
@@ -46,7 +48,7 @@ export default class SocialOptions extends Component {
        .method("POST")
        .body(JSON.stringify(payload))
        .result((res) => {console.log(res)})
-       .error((err) => {console.warn(err)});
+       .error((err) => {console.warn(err)});*/
   }
   postPinterest() {
     var image = '' + JSON.parse(this.props.collection.annotations)[0].annotationMedia;
