@@ -26,13 +26,11 @@ export default class SearchBox extends Component {
   }
   render() {
     var searchBox = {
-      marginTop: '20px',
-      marginBottom: '20px',
       position: 'fixed',
       top: '0',
-      left: '30%',
+      left: '20%',
       zIndex: '2001',
-      width: '200px'
+      width: '300px'
     }
     return (
       <form onSubmit={(event) => {this.goSearch(event)}} style={searchBox} className="input-group">
@@ -42,7 +40,7 @@ export default class SearchBox extends Component {
           onChange={(event) => {this.handleInputChange(event)}}
           value={this.state.searchTerm}/>
           <span className="input-group-btn">
-            <button style={{backgroundColor: this.props.color.secondary, color: '#fff'}} className="btn btn-default" type="submit">Search</button>
+            <button style={{backgroundColor: this.props.color.primary, color: '#333'}} className="btn btn-default" type="submit">Search</button>
           </span>
       </form>
     );
