@@ -93,8 +93,8 @@ export default class UserPage extends Component {
                     var sortedByPinId = data.sort(function(a, b) {
                           return a.annotationId - b.annotationId;
                     }).reverse();
-                    var fullResp = this.state.getResponse.push(sortedByPinId);
-
+                    var fullResp = this.state.getResponse;
+                    fullResp.push(sortedByPinId);
                     this.setState({
                         getResponse: fullResp
                     });
