@@ -8,14 +8,6 @@ export default class SocialOptions extends Component {
     }
   }
   postFacebook() {
-    /*
-    method: 'feed',
-        name: 'Facebook Dialogs',
-        link: 'https://developers.facebook.com/docs/dialogs/',
-        picture: 'http://fbrell.com/f8.jpg',
-        caption: 'Reference Documentation',
-        description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
-    */
     console.log(this.props.collection)
     FB.ui({
         method: 'feed',
@@ -35,20 +27,7 @@ export default class SocialOptions extends Component {
   postLinkedin() {
     var linkedinURL = "https://www.linkedin.com/shareArticle?mini=true&url=" + encodeURIComponent(window.location.href) + "&title=UxPass Collection&summary=This is just a placeholder&source=LinkedIn";
     window.open(linkedinURL, "name", 'height=520, width=570');
-  /*  var payload = {
-       "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
-       "visibility": {
-         "code": "anyone"
-       }
-     };
-     function onLinkedInLoad() {
-       IN.Event.on(IN, "auth", shareContent);
-     }
-     IN.API.Raw("/people/~/shares?format=json")
-       .method("POST")
-       .body(JSON.stringify(payload))
-       .result((res) => {console.log(res)})
-       .error((err) => {console.warn(err)});*/
+
   }
   postPinterest() {
     var image = '' + JSON.parse(this.props.collection.annotations)[0].annotationMedia;
@@ -79,22 +58,16 @@ export default class SocialOptions extends Component {
     var socialWrapper = {
       display: 'flex',
       justifyContent: 'space-between',
-      alignItems: 'center'
+      alignItems: 'center',
+      flexDirection: this.props.verticle ? 'column' : 'row',
+      width: this.props.verticle ? '50px' : '100%'
     };
     return (
       <div style={socialWrapper}>
-      <html prefix="og: http://ogp.me/ns#">
-      <head>
-        <meta property="og:title" content="My Shared Article Title" />
-        <meta property="og:description" content="Description of shared article" />
-        <meta property="og:url" content="http://example.com/my_article.html" />
-        <meta property="og:image" content="http://example.com/foo.jpg" />
-      </head>
-      </html>
         <span id='twitter' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-twitter'></span>
         <span id='facebook' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-facebook'></span>
         <span id='linkedin' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-linkedin'></span>
-        <span id='pinterest' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-pinterest'></span>
+        <span id='pinterest' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#bd081c'}} className='fa fa-pinterest'></span>
       </div>
     );
   }
