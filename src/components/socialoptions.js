@@ -10,7 +10,7 @@ export default class SocialOptions extends Component {
   postFacebook() {
     FB.ui({
         method: 'share',
-        href: 'https://developers.facebook.com/docs/'
+        href: window.location.href
       }, function(response){
         console.log(response)
       });
