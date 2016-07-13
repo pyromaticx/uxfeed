@@ -95,11 +95,11 @@ export default class UserPage extends Component {
                     }).reverse();
                     var oldCopy = this.state.getResponse;
 
-                      oldCopy.concat(sortedByPinId);
+                      var allAnno = oldCopy.concat(sortedByPinId);
                       console.log('OLD:', this.state.getResponse)
                       console.log('OLD and NEW', oldCopy)
                       this.setState({
-                          getResponse: oldCopy
+                          getResponse: allAnno
                       });
 
                 });
