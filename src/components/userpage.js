@@ -96,7 +96,7 @@ export default class UserPage extends Component {
                     var fullResp = this.state.getResponse.push(sortedByPinId);
 
                     this.setState({
-                        getResponse: sortedByPinId
+                        getResponse: fullResp
                     });
                 });
 
