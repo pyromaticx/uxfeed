@@ -16,7 +16,7 @@ export default class SocialOptions extends Component {
         caption: 'Reference Documentation',
         description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
     */
-
+    console.log(this.props.collection)
     FB.ui({
       method: 'feed',
       name: 'UxPass Collection',
