@@ -39,7 +39,9 @@ export default class SocialOptions extends Component {
          "code": "anyone"
        }
      };
-
+     function onLinkedInLoad() {
+       IN.Event.on(IN, "auth", shareContent);
+     }
      IN.API.Raw("/people/~/shares?format=json")
        .method("POST")
        .body(JSON.stringify(payload))
