@@ -31,7 +31,10 @@ export default class Home extends Component {
   submitEmail(event) {
     event.preventDefault();
     event.stopPropagation();
-
+    if(this.state.inputBox.length < 1 || this.state.nameBox.length < 1 || this.state.companyBox.length < 1) {
+      alert('Please enter a value for all fields');
+      return;
+    }
     var formDataArr = $(event.target).serializeArray();
     var formData = {};
     formDataArr.map(function(elem) {
@@ -122,7 +125,6 @@ export default class Home extends Component {
           <input name='email' type='email' style={{width: '300px', marginTop: '20px', marginBottom: '20px'}} placeholder='Enter your email address' value={this.state.inputBox} className='text' onChange={(event) => {this.updatedInput(event)}} />
           <input name='name' type='text' style={{width: '300px', marginBottom: '20px'}} placeholder='Enter your name' value={this.state.nameBox} className='text' onChange={(event) => {this.updatedNameInput(event)}} />
           <input name='company' type='text' style={{width: '300px', marginBottom: '20px'}} placeholder='Enter your company' value={this.state.companyBox} className='text' onChange={(event) => {this.updateCompany(event)}} />
-          <div class="g-recaptcha" data-sitekey="6LfLpCMTAAAAAMBfqgxFnvKLCf2OntVNQ0bAzzy2"></div>
           <button type='submit'>Let's Go!</button>
         </form>
         {this.state.modal}
