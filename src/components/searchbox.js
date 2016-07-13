@@ -31,7 +31,7 @@ export default class SearchBox extends Component {
       position: 'fixed',
       top: '0',
       left: '30%',
-      zIndex: '10000'
+      zIndex: '2001'
     }
     return (
       <form onSubmit={(event) => {this.goSearch(event)}} style={searchBox} className="input-group">
