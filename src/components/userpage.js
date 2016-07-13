@@ -442,8 +442,8 @@ export default class UserPage extends Component {
                 <div style={annotationWrapper}>
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}
-
-                    {this.state.page < 1 ? <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : <span><button onClick={() => {this.turnPage(this.state.page - 1)}} type='button'>Less</button><button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button></span>}
+                    {this.props.route.path == "username/:username" ?  <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : ''}
+                    
 
                 </div>
                 <div style={rightBar}>
