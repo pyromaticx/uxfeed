@@ -36,8 +36,9 @@ export default class SocialOptions extends Component {
 
   }
   postPinterest() {
+    var image = '' + JSON.parse(this.props.collection.annotations)[0].annotationMedia;
     PDK.pin({
-      image_url: JSON.parse(this.props.collection.annotations)[0].annotationMedia,
+      image_url: image,
       note: 'This is a placeholder',
       link: window.location.href
     });
