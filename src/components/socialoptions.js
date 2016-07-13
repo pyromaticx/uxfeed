@@ -16,12 +16,13 @@ export default class SocialOptions extends Component {
         caption: 'Reference Documentation',
         description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
     */
+
     FB.ui({
       method: 'feed',
       name: 'UxPass Collection',
       link: window.location.href,
-      picture: 'http://fbrell.com/f8.jpg',
-      caption: 'Annotate the web!',
+      picture: this.props.collection[0].annotationMedia,
+      caption: 'Caption Placeholder',
       description: 'These are some annotations that I collected!'
       }, function(response){
         console.log(response)
