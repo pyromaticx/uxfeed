@@ -73,14 +73,14 @@ export default class Annotation extends Component {
           return (
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}}>
               <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} width='100%' />
-              <video className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} width='30%' />
+              <video style={{margin: '20px'}} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} width='30%' />
               <button className='btn btn-success' type='button' onClick={(event) => {this.playBoth(event)}}>{this.state.playing ? 'Pause' : 'Play'}</button>
             </div>
           );
         }
         case 'audio': {
           return (
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column', margin: '20px'}}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'column'}}>
               <img src={this.props.annotation.annotationMedia} width='100%' height='auto'/>
               <audio controls src={this.props.annotation.annotationMediaAudio} />
             </div>
