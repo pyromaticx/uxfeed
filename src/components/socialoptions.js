@@ -10,7 +10,7 @@ export default class SocialOptions extends Component {
   postFacebook() {
     FB.ui({
       method: 'share_open_graph',
-      action_type: 'og.likes',
+      action_type: 'og.image',
       action_properties: JSON.stringify({
         object: window.location.href
       })
