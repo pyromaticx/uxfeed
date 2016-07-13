@@ -27,7 +27,7 @@ export default class ModalGeneric extends Component {
     modalContent = {
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-between',
+      justifyContent: 'space-around',
       alignItems: 'center',
       fontSize: '20px',
       padding: '30px',
@@ -49,8 +49,8 @@ export default class ModalGeneric extends Component {
           <span className='fa fa-close' style={closer} onClick={() => {this.props.close()}}></span>
           <div style={modalContent}>
             <h3>{this.props.title}</h3>
-            <br />
-            {this.props.content}
+
+            <p>{this.props.content}</p>
           </div>
         </div>
       </div>
