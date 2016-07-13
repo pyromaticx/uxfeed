@@ -8,12 +8,21 @@ export default class SocialOptions extends Component {
     }
   }
   postFacebook() {
+    /*
+    method: 'feed',
+        name: 'Facebook Dialogs',
+        link: 'https://developers.facebook.com/docs/dialogs/',
+        picture: 'http://fbrell.com/f8.jpg',
+        caption: 'Reference Documentation',
+        description: 'Dialogs provide a simple, consistent interface for applications to interface with users.'
+    */
     FB.ui({
-      method: 'share_open_graph',
-      action_type: 'og.image',
-      action_properties: JSON.stringify({
-        object: window.location.href
-      })
+      method: 'feed',
+      name: 'UxPass Collection',
+      link: window.location.href,
+      picture: 'http://fbrell.com/f8.jpg',
+      caption: 'Annotate the web!',
+      description: 'These are some annotations that I collected!'
       }, function(response){
         console.log(response)
       });
