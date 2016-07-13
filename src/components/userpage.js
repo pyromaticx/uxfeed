@@ -99,7 +99,7 @@ export default class UserPage extends Component {
                 });
 
                 api.getUserCollections(this.state.user.userName).then((data) => {
-                  console.warn(data);
+
                   this.setState({
                     userCollections: data
                   });
@@ -113,14 +113,12 @@ export default class UserPage extends Component {
                   var sortedByPinId = JSON.parse(data.annotations).sort(function(a, b) {
                         return a.annotationId - b.annotationId;
                   }).reverse();
-                  console.log(sortedByPinId)
                   this.setState({
                       getResponse: sortedByPinId,
                       collectionData: data
                   });
                 })
                 api.getUserCollections(this.state.user.userName).then((data) => {
-                  console.warn(data);
                   this.setState({
                     userCollections: data
                   });

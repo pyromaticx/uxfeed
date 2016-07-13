@@ -9,16 +9,32 @@ export default class SocialOptions extends Component {
   }
   postFacebook() {
     console.log(this.props.collection)
-    FB.ui({
-        method: 'feed',
-        name: 'UxPass Collection',
-        link: window.location.href,
-        picture: JSON.parse(this.props.collection.annotations)[0].annotationMedia,
-        caption: 'Caption Placeholder',
-        description: 'These are some annotations that I collected!'
-      }, function(response){
-        console.log(response)
-      });
+
+    var displayAnno = JSON.parse(this.props.collection.annotations)[0];
+    console.log(displayAnno);
+    if(displayAnno.annotationMediaType == 'webm' || displayAnno.annotationMediaType == 'webcam') {
+      FB.ui({
+          method: 'feed',
+          name: 'UxPass Collection',
+          link: window.location.href,
+          video: displayAnno.annotationMedia,
+          caption: 'Caption Placeholder',
+          description: 'These are some annotations that I collected!'
+        }, function(response){
+          console.log(response)
+        });
+    } else {
+        FB.ui({
+            method: 'feed',
+            name: 'UxPass Collection',
+            link: window.location.href,
+            picture: displayAnno.annotationMedia,
+            caption: 'Caption Placeholder',
+            description: 'These are some annotations that I collected!'
+          }, function(response){
+            console.log(response)
+          });
+        }
   }
   postTwitter() {
     var tweet = 'text=These are some annotations from UxPass.com&url=' + encodeURIComponent(window.location.href) + '&hashtags=uxpass'
