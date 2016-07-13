@@ -10,39 +10,57 @@
   <body>
     <div id="app"></div>
   </body>
-  <script>window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
+  <script>
+      window.pAsyncInit = function() {
+          PDK.init({
+              appId: "<your app-id>", // Change this
+              cookie: true
+          });
+      };
 
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
+      (function(d, s, id){
+          var js, pjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//assets.pinterest.com/sdk/sdk.js";
+          pjs.parentNode.insertBefore(js, pjs);
+      }(document, 'script', 'pinterest-jssdk'));
+  </script>
+  <script>
+    window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
 
-  return t;
-}(document, "script", "twitter-wjs"));</script>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '318715021804649',
-      xfbml      : true,
-      version    : 'v2.6'
-    });
-  };
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
+      return t;
+    }(document, "script", "twitter-wjs"));
+  </script>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '318715021804649',
+        xfbml      : true,
+        version    : 'v2.6'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"</script>
   <scr ipt src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>

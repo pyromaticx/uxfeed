@@ -18,12 +18,12 @@ export default class SocialOptions extends Component {
     */
     console.log(this.props.collection)
     FB.ui({
-      method: 'feed',
-      name: 'UxPass Collection',
-      link: window.location.href,
-      picture: JSON.parse(this.props.collection.annotations)[0].annotationMedia,
-      caption: 'Caption Placeholder',
-      description: 'These are some annotations that I collected!'
+        method: 'feed',
+        name: 'UxPass Collection',
+        link: window.location.href,
+        picture: JSON.parse(this.props.collection.annotations)[0].annotationMedia,
+        caption: 'Caption Placeholder',
+        description: 'These are some annotations that I collected!'
       }, function(response){
         console.log(response)
       });
@@ -34,6 +34,13 @@ export default class SocialOptions extends Component {
   }
   postLinkedin() {
 
+  }
+  postPinterest() {
+    PDK.pin({
+      image_url: JSON.parse(this.props.collection.annotations)[0].annotationMedia,
+      note: 'This is a placeholder',
+      link: window.location.href
+    });
   }
   handleClick(event) {
     switch(event.target.id) {
@@ -48,6 +55,9 @@ export default class SocialOptions extends Component {
       case 'linkedin': {
         this.postLinkedin();
         break;
+      }
+      case 'pinterest': {
+        this.postPinterest();
       }
     }
   }
@@ -64,6 +74,7 @@ export default class SocialOptions extends Component {
         <span id='twitter' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-twitter'></span>
         <span id='facebook' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-facebook'></span>
         <span id='linkedin' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-linkedin'></span>
+        <span id='pinterest' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-pinterest'></span>
       </div>
     );
   }
