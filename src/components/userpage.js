@@ -99,7 +99,7 @@ export default class UserPage extends Component {
                           getResponse: sortedByPinId
                       });
                     } else {
-                      oldCopy.push(sortedByPinId);
+                      oldCopy.concat(sortedByPinId);
                       console.log('OLD and NEW', oldCopy)
                       this.setState({
                           getResponse: oldCopy
