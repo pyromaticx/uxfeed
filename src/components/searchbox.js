@@ -27,7 +27,10 @@ export default class SearchBox extends Component {
   render() {
     var searchBox = {
       marginTop: '20px',
-      marginBottom: '20px'
+      marginBottom: '20px',
+      position: 'fixed',
+      top: '0',
+      left: '30%'
     }
     return (
       <form onSubmit={(event) => {this.goSearch(event)}} style={searchBox} className="input-group">
