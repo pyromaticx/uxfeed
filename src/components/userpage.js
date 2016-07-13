@@ -307,6 +307,13 @@ export default class UserPage extends Component {
         )
       }
       var displayCols = files.map((col, idx) => {
+        return (
+            <div onClick={() => {this.gotoCollection(col.collectionId)}} key={idx+col+'col'} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+              <p>{col.fileName}</p>
+            </div>
+          );
+
+        /*
         if(idx >= pageStart && idx < pageEnd) {
         return (
             <div onClick={() => {this.gotoCollection(col.collectionId)}} key={idx+col+'col'} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
@@ -315,7 +322,7 @@ export default class UserPage extends Component {
           );
         } else {
           return;
-        }
+        }*/
       })
       return displayCols.reverse();
     }
