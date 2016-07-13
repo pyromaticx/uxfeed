@@ -33,7 +33,18 @@ export default class SocialOptions extends Component {
     window.open('https://twitter.com/intent/tweet?' + tweet, 'name', 'height=300,width=600');
   }
   postLinkedin() {
+    var payload = {
+       "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
+       "visibility": {
+         "code": "anyone"
+       }
+     };
 
+     IN.API.Raw("/people/~/shares?format=json")
+       .method("POST")
+       .body(JSON.stringify(payload))
+       .result((res) => {console.log(res)})
+       .error((err) => {console.warn(err)});
   }
   postPinterest() {
     var image = '' + JSON.parse(this.props.collection.annotations)[0].annotationMedia;
