@@ -100,6 +100,7 @@ export default class UserPage extends Component {
                       });
                     } else {
                       oldCopy.push(sortedByPinId);
+                      console.log('OLD and NEW', oldCopy)
                       this.setState({
                           getResponse: oldCopy
                       });
