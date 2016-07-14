@@ -91,9 +91,7 @@ export default class Login extends Component {
     }
     api.login(this.state.username, this.state.password).done((userData) => {
       //this.props.updateUser(userData);
-      if(userData.error) {
-        console.warn(userData.error);
-      }
+      console.warn(userData);
       var data = JSON.parse(userData);
       if(localStorage.auth) {
         localStorage.auth = '';
