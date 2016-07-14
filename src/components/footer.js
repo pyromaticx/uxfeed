@@ -29,8 +29,6 @@ export default class Footer extends Component {
                       <h4>Get the Chrome extension</h4>
                     </a>
                   </span>)} color={this.props.color}/>
-                <FooterItem content={(<FooterSocial color={this.props.color} />)} color={this.props.color}/>
-                <FooterItem title='UI Colors' content={(<ColorPicker colorChanger={this.props.colorChanger}/>)} color={this.props.color}/>
             </div>
         );
     }
