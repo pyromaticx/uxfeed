@@ -91,8 +91,12 @@ export default class Login extends Component {
     }
     api.login(this.state.username, this.state.password).done((userData) => {
       //this.props.updateUser(userData);
-      console.warn(userData);
+
       var data = JSON.parse(userData);
+      if(data.error) {
+        alert(data.error);
+        window.location = "http://uxpass.com";
+      }
       if(localStorage.auth) {
         localStorage.auth = '';
       }
