@@ -35,8 +35,22 @@ var api = {
       return resp.json()
     });
   },
-  annotations: function() {
-    return fetch(this.baseUrl + 'annotations/all', myInit).then(function(resp) {
+  annotations: function(page) {
+    if(!page) {
+      var page = 0;
+    }
+    var config = {
+                "async": true,
+    						"crossDomain": true,
+                "mode": "cors",
+    						"method": "GET",
+    						"process-data": false,
+                "headers": {
+                  "authorization": localStorage.getItem('auth'),
+                  "page": page
+                }
+              };
+    return fetch(this.baseUrl + 'annotations/all', config).then(function(resp) {
       return resp.json();
     });
   },

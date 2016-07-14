@@ -70,7 +70,7 @@ export default class UserPage extends Component {
 
         switch (this.props.route.path) {
             case 'annotations': {
-                api.annotations().then((data) => {
+                api.annotations(this.state.page).then((data) => {
                     var sortedByPinId = data.sort(function(a, b) {
                         return a.annotationId - b.annotationId;
                     }).reverse();
@@ -444,7 +444,7 @@ export default class UserPage extends Component {
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}
                     {this.props.route.path == "username/:username" ?  <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : ''}
-
+                    {this.props.route.path == "annotations" ? <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : ''}
 
                 </div>
                 <div style={rightBar}>
