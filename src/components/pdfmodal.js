@@ -90,7 +90,10 @@ export default class PDFModal extends Component {
           {this.state.loading === true ? "Preparing your PDF Report..." : <button className='btn btn-primary' type='button' onClick={() => {
             this.setState({
               loading: true
-            })
+            });
+            if(this.state.companyName.length < 1 || this.state.collectionTitle.length < 1) {
+              return alert("Please enter a title and company name");
+            }
             this.props.callback({
               companyName: this.state.companyName,
               collectionTitle: this.state.collectionTitle,
