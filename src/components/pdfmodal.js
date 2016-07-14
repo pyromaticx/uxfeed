@@ -92,7 +92,8 @@ export default class PDFModal extends Component {
               loading: true
             });
             if(this.state.companyName.length < 1 || this.state.collectionTitle.length < 1) {
-              return alert("Please enter a title and company name");
+              alert("Please enter a title and company name");
+              return;
             }
             this.props.callback({
               companyName: this.state.companyName,
