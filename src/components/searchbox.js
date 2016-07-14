@@ -18,15 +18,16 @@ export default class SearchBox extends Component {
   handleInputChange(event) {
     this.setState({
       searchTerm: event.target.value
-    },
-    api.searchAnnotations(event.target.value).done((resp) => {
+    });
+    /*api.searchAnnotations(event.target.value).done((resp) => {
       console.log(resp);
       this.props.callback(resp);
-    }))
+    }))*/
   }
   render() {
     var searchBox = {
-      width: '100%'
+      width: '100%',
+      marginBottom: '20px'
     }
     return (
       <form onSubmit={(event) => {this.goSearch(event)}} style={searchBox} className="input-group">

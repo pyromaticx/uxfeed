@@ -372,7 +372,8 @@ export default class UserPage extends Component {
                 display: 'flex',
                 justifyContent: this.state.getResponse.length > 0 ? 'flex-start' : 'center',
                 alignItems: 'center',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                height: '100%'
             },
             leftBarContent = [{
               title: 'Create a collection',
