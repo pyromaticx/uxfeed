@@ -440,7 +440,7 @@ export default class UserPage extends Component {
 
                 </div>
                 <div style={annotationWrapper}>
-                  {this.props.route.path == 'username/:username' ? <SearchBox color={this.props.route.color} callback={(annotations) => {this.annotationLoader(annotations)}} /> : ''}
+                  {this.props.route.path == 'username/:username' || this.props.route.path == 'annotations' ? <SearchBox color={this.props.route.color} callback={(annotations) => {this.annotationLoader(annotations)}} /> : ''}
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}
                     {this.props.route.path == "username/:username" ?  <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : ''}
