@@ -391,7 +391,7 @@ export default class UserPage extends Component {
               activeColor: this.props.color.primary
 
             },{
-              title: 'Collections',
+              title: 'My Collections',
               callback: () => {},
               activeText: this.listCollections(1),
               button: false,
@@ -443,7 +443,7 @@ export default class UserPage extends Component {
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}
                     {this.props.route.path == "username/:username" ?  <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : ''}
-                    
+
 
                 </div>
                 <div style={rightBar}>
