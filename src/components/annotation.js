@@ -73,7 +73,7 @@ export default class Annotation extends Component {
           return (
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}}>
               <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} width='100%' />
-              <video style={{position: 'relative', left: '-50%', top: '-100px'}} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} width='30%' />
+              <video style={{position: 'relative', left: '-50%', top: '-100px', transform: 'translateX(50%)'}} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} width='30%' />
               <button className='btn btn-success' type='button' onClick={(event) => {this.playBoth(event)}}>{this.state.playing ? 'Pause' : 'Play'}</button>
             </div>
           );
