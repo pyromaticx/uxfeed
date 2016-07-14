@@ -88,13 +88,14 @@ export default class PDFModal extends Component {
             <input name='recs' type='checkbox' onChange={(event) => {this.enableRecs(event)}}/>
           </span>
           {this.state.loading === true ? "Preparing your PDF Report..." : <button className='btn btn-primary' type='button' onClick={() => {
-            this.setState({
-              loading: true
-            });
             if(this.state.companyName.length < 1 || this.state.collectionTitle.length < 1) {
               alert("Please enter a title and company name");
               return;
             }
+            this.setState({
+              loading: true
+            });
+
             this.props.callback({
               companyName: this.state.companyName,
               collectionTitle: this.state.collectionTitle,
