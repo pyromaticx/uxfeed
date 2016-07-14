@@ -95,7 +95,7 @@ export default class Login extends Component {
       var data = JSON.parse(userData);
       if(data.error) {
         alert(data.error);
-        window.location = "http://uxpass.com";
+        return window.location = "http://uxpass.com";
       }
       if(localStorage.auth) {
         localStorage.auth = '';
