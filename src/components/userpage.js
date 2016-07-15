@@ -64,10 +64,6 @@ export default class UserPage extends Component {
 
     }
     getUpdated() {
-        if(localStorage.getItem('auth') == '') {
-          return window.location = 'http://uxpass.com/#/login';
-        }
-
         switch (this.props.route.path) {
             case 'annotations': {
                 api.annotations(this.state.page).then((data) => {
@@ -425,7 +421,7 @@ export default class UserPage extends Component {
             <div style={pageWrapper}>
                 {this.state.modalActive ? this.state.modal : ''}
                 <div style={leftBarWrapper}>
-                    <DashboardProfileCard color={this.props.color}/>
+                    {this.props.route.path == 'collections/:collectionId' ? '' : <DashboardProfileCard color={this.props.color}/>}
 
                     <SideBar
                         icon="fa-filter"
