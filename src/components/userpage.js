@@ -365,7 +365,7 @@ export default class UserPage extends Component {
 
             },
             leftBarWrapper = {
-                width: '40%',
+                width: '30%',
                 marginRight: '25px',
                 minWidth: '300px'
             },
