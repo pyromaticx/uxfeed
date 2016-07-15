@@ -32,7 +32,12 @@ export default class UserPage extends Component {
             userCollections: [],
             status: 'You have not annotated anything yet!',
             page: 0,
-            user: JSON.parse(localStorage.user) || {},
+            user: function() {
+              try {
+                return JSON.parse(localStorage.user);
+              } catch(e) {
+                return {};
+              },
             collectionData: {}
         };
     }
