@@ -90,7 +90,7 @@ export default class Annotation extends Component {
                position: 'relative',
                left: this.state.userVideoExpanded ? '0' : '-50%',
                top: this.state.userVideoExpanded ? '0' : '-100px',
-               transform: 'translateX(50%)',
+               transform: this.state.userVideoExpanded ? '' : 'translateX(50%)',
                height: this.state.userVideoExpanded ? '500px' : '100px',
 
              }} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} />
