@@ -365,9 +365,9 @@ export default class UserPage extends Component {
 
             },
             leftBarWrapper = {
-                width: '25%',
+                width: '30%',
                 marginRight: '25px',
-                minWidth: '200px'
+                minWidth: '300px'
             },
             annotationWrapper = {
                 minWidth: '300px',
@@ -405,7 +405,8 @@ export default class UserPage extends Component {
 
             }],
             rightBar = {
-              width: '30%'
+              width: '30%',
+              minWidth: '300px'
             },
             pageButtons = {
 
