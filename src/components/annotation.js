@@ -13,7 +13,8 @@ export default class Annotation extends Component {
             selected: false,
             playing: false,
             hover: false,
-            deleted: false
+            deleted: false,
+            userVideoExpanded: false
         }
     }
     componentWillReceiveProps(newProps) {
@@ -57,6 +58,17 @@ export default class Annotation extends Component {
         });
       }
     }
+    expandUserVideo() {
+      if(this.state.userVideoExpanded) {
+        this.setState({
+          userVideoExpanded: false
+        });
+      } else {
+        this.setState({
+          userVideoExpanded: true
+        })
+      }
+    }
     annotationTypeSwitch() {
       switch (this.props.annotation.annotationMediaType) {
         case 'jpeg': {
@@ -73,7 +85,7 @@ export default class Annotation extends Component {
           return (
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}}>
               <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} width='100%' />
-              <video style={{position: 'relative', left: '-50%', top: '-200px', transform: 'translateX(50%)'}} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} height='200px' />
+              <video onClick={() => {this.expandUserVideo()}} style={userVideoStyle} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} />
               <button className='btn btn-success' type='button' onClick={(event) => {this.playBoth(event)}}>{this.state.playing ? 'Pause' : 'Play'}</button>
             </div>
           );
@@ -289,6 +301,14 @@ export default class Annotation extends Component {
               textAlign: 'center',
               fontSize: '30px',
               color: 'red'
+            },
+            userVideoStyle = {
+              position: 'relative',
+              left: this.state.userVideoExpanded ? '0' : '-50%',
+              top: this.state.userVideoExpanded ? '0' : '-100px',
+              transform: 'translateX(50%)',
+              height: this.state.userVideoExpanded ? '500px' : '100px',
+
             };
 
       /*  var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
