@@ -367,7 +367,7 @@ export default class UserPage extends Component {
             leftBarWrapper = {
                 width: '25%',
                 marginRight: '25px',
-                minWidth: '300px'
+                minWidth: '200px'
             },
             annotationWrapper = {
                 minWidth: '300px',
