@@ -194,7 +194,7 @@ export default class Annotation extends Component {
             },
             thumbnailStyle = {
                 display: this.state.expanded ? '' : 'none',
-                height: "100%",
+                height: this.state.userVideoExpanded "100%" : 'calc(100% - 100px)',
                 width: '100%',
                 minHeight: '200px'
             },
