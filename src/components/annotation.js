@@ -303,7 +303,7 @@ export default class Annotation extends Component {
             annoTools = {
               display: this.state.hover ? 'flex' : 'none',
               position: 'absolute',
-              left: '80%',
+              left: '70%',
               width: '30px',
               marginTop: '20px',
               textAlign: 'center',
