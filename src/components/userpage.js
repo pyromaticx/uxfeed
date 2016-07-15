@@ -32,7 +32,7 @@ export default class UserPage extends Component {
             userCollections: [],
             status: 'You have not annotated anything yet!',
             page: 0,
-            user: JSON.parse(localStorage.user),
+            user: JSON.parse(localStorage.user) || {},
             collectionData: {}
         };
     }
@@ -120,12 +120,14 @@ export default class UserPage extends Component {
                       collectionData: data
                   });
                 })
-                api.getUserCollections(this.state.user.userName).then((data) => {
-                  this.setState({
-                    userCollections: data
-                  });
+                if(this.state.user.userName) {
+                  api.getUserCollections(this.state.user.userName).then((data) => {
+                    this.setState({
+                      userCollections: data
+                    });
 
-                })
+                  })
+                }
                 break;
             }
         }
@@ -423,11 +425,11 @@ export default class UserPage extends Component {
                 <div style={leftBarWrapper}>
                     {this.props.route.path == 'collections/:collectionId' ? '' : <DashboardProfileCard color={this.props.color}/>}
 
-                    <SideBar
+                    {this.state.user.userName ? <SideBar
                         icon="fa-filter"
                         title='Tools'
                         content={leftBarContent}
-                        color={this.props.color} />
+                        color={this.props.color} /> : '' }
 
 
                 </div>
