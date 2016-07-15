@@ -309,7 +309,7 @@ export default class Annotation extends Component {
               textAlign: 'center',
               fontSize: '30px',
               color: 'red'
-            },
+            };
 
 
       /*  var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
