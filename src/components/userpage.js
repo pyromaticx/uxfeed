@@ -16,7 +16,7 @@ export default class UserPage extends Component {
     resizeListener
     constructor(props) {
         super(props);
-        if(localStorage.getItem('auth') == '') {
+        if(localStorage.getItem('auth') == '' && this.props.route.path != 'collections/:collectionId') {
           return window.location = 'http://uxpass.com/#/login';
         }
         this.state = {
@@ -426,11 +426,7 @@ export default class UserPage extends Component {
                 {this.state.modalActive ? this.state.modal : ''}
                 <div style={leftBarWrapper}>
                     <DashboardProfileCard color={this.props.color}/>
-                    {this.props.route.path == 'collections/:collectionId' ?
-                        <SideBar
-                            title="Collection Details"
-                            content={collectionDetail}
-                            color={this.props.color} /> : ''}
+
                     <SideBar
                         icon="fa-filter"
                         title='Tools'
