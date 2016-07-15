@@ -82,6 +82,14 @@ export default class Annotation extends Component {
           );
         }
         case 'webcam': {
+          var userVideoStyle = {
+            position: 'relative',
+            left: this.state.userVideoExpanded ? '0' : '-50%',
+            top: this.state.userVideoExpanded ? '0' : '-100px',
+            transform: 'translateX(50%)',
+            height: this.state.userVideoExpanded ? '500px' : '100px',
+
+          };
           return (
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}}>
               <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} width='100%' />
@@ -302,14 +310,7 @@ export default class Annotation extends Component {
               fontSize: '30px',
               color: 'red'
             },
-            userVideoStyle = {
-              position: 'relative',
-              left: this.state.userVideoExpanded ? '0' : '-50%',
-              top: this.state.userVideoExpanded ? '0' : '-100px',
-              transform: 'translateX(50%)',
-              height: this.state.userVideoExpanded ? '500px' : '100px',
 
-            };
 
       /*  var currentComments = typeof this.props.annotation.comments == 'object' ? this.props.annotation.comments : [];
         var Comments = currentComments.map((comment) => {
