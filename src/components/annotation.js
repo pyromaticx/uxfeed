@@ -82,18 +82,18 @@ export default class Annotation extends Component {
           );
         }
         case 'webcam': {
-          var userVideoStyle = {
-            position: 'relative',
-            left: this.state.userVideoExpanded ? '0' : '-50%',
-            top: this.state.userVideoExpanded ? '0' : '-100px',
-            transform: 'translateX(50%)',
-            height: this.state.userVideoExpanded ? '500px' : '100px',
 
-          };
           return (
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}}>
               <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} width='100%' />
-              <video onClick={() => {this.expandUserVideo()}} style={userVideoStyle} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} />
+              <video onClick={() => {this.expandUserVideo()}} style={{
+               position: 'relative',
+               left: this.state.userVideoExpanded ? '0' : '-50%',
+               top: this.state.userVideoExpanded ? '0' : '-100px',
+               transform: 'translateX(50%)',
+               height: this.state.userVideoExpanded ? '500px' : '100px',
+
+             }} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} />
               <button className='btn btn-success' type='button' onClick={(event) => {this.playBoth(event)}}>{this.state.playing ? 'Pause' : 'Play'}</button>
             </div>
           );
