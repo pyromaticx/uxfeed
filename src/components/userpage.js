@@ -443,7 +443,7 @@ export default class UserPage extends Component {
                 </div>
                 <div style={annotationWrapper}>
                   {this.props.route.path == 'username/:username' || this.props.route.path == 'annotationss' ? <SearchBox color={this.props.route.color} callback={(annotations) => {this.annotationLoader(annotations)}} /> : ''}
-                  {this.props.route.path == 'collections/:collectionId' ? (<div style={{width: '100%', paddingLeft: '25%', paddingRight: '25%', textAlign: 'center', backgroundColor: '#fff', marginBottom: '20px'}}><p>{this.state.collectionData.title}</p><p>Share this collection on:</p><SocialOptions collection={this.state.collectionData}/></div>) : ''}
+                  {this.props.route.path == 'collections/:collectionId' ? (<div style={{width: '100%', paddingLeft: '25%', paddingRight: '25%', textAlign: 'center', backgroundColor: '#fff', marginBottom: '20px'}}><p>{this.state.collectionData.exportURI}</p><p>Share this collection on:</p><SocialOptions collection={this.state.collectionData}/></div>) : ''}
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}
                     {this.props.route.path == "username/:username" ?  <button onClick={() => {this.turnPage(this.state.page + 1)}} type='button'>More</button> : ''}
