@@ -87,7 +87,7 @@ export default class Annotation extends Component {
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems:'center'}}>
               <video className={this.props.annotation.annotationId} src={this.props.annotation.annotationMedia} width='100%' />
               <video onClick={() => {this.expandUserVideo()}} style={{
-               position: 'relative',
+               position: 'absolute',
                left: this.state.userVideoExpanded ? '0' : '-50%',
                top: this.state.userVideoExpanded ? '0' : '-100px',
                transform: this.state.userVideoExpanded ? '' : 'translateX(50%)',
