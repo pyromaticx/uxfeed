@@ -14,7 +14,8 @@ export default class PDFModal extends Component {
       intDesign: 'N/A',
       visDesign: 'N/A',
       jsOpts: 'N/A',
-      loading: false
+      loading: false,
+      instruction: 'Prepare PDF Report'
     }
   }
   render() {
@@ -92,6 +93,9 @@ export default class PDFModal extends Component {
               alert("Please enter a title and company name");
               return;
             }
+            if(this.state.recs) {
+              return this.changePage('2');
+            }
             this.setState({
               loading: true
             });
@@ -107,7 +111,7 @@ export default class PDFModal extends Component {
               intDesign: this.state.intDesign,
               visDesign: this.state.visDesign,
               jsOpts: this.state.jsOpts,
-          })}}>Prepare PDF file</button>}
+          })}}>{this.state.instruction}</button>}
 
           <p>File Name: {fileName}</p>
           {backButton}
@@ -156,18 +160,16 @@ export default class PDFModal extends Component {
     });
   }
   changePage(page) {
+    if(this.state.recs && page == 2) {
+      this.setState({
+        modalPage: page,
+        instruction: 'Prepare PDF Report'
+      })
+    }
     this.setState({
       modalPage: page
     });
-    if(!this.state.recs) {
-      this.setState({
-        modalPage: page
-      });
-    } else {
-      this.setState({
-        modalPage: page
-      });
-    }
+
   }
 
   enableRecs() {
@@ -175,10 +177,12 @@ export default class PDFModal extends Component {
     if(this.state.recs == false) {
       this.setState({
         recs: true,
+        instruction: 'Next'
       });
     } else {
       this.setState({
         recs: false,
+        instruction: 'Prepare PDF Report'
       });
     }
     this.forceUpdate();
