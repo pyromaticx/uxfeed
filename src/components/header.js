@@ -90,9 +90,6 @@ export default class Header extends Component {
             color={this.props.color}
             iconType='fa-home' />
             <div style={uxLogo}></div>
-            <div style={downloadLink}>
-              <a style={{color: '#fff'}} href='https://chrome.google.com/webstore/detail/ux-pass/mipcbibmecemipbooafkmlglpjbbmojb?utm_source=chrome-app-launcher-info-dialog'>Download Chrome Extension!</a>
-            </div>
           <div style={loginBub} onClick={() => {this.loginOut()}}>
             {this.state.loginButtonState}
           </div>

@@ -443,11 +443,12 @@ export default class UserPage extends Component {
                 </div>
                 <div style={annotationWrapper}>
 
-                  <div style={{width: '100%', paddingLeft: '25%', paddingRight: '25%', textAlign: 'center', backgroundColor: '#fff', marginBottom: '20px'}}>
+                  <div style={{width: '100%', textAlign: 'center', marginBottom: '20px'}}>
                     <SearchBox color={this.props.route.color} callback={(annotations) => {this.annotationLoader(annotations)}} />
                     <h5>{this.state.collectionData.fileName}</h5>
-                    <p>Share this collection on:</p>
-                    <SocialOptions collection={this.state.collectionData}/>
+                    <div style={{width: '100%', paddingLeft: '25%', paddingRight: '25%', textAlign: 'center', marginBottom: '20px'}}>
+                      {this.props.route.path == "username/:username" ? "" : <SocialOptions collection={this.state.collectionData}/>}
+                    </div>
                   </div>
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />
                   {this.state.getResponse.length > 0 ? this.annotationRender() : this.state.status}

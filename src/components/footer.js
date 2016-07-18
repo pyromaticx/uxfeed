@@ -25,11 +25,14 @@ export default class Footer extends Component {
             <div style={footerStyle}>
                 <FooterItem title='UXPass' content={(
                   <span style={injectedJsxStyle}>
-                    <a style={{color: '#fff', textDecoration: 'none'}} href='https://chrome.google.com/webstore/detail/ux-pass/mipcbibmecemipbooafkmlglpjbbmojb?utm_source=chrome-app-launcher-info-dialog'>
-                      <h4>Get the Chrome extension</h4>
-                    </a>
+
                   </span>)} color={this.props.color}/>
             </div>
         );
     }
 }
+/*
+<a style={{color: '#fff', textDecoration: 'none'}} href='https://chrome.google.com/webstore/detail/ux-pass/mipcbibmecemipbooafkmlglpjbbmojb?utm_source=chrome-app-launcher-info-dialog'>
+  <h4>Get the Chrome extension</h4>
+</a>
+*/

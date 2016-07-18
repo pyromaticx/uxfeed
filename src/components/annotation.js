@@ -92,7 +92,7 @@ export default class Annotation extends Component {
                top: this.state.userVideoExpanded ? '0' : '-100px',
                transform: this.state.userVideoExpanded ? '' : 'translateX(50%)',
                height: this.state.userVideoExpanded ? '500px' : '100px',
-
+               marginBottom: this.state.userVideoExpanded ? 0 : '-100px'
              }} className={this.props.annotation.annotationId} src={this.props.annotation.userVideo} />
               <button className='btn btn-success' type='button' onClick={(event) => {this.playBoth(event)}}>{this.state.playing ? 'Pause' : 'Play'}</button>
             </div>
