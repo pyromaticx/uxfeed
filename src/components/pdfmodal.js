@@ -114,7 +114,7 @@ export default class PDFModal extends Component {
           })}}>{this.state.instruction}</button>}
 
           <p>File Name: {fileName}</p>
-          {backButton}
+        
         </div>
       </div>
     );
