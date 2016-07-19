@@ -93,6 +93,7 @@ export default class PDFModal extends Component {
               alert("Please enter a title and company name");
               return;
             }
+
             if(this.state.recs && this.state.page == '1') {
               return this.changePage('2');
             }
