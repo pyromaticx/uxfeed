@@ -94,7 +94,7 @@ export default class PDFModal extends Component {
               return;
             }
 
-            if(this.state.recs && this.state.page == '1') {
+            if(this.state.recs && this.state.modalPage == '1') {
               return this.changePage('2');
             }
             this.setState({
