@@ -93,7 +93,7 @@ export default class PDFModal extends Component {
               alert("Please enter a title and company name");
               return;
             }
-            if(this.state.recs) {
+            if(this.state.recs && this.state.page == '1') {
               return this.changePage('2');
             }
             this.setState({
@@ -114,7 +114,7 @@ export default class PDFModal extends Component {
           })}}>{this.state.instruction}</button>}
 
           <p>File Name: {fileName}</p>
-        
+
         </div>
       </div>
     );
