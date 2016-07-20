@@ -431,7 +431,7 @@ export default class UserPage extends Component {
             <div style={pageWrapper}>
                 {this.state.modalActive ? this.state.modal : ''}
                 <div style={leftBarWrapper}>
-                    {this.props.route.path == 'collections/:collectionId' ? '' : <DashboardProfileCard color={this.props.color}/>}
+                    <DashboardProfileCard color={this.props.color} />
 
                     {this.state.user.userName ? <SideBar
                         icon="fa-filter"
@@ -444,7 +444,7 @@ export default class UserPage extends Component {
                 <div style={annotationWrapper}>
 
                   <div style={{width: '100%', textAlign: 'center', marginBottom: '20px'}}>
-                    <SearchBox color={this.props.route.color} callback={(annotations) => {this.annotationLoader(annotations)}} />
+                    <SearchBox color={this.props.route.color} path={this.props.route.path} callback={(annotations) => {this.annotationLoader(annotations)}} />
                     <h5>{this.state.collectionData.fileName}</h5>
                     <div style={{width: '100%', paddingLeft: '25%', paddingRight: '25%', textAlign: 'center', marginBottom: '20px'}}>
                       {this.props.route.path == "username/:username" ? "" : <SocialOptions collection={this.state.collectionData}/>}

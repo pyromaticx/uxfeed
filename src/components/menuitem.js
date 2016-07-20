@@ -54,7 +54,7 @@ export default class MenuItem extends Component {
     var menuItemStyle = {
       display: 'flex',
       flexDirection: 'column',
-      maxHeight: this.state.active ? '600px': '50px',
+      maxHeight: this.state.active ? '100%': '50px',
       width: '100%',
       alignItems: 'center',
       justifyContent: this.state.active ? 'space-between' : 'center',

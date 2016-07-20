@@ -15,7 +15,7 @@ export default class PDFModal extends Component {
       visDesign: 'N/A',
       jsOpts: 'N/A',
       loading: false,
-      instruction: 'Prepare PDF Report'
+      instruction: 'Finish'
     }
   }
   render() {
@@ -59,7 +59,7 @@ export default class PDFModal extends Component {
       <div style={wrapper}>
         <div style={modalBox}>
           <div style={{height: '25px', width: '100%', display: 'flex', alignItems: 'center'}}>
-            <span style={{fontSize: '25px', color: '#333', marginLeft: '95%'}} className='fa fa-times' onClick={() => this.props.close()}></span>
+            <span style={{fontSize: '25px', color: '#333', marginLeft: '95%'}} className='fa fa-times' onClick={() => this.closeModal()}></span>
           </div>
           {this.state.modalPage == '1' ?
           <div style={pageStyle}>
@@ -120,6 +120,15 @@ export default class PDFModal extends Component {
       </div>
     );
   }
+  closeModal() {
+    if(this.state.modalPage == '2') {
+      this.setState({
+        modalPage: '1'
+      });
+    } else {
+      this.props.close();
+    }
+  }
   cogWalkChange(event) {
     this.setState({
       cogWalk: event.target.value
@@ -164,7 +173,7 @@ export default class PDFModal extends Component {
     if(this.state.recs && page == 2) {
       this.setState({
         modalPage: page,
-        instruction: 'Prepare PDF Report'
+        instruction: 'Finish'
       })
     }
     this.setState({
@@ -183,7 +192,7 @@ export default class PDFModal extends Component {
     } else {
       this.setState({
         recs: false,
-        instruction: 'Prepare PDF Report'
+        instruction: 'Finish'
       });
     }
     this.forceUpdate();

@@ -10,10 +10,15 @@ export default class SearchBox extends Component {
   goSearch(event) {
     event.preventDefault();
     event.stopPropagation();
-    api.searchAnnotations(this.state.searchTerm).done((resp) => {
-      console.log(resp);
-      this.props.callback(resp);
-    });
+    switch(this.props.path) {
+      case "username/:username": {
+        api.searchAnnotations(this.state.searchTerm).done((resp) => {
+          console.log(resp);
+          this.props.callback(resp);
+        });
+        break;
+      }
+    }
   }
   handleInputChange(event) {
     this.setState({
@@ -33,7 +38,7 @@ export default class SearchBox extends Component {
       <form onSubmit={(event) => {this.goSearch(event)}} style={searchBox} className="input-group">
           <input type="text"
           className="form-control"
-          placeholder="Search annotations"
+          placeholder={this.props.path == "username/:username" ? "Search annotations" : "Search Collections"}
           onChange={(event) => {this.handleInputChange(event)}}
           value={this.state.searchTerm}/>
           <span className="input-group-btn">
