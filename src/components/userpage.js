@@ -447,7 +447,7 @@ export default class UserPage extends Component {
                     <SearchBox color={this.props.route.color} path={this.props.route.path} callback={(annotations) => {this.annotationLoader(annotations)}} />
                     <h5>{this.state.collectionData.fileName}</h5>
                     <div style={{width: '100%', paddingLeft: '25%', paddingRight: '25%', textAlign: 'center', marginBottom: '20px'}}>
-                      {this.props.route.path == "username/:username" ? "" : <SocialOptions collection={this.state.collectionData}/>}
+                      {this.props.route.path == "username/:username" ? "" : <SocialOptions user={this.state.user} collection={this.state.collectionData}/>}
                     </div>
                   </div>
                   <Loader annotations={this.state.getResponse.length} color={this.props.color} />

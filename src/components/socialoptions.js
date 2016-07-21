@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
-
+import ModalGeneric from './modal-generic.js';
+import api from './api/api.js';
 export default class SocialOptions extends Component {
   constructor() {
     super();
     this.state = {
-
+      modalState: false,
+      modalContent: ''
     }
+  }
+  closeModal() {
+    this.setState({
+      modalContent: '',
+      modalState: false
+    });
   }
   postFacebook() {
     console.log(this.props.collection)
@@ -51,6 +59,35 @@ export default class SocialOptions extends Component {
       console.log(res);
     });
   }
+  shareEmail() {
+    var sendEmail = () => {
+      var recipients = this.state.emailList.split("\n");
+      var sender = this.props.user.userFirstName + " " + this.props.user.userLastName;
+      var urlTarget = window.location.href
+      api.sendShareEmail({
+        emailTo: recipients.toString(),
+        sender: sender,
+        urlTarget: urlTarget
+      }).done((resp) => {
+        console.log(resp);
+      })
+    }
+    var updateValues = (event) => {
+      this.setState({
+        emailList: event.target.value
+      });
+    }
+    this.setState({
+      modalState: true,
+      modalContent: (
+        <ModalGeneric close={() => {this.closeModal()}} title={(<h5>Enter Recipients <h6>(One per line)</h6></h5>)} content={(
+          <div style={{width: '100%', height: '100%', marginTop: '20px'}}>
+            <textarea onChange={(event) => {updateValues(event)}} type="textbox" rows='3' style={{width:'100%'}}></textarea>
+            <button type="button" className='btn btn-success' onClick={() => {sendEmail()}}>Send</button>
+          </div>)} />
+      )
+    })
+  }
   handleClick(event) {
     switch(event.target.id) {
       case 'facebook': {
@@ -67,6 +104,10 @@ export default class SocialOptions extends Component {
       }
       case 'pinterest': {
         this.postPinterest();
+        break;
+      }
+      case 'email': {
+        this.shareEmail();
       }
     }
   }
@@ -80,11 +121,13 @@ export default class SocialOptions extends Component {
     };
     return (
       <div style={socialWrapper}>
+        {this.state.modalContent}
         <span id='twitter' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-twitter'></span>
         <span id='facebook' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-facebook'></span>
         <span id='linkedin' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-linkedin'></span>
         <span id='pinterest' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#bd081c'}} className='fa fa-pinterest'></span>
-        <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="//www.redditstatic.com/spreddit1.gif" alt="submit to reddit" border="0" /> </a>
+        <a href="//www.reddit.com/submit" target="_blank" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="//www.redditstatic.com/spreddit1.gif" alt="submit to reddit" border="0" /> </a>
+        <span id='email' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#bd081c'}} className='fa fa-envelope'></span>
       </div>
     );
   }

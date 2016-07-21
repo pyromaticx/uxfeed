@@ -7,13 +7,13 @@ import UserPage from './components/userpage.js';
 import Login from './components/login.js';
 import PricingPage from './components/pricing.js';
 import NewProject from './components/newproject';
-
+import Verify from './components/verify.js';
 var createHistory = require('history/lib/createHashHistory');
 
 var history = new createHistory({
   queryKey: false
 });
-if(!localStorage.auth && !localStorage.user) {
+if(!localStorage.auth || !localStorage.user) {
   console.log('bad auth')
   localStorage.user = "";
   localStorage.auth = "";
@@ -143,6 +143,7 @@ var Routes = (
       <Route path='annotations' component={UserPage} color={color()} user={currentUser} />
       <Route path='/pricing' component={PricingPage} color={color()} />
       <Route path='newproject' component={NewProject} color={color()} />
+      <Route path='verify/:uuid' component={Verify} />
     </Route>
   </Router>
 );

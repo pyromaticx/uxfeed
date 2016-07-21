@@ -31,7 +31,8 @@ export default class ModalGeneric extends Component {
       alignItems: 'center',
       fontSize: '20px',
       padding: '30px',
-      textAlign: 'center'
+      textAlign: 'center',
+      height: '100%'
     },
     closer = {
       position: 'relative',
@@ -50,7 +51,7 @@ export default class ModalGeneric extends Component {
           <div style={modalContent}>
             <h3>{this.props.title}</h3>
 
-            <p>{this.props.content}</p>
+            {this.props.content}
           </div>
         </div>
       </div>

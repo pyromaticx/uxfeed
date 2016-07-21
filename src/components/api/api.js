@@ -181,6 +181,40 @@ var api = {
   }
   return $.ajax(settings);
   },
+  sendShareEmail(emailInfo) {
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://htmlntopdf.herokuapp.com/email/collection",
+      "method": "POST",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "cache-control": "no-cache",
+      },
+      "data": {
+        "emailTo": emailInfo.emailTo.toString(),
+        "sender": emailInfo.sender,
+        "urlTarget": emailInfo.urlTarget
+      }
+  }
+  return $.ajax(settings);
+
+  },
+  verifyEmail(uuid) {
+    var settings = {
+      "crossDomain": true,
+      "url": "https://uxpass-server.herokuapp.com/user/verify/" + uuid,
+      "method": "POST",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "cache-control": "no-cache",
+      },
+      "data": {
+      }
+    }
+    return $.ajax(settings);
+  },
+
   emailRohit: function(name, email, company) {
       var settings = {
         "async": true,
