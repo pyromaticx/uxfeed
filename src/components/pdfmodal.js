@@ -86,7 +86,7 @@ export default class PDFModal extends Component {
 
           <span>
             <label style={{marginRight: '5px'}} htmlFor='recs'>Enable Executive Summary</label>
-            <input name='recs' type='checkbox' onChange={(event) => {this.enableRecs(event)}}/>
+            <input id="recbox" name='recs' type='checkbox' onChange={(event) => {this.enableRecs(event)}}/>
           </span>
           {this.state.loading === true ? "Preparing your PDF Report..." : <button className='btn btn-primary' type='button' onClick={() => {
             if(this.state.companyName.length < 1 || this.state.collectionTitle.length < 1) {
@@ -123,8 +123,10 @@ export default class PDFModal extends Component {
   closeModal() {
     if(this.state.modalPage == '2') {
       this.setState({
-        modalPage: '1'
+        modalPage: '1',
+        recs: false
       });
+      $("#recbox").removeAttr("checked");
     } else {
       this.props.close();
     }
