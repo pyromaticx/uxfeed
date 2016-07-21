@@ -38,7 +38,7 @@ export default class SearchBox extends Component {
       <form onSubmit={(event) => {this.goSearch(event)}} style={searchBox} className="input-group">
           <input type="text"
           className="form-control"
-          placeholder={this.props.path == "username/:username" ? "Search annotations" : "Search Collections"}
+          placeholder={this.props.path == "username/:username" ? "Search annotations" : "Search Collection Annotations"}
           onChange={(event) => {this.handleInputChange(event)}}
           value={this.state.searchTerm}/>
           <span className="input-group-btn">

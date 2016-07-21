@@ -126,7 +126,9 @@ export default class SocialOptions extends Component {
         <span id='facebook' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-facebook'></span>
         <span id='linkedin' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-linkedin'></span>
         <span id='pinterest' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#bd081c'}} className='fa fa-pinterest'></span>
-        <a href="//www.reddit.com/submit" target="_blank" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="//www.redditstatic.com/spreddit1.gif" alt="submit to reddit" border="0" /> </a>
+        <div href="//www.reddit.com/submit" target="_blank" onClick={() => {window.location = "http://www.reddit.com/submit?url=" + encodeURIComponent(window.location); return false;}}>
+          <img src="//www.redditstatic.com/spreddit1.gif" alt="submit to reddit" border="0" />
+        </div>
         <span id='email' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#bd081c'}} className='fa fa-envelope'></span>
       </div>
     );
