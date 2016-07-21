@@ -207,7 +207,6 @@ var api = {
       "method": "POST",
       "headers": {
         "content-type": "application/x-www-form-urlencoded",
-        "cache-control": "no-cache",
       },
       "data": {
       }
