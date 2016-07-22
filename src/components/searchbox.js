@@ -18,6 +18,18 @@ export default class SearchBox extends Component {
         });
         break;
       }
+      case 'collections/:collectionId': {
+        var annotations = JSON.parse(this.props.collection.annotations);
+        var found = [];
+        for(var i = 0; i < annotations.length; i++) {
+          var an = annotations[i].annotationTitle + ' ' + annotations[i].annotationText;
+          if(an.toLowerCase().indexOf(this.state.searchTerm.toLowerCase()) != -1) {
+            found.push(annotations[i]);
+            console.log(annotations[i]);
+          }
+        }
+        this.props.callback(found);
+      }
     }
   }
   handleInputChange(event) {

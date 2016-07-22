@@ -69,7 +69,10 @@ export default class SocialOptions extends Component {
         sender: sender,
         urlTarget: urlTarget
       }).done((resp) => {
-        console.log(resp);
+        if(resp == 'OK') {
+          
+          this.closeModal();
+        }
       })
     }
     var updateValues = (event) => {
