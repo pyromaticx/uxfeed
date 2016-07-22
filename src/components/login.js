@@ -93,7 +93,7 @@ export default class Login extends Component {
       //this.props.updateUser(userData);
 
       var data = JSON.parse(userData);
-      
+
       if(data.error) {
         alert(data.error);
         return window.location = "http://uxpass.com";
