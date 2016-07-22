@@ -166,6 +166,7 @@ export default class UserPage extends Component {
                   selected={this.isSelected(annotation)}
                   expanded={this.state.expanded}
                   annotation={annotation}
+                  route={this.props.route}
                   scale={this.state.scaleValue}
                   updateCommentsCB={this.updateCommentsCB}
                   addToCollection={this.addToCollection.bind(this)}

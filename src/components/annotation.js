@@ -327,7 +327,7 @@ export default class Annotation extends Component {
             <div onMouseOver={() => {this.handleHover('enter')}} onMouseLeave={() => {this.handleHover('leave')}} onClick={() => {this.addToCollection()}}style={annotationWrapper}>
 
                 <div style={thumbnailStyle}>
-                    <span style={annoTools} className='fa fa-trash' onClick={() => {this.deleteAnnotation()}}></span>
+                    {this.props.route.path == 'username/:username' ? <span style={annoTools} className='fa fa-trash' onClick={() => {this.deleteAnnotation()}}></span>: ""}
                     {this.annotationTypeSwitch()}
                 </div>
                 <div style={annotationPanel}>
