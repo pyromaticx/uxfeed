@@ -98,8 +98,6 @@ export default class UserPage extends Component {
                     var oldCopy = this.state.getResponse;
 
                       var allAnno = oldCopy.concat(sortedByPinId);
-                      console.log('OLD:', this.state.getResponse)
-                      console.log('OLD and NEW', oldCopy)
                       this.setState({
                           getResponse: allAnno
                       });
@@ -117,7 +115,7 @@ export default class UserPage extends Component {
             }
             case 'collections/:collectionId': {
                 api.getCollectionAnnotations(this.props.params.collectionId).then((data) => {
-
+                  console.log(data);
                   var sortedByPinId = JSON.parse(data.annotations).sort(function(a, b) {
                         return a.annotationId - b.annotationId;
                   }).reverse();
@@ -426,7 +424,7 @@ export default class UserPage extends Component {
               activeColor: this.props.color.primary,
             }];
             //rightBarContent = [{title: 'Most Used Pin Type', value: ''}, {title: 'Most Used Emojii', value: ''}, {title: 'Most Searched', value: ''}, {title: 'Most Votes', value: ''}, {title: 'Most Active Reviewed', value: ''}, {title: 'Most Pins', value: ''}];
-            console.warn(this.state.collectionData)
+
         return (
             <div style={pageWrapper}>
                 {this.state.modalActive ? this.state.modal : ''}

@@ -87,6 +87,10 @@ var api = {
     return $.ajax(settings);
   },
   addToUserCollections: function(userName, annotations, exportURI, fileName) {
+    var annoIdArray = annotations.map((anno) => {
+      return anno.annotationId;
+    });
+    console.warn(annoIdArray)
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -97,7 +101,7 @@ var api = {
         "authorization": localStorage.getItem('auth')
       },
       "data": {
-        annotations: JSON.stringify(annotations),
+        annotations: JSON.stringify(annoIdArray),
         exportURI: exportURI,
         fileName: fileName
       }
