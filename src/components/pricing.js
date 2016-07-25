@@ -122,7 +122,6 @@ export default class PricingPage extends Component {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-around',
-      margin: '30px'
     },
     salesForm = {
       display: 'flex',
@@ -133,7 +132,8 @@ export default class PricingPage extends Component {
       flexDirection: 'column',
       textAlign: 'center',
       borderRadius: '5px',
-      marginTop: '20px'
+      marginTop: '20px',
+      minWidth: '450px'
     },
     formRow = {
       display: 'flex',
@@ -227,8 +227,8 @@ export default class PricingPage extends Component {
           </div>
         </div>
         <div style={infoBox}>
-          <div style={{height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <span style={{margin: '30px', fontSize: '80px'}} className="fa fa-trophy"></span>
+          <div style={{height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '200px'}}>
+            <span style={{fontSize: '80px'}} className="fa fa-trophy"></span>
           </div>
           <div style={linesCol}>
             <h5 style={linesBold}>ONBOARDING SERVICES THAT SET YOU UP FOR SUCCESS</h5>
