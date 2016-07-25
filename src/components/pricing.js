@@ -155,7 +155,8 @@ export default class PricingPage extends Component {
       textAlign: 'center',
       position: 'relative',
       left: '50%',
-      transform: 'translateX(-50%)'
+      transform: 'translateX(-50%)',
+      marginBottom: '100px'
     },
     featureForm = {
       width: '90%',
@@ -270,7 +271,7 @@ export default class PricingPage extends Component {
                 <input className="form-control" id="team" type='text' name="team" onChange={(event) => {this.formChange(event)}} />
               </div>
             </div>
-            <button className="btn btn-default" onClick={() => {this.verifyAndSubmit()}} type='button'>Speak with an expert</button>
+            <button className="btn btn-default" style={{marginTop: '30px'}} onClick={() => {this.verifyAndSubmit()}} type='button'>Speak with an expert</button>
           </form>
         </div>
         <div style={freeTrial}>
