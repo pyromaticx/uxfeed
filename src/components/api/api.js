@@ -198,7 +198,8 @@ var api = {
       "data": {
         "emailTo": emailInfo.emailTo.toString(),
         "sender": emailInfo.sender,
-        "urlTarget": emailInfo.urlTarget
+        "urlTarget": emailInfo.urlTarget,
+        "attachmentFiles": emailInfo.attachmentFiles
       }
   }
   return $.ajax(settings);

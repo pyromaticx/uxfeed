@@ -15,7 +15,7 @@ export default class Verify extends Component {
         });
         setTimeout(() => {
           window.location.hash = '/login';
-        }, 3000)
+        }, 500)
       } else {
         this.setState({
           verification: "Verification failed."

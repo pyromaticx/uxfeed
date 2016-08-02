@@ -61,16 +61,23 @@ export default class SocialOptions extends Component {
   }
   shareEmail() {
     var sendEmail = () => {
+      var attachmentFiles = JSON.parse(this.props.collection.annotations).map((annotation, idx) => {
+        return {
+          filename: "Annotation Media " + idx,
+          path: annotation.annotationMedia
+        }
+      });
       var recipients = this.state.emailList.split("\n");
       var sender = this.props.user.userFirstName + " " + this.props.user.userLastName;
       var urlTarget = window.location.href
       api.sendShareEmail({
         emailTo: recipients.toString(),
         sender: sender,
-        urlTarget: urlTarget
+        urlTarget: urlTarget,
+        attachmentFiles: attachmentFiles
       }).done((resp) => {
         if(resp == 'OK') {
-          
+
           this.closeModal();
         }
       })
