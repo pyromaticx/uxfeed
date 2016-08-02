@@ -63,7 +63,7 @@ export default class SocialOptions extends Component {
     var sendEmail = () => {
       var attachmentFiles = JSON.parse(this.props.collection.annotations).map((annotation, idx) => {
         return {
-          filename: "Annotation Media " + idx,
+          filename: "Annotation Media " + idx + annotation.annotationMedia.substr(annotation.annotationMedia.indexOf('.') + 1, annotation.annotationMedia.length),
           path: annotation.annotationMedia
         }
       });
