@@ -10,6 +10,8 @@ export default class Home extends Component {
       inputBox: '',
       nameBox: '',
       companyBox: '',
+      designation: '',
+      hours: '',
       modal: ''
     }
   }
@@ -28,12 +30,27 @@ export default class Home extends Component {
       companyBox: event.target.value
     });
   }
+  updateHours(event) {
+    this.setState({
+      hours: event.target.value
+    });
+  }
+  updateDesignation(event) {
+    this.setState({
+      designation: event.target.value
+    });
+  }
   submitEmail(event) {
     event.preventDefault();
     event.stopPropagation();
-    if(this.state.inputBox.length < 1 || this.state.nameBox.length < 1 || this.state.companyBox.length < 1) {
-      alert('Please enter a value for all fields');
-      return;
+
+    for(var key in this.state) {
+      if(key != 'modal') {
+        if(this.state[key].length < 1) {
+          alert('Please enter a value for all fields');
+          return;
+        }
+      }
     }
     var formDataArr = $(event.target).serializeArray();
     var formData = {};
@@ -42,7 +59,7 @@ export default class Home extends Component {
     })
     console.log(formData);
 
-      api.emailRohit(formData.name, formData.email, formData.company).done((resp) => {
+      api.emailRohit(formData).done((resp) => {
         if(resp.error) {
           this.setState({
             modal: (<ModalGeneric title='Oops!' content="Looks like we have already received a request from this email. We will be in touch soon!" close={() => {this.closeModal()}}/>)
@@ -117,14 +134,38 @@ export default class Home extends Component {
       opacity: (this.state.inputBox.length + this.state.nameBox.length + this.state.companyBox.length) > 0 ? '1.0' : '0.0',
       height: (this.state.inputBox.length + this.state.nameBox.length + this.state.companyBox.length) > 0 ? '100px': '0px',
       transition: 'all 500ms ease'
+    },
+    inputFields = {
+      display: 'flex',
+      flexDirection: 'column',
+
     };
     return (
       <div style={landingStyle}>
         <form style={jumboTron} onSubmit={(event) => {this.submitEmail(event)}}>
-          <h1>Enter your email to be invited!</h1>
-          <input name='email' type='email' style={{width: '300px', marginTop: '20px', marginBottom: '20px'}} placeholder='Enter your email address' value={this.state.inputBox} className='text' onChange={(event) => {this.updatedInput(event)}} />
-          <input name='name' type='text' style={{width: '300px', marginBottom: '20px'}} placeholder='Enter your name' value={this.state.nameBox} className='text' onChange={(event) => {this.updatedNameInput(event)}} />
-          <input name='company' type='text' style={{width: '300px', marginBottom: '20px'}} placeholder='Enter your company' value={this.state.companyBox} className='text' onChange={(event) => {this.updateCompany(event)}} />
+          <h1>Beta Program Invitation</h1>
+          <br />
+          <div style={inputFields}>
+          <label htmlFor='name'>Name:</label>
+          <input name='name' type='text' style={{width: '300px'}} placeholder='Enter your name' value={this.state.nameBox} className='text' onChange={(event) => {this.updatedNameInput(event)}} />
+          </div>
+          <div style={inputFields}>
+          <label htmlFor='company'>Company:</label>
+          <input name='company' type='text' style={{width: '300px'}} placeholder='Enter your employer' value={this.state.companyBox} className='text' onChange={(event) => {this.updateCompany(event)}} />
+          </div>
+          <div style={inputFields}>
+          <label htmlFor='email'>Email:</label>
+          <input name='email' type='email' style={{width: '300px'}} placeholder='Enter your email address' value={this.state.inputBox} className='text' onChange={(event) => {this.updatedInput(event)}} />
+          </div>
+          <div style={inputFields}>
+          <label htmlFor='designation'>Designation:</label>
+          <input name='designation' type='text' style={{width: '300px'}} placeholder='Enter your designation' value={this.state.designation} className='text' onChange={(event) => {this.updateDesignation(event)}} />
+          </div>
+          <div style={inputFields}>
+          <label htmlFor='hours'>Hours per week you can beta test:</label>
+          <input name='hours' type='text' style={{width: '300px'}} placeholder='Hours per week' value={this.state.hours} className='text' onChange={(event) => {this.updateHours(event)}} />
+          </div>
+          <br />
           <button type='submit'>Let's Go!</button>
         </form>
         {this.state.modal}

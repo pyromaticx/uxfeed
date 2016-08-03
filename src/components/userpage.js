@@ -174,7 +174,7 @@ export default class UserPage extends Component {
       });
       return Annotations;
     }
-    beginCollecting(submit) {
+    beginCollecting(submit, reportType) {
       if(!this.state.collect) {
         this.setState({
           collect: true
@@ -184,10 +184,14 @@ export default class UserPage extends Component {
           collect: false
         });
         if (submit == 'buttonClicked') {
-            this.setState({
-              modalActive: true,
-              modal: (<PDFModal close={() => this.closeModal()} loading={this.state.loading} callback={(data) => {this.submitCollection(data)}}/>)
-            });
+            if(reportType == 'pdf') {
+              this.setState({
+                modalActive: true,
+                modal: (<PDFModal close={() => this.closeModal()} loading={this.state.loading} callback={(data) => {this.submitCollection(data)}}/>)
+              });
+            } else if (reportType == 'slides') {
+              alert('slides!');
+            }
 
         }
 
@@ -379,11 +383,19 @@ export default class UserPage extends Component {
                 height: '100%'
             },
             leftBarContent = [{
-              title: 'Create a collection',
-              callback: (event) => {this.beginCollecting(event)},
+              title: 'Create a PDF',
+              callback: (event) => {this.beginCollecting(event, 'pdf')},
               activeText: 'After selecting the annotations you would like in your collection, click below to export them to PDF',
               button: 'true',
               buttonText: 'Create Collection',
+              activeColor: this.props.color.primary
+            },
+            {
+              title: 'Create a slideshow',
+              callback: (event) => {this.beginCollecting(event, 'slides')},
+              activeText: 'After selecting the annotations you would like in your collection, click below to export them to slides',
+              button: 'true',
+              buttonText: 'Create Slideshow',
               activeColor: this.props.color.primary
             },
             {
