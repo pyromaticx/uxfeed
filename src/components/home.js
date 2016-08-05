@@ -3,6 +3,8 @@ import SpanItem from './spanitem.js';
 import SlideBox from './slidebox.js';
 import api from './api/api.js';
 import ModalGeneric from './modal-generic.js';
+
+
 export default class Home extends Component {
   constructor() {
     super();
@@ -166,7 +168,7 @@ export default class Home extends Component {
           <input name='hours' type='text' style={{width: '300px'}} placeholder='Hours per week' value={this.state.hours} className='text' onChange={(event) => {this.updateHours(event)}} />
           </div>
           <br />
-          <button type='submit'>Let's Go!</button>
+          <button type='submit'>Submit</button>
         </form>
         {this.state.modal}
 
