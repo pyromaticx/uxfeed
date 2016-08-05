@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 export default class ModalGeneric extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
     var modalOverlay = {
       position: 'fixed',
@@ -15,29 +19,27 @@ export default class ModalGeneric extends Component {
       width: '100%'
     },
     modalWrapper = {
-      height: '50%',
-      width: '50%',
-      maxWidth: '500px',
-      maxHeight: '500px',
-      minWidth: '300px',
-      minHeight: '300px',
+      width: '450px',
+      height: '300px',
       backgroundColor: '#f9f9f9',
-      border: '3px solid #ddd'
+      border: '3px solid #ddd',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     modalContent = {
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-around',
+      justifyContent: 'center',
       alignItems: 'center',
       fontSize: '20px',
-      padding: '30px',
       textAlign: 'center',
-      height: '100%'
+      height: '100%',
+      width: '100%',
     },
     closer = {
-      position: 'relative',
-      left: '94%',
-      top: '-20%',
+      position: 'absolute',
+      transform: 'translateX(415px)',
       color: '#333',
       fontSize: '30px',
       height: '30px',
@@ -49,9 +51,9 @@ export default class ModalGeneric extends Component {
         <div style={modalWrapper}>
           <span className='fa fa-close' style={closer} onClick={() => {this.props.close()}}></span>
           <div style={modalContent}>
-            <h3>{this.props.title}</h3>
+            <span>{this.props.title}</span>
 
-            {this.props.content}
+            <span>{this.props.content}</span>
           </div>
         </div>
       </div>

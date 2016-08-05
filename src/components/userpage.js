@@ -17,7 +17,7 @@ export default class UserPage extends Component {
     constructor(props) {
         super(props);
         if(localStorage.getItem('auth') == '') {
-          return window.location = 'http://uxpass.com/#/login';
+          return window.location = window.location.origin + '/#/login';
         }
         this.state = {
             expanded: true,
@@ -338,7 +338,7 @@ export default class UserPage extends Component {
       return displayCols.reverse();
     }
     gotoCollection(id) {
-      window.location = 'http://uxpass.com/#/collections/' + id
+      window.location = window.location.origin + '/#/collections/' + id
     }
     turnPage(newPage) {
       if(newPage < 0) {

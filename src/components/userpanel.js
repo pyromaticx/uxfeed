@@ -70,7 +70,7 @@ export default class UserPanel extends Component {
     event.stopPropagation();
     switch (event.target.id) {
       case 'gohome': {
-        window.location = 'http://uxpass.com/#/username/' + this.state.user.userName;
+        window.location = window.location.origin + '/#/username/' + this.state.user.userName;
         break;
       }
       case 'editpro': {
@@ -80,7 +80,7 @@ export default class UserPanel extends Component {
       case 'logout' : {
         localStorage.auth = '';
         localStorage.user = '';
-        window.location = 'http://uxpass.com'
+        window.location = window.location.origin
         break;
       }
       default: {

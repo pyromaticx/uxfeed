@@ -101,9 +101,9 @@ export default class Header extends Component {
 
     if(toke) {
       localStorage.setItem('auth', '');
-      window.location = 'http://uxpass.com';
+      window.location = window.location.origin;
     } else {
-      window.location = 'http://uxpass.com/#/login'
+      window.location = window.location.origin + '/#/login'
     }
   }
   inputChange(event) {

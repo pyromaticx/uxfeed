@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import ModalGeneric from './modal-generic.js';
 import api from './api/api.js';
+import PDFPreview from './pdfpreview.js';
 export default class SocialOptions extends Component {
   constructor() {
     super();
     this.state = {
       modalState: false,
-      modalContent: ''
+      modalContent: '',
+      modalBody: '',
+      modalTitle: '',
+      attachPDF: false,
+      pdfPreview: false
     }
   }
   closeModal() {
@@ -61,42 +66,66 @@ export default class SocialOptions extends Component {
   }
   shareEmail() {
     var sendEmail = () => {
-      var attachmentFiles = JSON.parse(this.props.collection.annotations).map((annotation, idx) => {
-        return {
-          filename: "Annotation Media " + idx + annotation.annotationMedia.substr(annotation.annotationMedia.lastIndexOf('.'), annotation.annotationMedia.length),
-          path: annotation.annotationMedia
-        }
-      });
-      var recipients = this.state.emailList.split("\n");
-      var sender = this.props.user.userFirstName + " " + this.props.user.userLastName;
-      var urlTarget = window.location.href
-      api.sendShareEmail({
-        emailTo: recipients.toString(),
-        sender: sender,
-        urlTarget: urlTarget,
-        attachmentFiles: attachmentFiles
-      }).done((resp) => {
-        if(resp == 'OK') {
+      this.setState({
+        modalTitle: (<h5>Sending email...</h5>),
+        modalBody: ''
+      }, () => {
+        var attachmentFiles = JSON.parse(this.props.collection.annotations).map((annotation, idx) => {
+          return {
+            filename: "Annotation Media " + idx + annotation.annotationMedia.substr(annotation.annotationMedia.lastIndexOf('.'), annotation.annotationMedia.length),
+            path: annotation.annotationMedia
+          }
+        });
+        var recipients = this.state.emailList.split("\n");
+        var sender = this.props.user.userFirstName + " " + this.props.user.userLastName;
+        var urlTarget = window.location.href
 
-          this.closeModal();
-        }
-      })
+        api.sendShareEmail({
+          emailTo: recipients.toString(),
+          sender: sender,
+          urlTarget: urlTarget,
+          attachmentFiles: this.state.attachPDF ? [{filename: this.props.collection.fileName + ".pdf", path: this.props.collection.exportURI}] : attachmentFiles
+        }).done((resp) => {
+          console.log(resp);
+          if(resp == 'OK') {
+            this.setState({
+              modalTitle: (<h5>Success!!</h5>),
+              modalBody: ''
+            });
+            setTimeout(() => {this.closeModal()}, 2500);
+          }
+        })
+      });
     }
-    var updateValues = (event) => {
+    var updateEmailValues = (event) => {
       this.setState({
         emailList: event.target.value
       });
     }
     this.setState({
       modalState: true,
-      modalContent: (
-        <ModalGeneric close={() => {this.closeModal()}} title={(<h5>Enter Recipients <h6>(One per line)</h6></h5>)} content={(
-          <div style={{width: '100%', height: '100%', marginTop: '20px'}}>
-            <textarea onChange={(event) => {updateValues(event)}} type="textbox" rows='3' style={{width:'100%'}}></textarea>
-            <button type="button" className='btn btn-success' onClick={() => {sendEmail()}}>Send</button>
-          </div>)} />
-      )
-    })
+      modalTitle: (<div><h5>Sharing Collection:</h5><br /><h5>{this.props.collection.fileName}</h5></div>),
+      modalBody: (
+        <div style={{width: '100%', height: '100%', marginTop: '20px'}}>
+          <textarea onChange={(event) => {updateEmailValues(event)}} type="textbox" rows='3' placeholder="Enter addresses one per line" style={{width:'100%'}}></textarea>
+          {this.props.collection.exportURI ? <span>
+                                                <input type='checkbox' onChange={(event => {this.checkBoxUpdate(event)})}>Attach PDF File</input>
+                                                <span style={{color: '#333', textDecoration: 'none'}} onClick={() => {window.open(this.props.collection.exportURI, "_blank")}}>
+                                                  <span style={{marginLeft: '10px', cursor: 'pointer'}} className='fa fa-file-pdf-o'></span>
+                                                  <span>Preview</span>
+                                                </span>
+                                             </span> : ""}
+          <br />
+          <button type="button" className='btn btn-success' onClick={() => {sendEmail()}}>Send</button>
+        </div>
+      ),
+    });
+  }
+
+  checkBoxUpdate(event) {
+    this.setState({
+      attachPDF: event.target.checked
+    });
   }
   handleClick(event) {
     switch(event.target.id) {
@@ -131,7 +160,8 @@ export default class SocialOptions extends Component {
     };
     return (
       <div style={socialWrapper}>
-        {this.state.modalContent}
+        {this.state.modalState ? <ModalGeneric close={() => {this.closeModal()}} title={this.state.modalTitle} content={this.state.modalBody} /> : ''}
+        {this.state.pdfPreview ? <PDFPreview collection={this.props.collection} /> : ""}
         <span id='twitter' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-twitter'></span>
         <span id='facebook' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-facebook'></span>
         <span id='linkedin' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-linkedin'></span>

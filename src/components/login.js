@@ -96,14 +96,14 @@ export default class Login extends Component {
 
       if(data.error) {
         alert(data.error);
-        return window.location = "http://uxpass.com";
+        return window.location = window.location.origin;
       }
       if(localStorage.auth) {
         localStorage.auth = '';
       }
       localStorage.auth = data.token;
       localStorage.user = userData.toString();
-      window.location = 'http://uxpass.com/#/username/' + this.state.username;
+      window.location = window.location.origin + '/#/username/' + this.state.username;
     })
   }
 }
