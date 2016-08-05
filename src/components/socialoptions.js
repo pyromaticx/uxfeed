@@ -65,6 +65,7 @@ export default class SocialOptions extends Component {
     });
   }
   shareEmail() {
+    console.log(this.props.collection)
     var sendEmail = () => {
       this.setState({
         modalTitle: (<h5>Sending email...</h5>),
