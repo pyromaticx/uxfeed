@@ -36,6 +36,7 @@ export default class ModalGeneric extends Component {
       textAlign: 'center',
       height: '100%',
       width: '100%',
+      padding: '15px'
     },
     closer = {
       position: 'absolute',
