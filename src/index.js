@@ -13,7 +13,7 @@ var createHistory = require('history/lib/createHashHistory');
 var history = new createHistory({
   queryKey: false
 });
-if(!localStorage.auth || !localStorage.user) {
+if(localStorage.getItem('auth') == null) {
   console.log('bad auth')
   localStorage.user = "";
   localStorage.auth = "";

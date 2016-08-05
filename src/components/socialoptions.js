@@ -108,13 +108,14 @@ export default class SocialOptions extends Component {
       modalBody: (
         <div style={{width: '100%', height: '100%', marginTop: '20px'}}>
           <textarea onChange={(event) => {updateEmailValues(event)}} type="textbox" rows='3' placeholder="Enter addresses one per line" style={{width:'100%'}}></textarea>
-          {this.props.collection.exportURI ? <span>
-                                                <input type='checkbox' onChange={(event => {this.checkBoxUpdate(event)})}>Attach PDF File</input>
-                                                <span style={{color: '#333', textDecoration: 'none'}} onClick={() => {window.open(this.props.collection.exportURI, "_blank")}}>
-                                                  <span style={{marginLeft: '10px', cursor: 'pointer'}} className='fa fa-file-pdf-o'></span>
-                                                  <span>Preview</span>
-                                                </span>
-                                             </span> : ""}
+          <span>
+            <input type='checkbox' onChange={(event => {this.checkBoxUpdate(event)})} />
+            <span>Attach PDF file</span>
+            <span style={{color: '#333', textDecoration: 'none'}} onClick={() => {window.open(this.props.collection.exportURI, "_blank")}}>
+              <span style={{marginLeft: '10px', cursor: 'pointer'}} className='fa fa-file-pdf-o'></span>
+              <span>Preview</span>
+            </span>
+          </span>
           <br />
           <button type="button" className='btn btn-success' onClick={() => {sendEmail()}}>Send</button>
         </div>
