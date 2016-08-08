@@ -12,7 +12,7 @@ export default class Header extends Component {
         loggedIn = JSON.parse(localStorage.getItem('user'));
         console.log(loggedIn);
     } catch(e) {
-      loggedIn = {userName: 'Kelly'};
+      loggedIn = false;
     }
     this.state = {
       searchValue: '',
