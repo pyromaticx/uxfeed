@@ -132,9 +132,9 @@ function userLoggedIn(userData) {
 }
 
 
-window.onhashchange = () => {
+/*window.onhashchange = () => {
   location.reload();
-}
+}*/
 var Routes = (
   <Router history={history}>
     <Route path='/' component={App} color={color()} colorChanger={(choice, cb) => {colorChanger(choice, cb)}}>
