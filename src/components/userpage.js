@@ -16,7 +16,7 @@ export default class UserPage extends Component {
     resizeListener
     constructor(props) {
         super(props);
-        if(localStorage.getItem('auth') == '') {
+        if(!JSON.parse(localStorage.getItem('user')) || !localStorage.getItem('auth')) {
           return window.location = window.location.origin + '/#/login';
         }
         this.state = {
