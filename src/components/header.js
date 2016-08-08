@@ -5,11 +5,18 @@ import UxpassQuote from './uxpassquote.js';
 import UserPanel from './userpanel.js';
 import {Link} from 'react-router';
 export default class Header extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    let loggedIn = {}
+    try {
+        loggedIn = JSON.parse(localStorage.getItem('user'));
+        console.log(loggedIn);
+    } catch(e) {
+      loggedIn = {userName: 'Kelly'};
+    }
     this.state = {
       searchValue: '',
-      loginButtonState: localStorage.getItem('auth') == '' ? 'Login' : <UserPanel />
+      loginButtonState: !loggedIn ? 'Login' : <UserPanel user={loggedIn}/>
     }
   }
   render() {

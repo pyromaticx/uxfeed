@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import EditProfile from './editprofile.js';
 export default class UserPanel extends Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
+    
     this.state = {
       panelOpen: false,
-      user: JSON.parse(localStorage.user),
+      user: this.props.user,
       modal: false,
       editOpen: false
-    }
+    };
   }
   togglePanel(event) {
     event.preventDefault();
