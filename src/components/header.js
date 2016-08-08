@@ -7,18 +7,13 @@ import {Link} from 'react-router';
 export default class Header extends Component {
   constructor(props) {
     super(props);
-    let loggedIn = {}
-    try {
-        loggedIn = JSON.parse(localStorage.getItem('user'));
-        console.log(loggedIn);
-    } catch(e) {
-      loggedIn = false;
-    }
+
     this.state = {
       searchValue: '',
-      loginButtonState: !loggedIn ? 'Login' : <UserPanel user={loggedIn}/>
+      loginButtonState: 'Login'
     }
   }
+
   render() {
     var headerStyle = {
       height: '60px',
@@ -89,6 +84,14 @@ export default class Header extends Component {
       width: '20%',
 
     }
+
+    let loggedIn = {}
+    try {
+        loggedIn = JSON.parse(localStorage.getItem('user'));
+    } catch(e) {
+      loggedIn = false;
+    }
+
     return (
       <div style={headerStyle}>
           <HeaderItem
@@ -98,7 +101,7 @@ export default class Header extends Component {
             iconType='fa-home' />
             <div style={uxLogo}></div>
           <div style={loginBub} onClick={() => {this.loginOut()}}>
-            {this.state.loginButtonState}
+            {!loggedIn ? this.state.loginButtonState : <UserPanel user={loggedIn} />}
           </div>
       </div>
     );

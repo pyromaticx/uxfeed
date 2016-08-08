@@ -3,7 +3,7 @@ import EditProfile from './editprofile.js';
 export default class UserPanel extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       panelOpen: false,
       user: this.props.user,
@@ -23,6 +23,11 @@ export default class UserPanel extends Component {
         panelOpen: true
       });
     }
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      user: nextProps.user
+    });
   }
   render() {
     var bubbleStyle = {
