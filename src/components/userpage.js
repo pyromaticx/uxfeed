@@ -294,6 +294,13 @@ export default class UserPage extends Component {
     listFiles(page) {
       var pageStart = (page - 1) * 5;
       var pageEnd = page * 5;
+      if(this.state.userCollections.length < 1) {
+        return (
+          <div style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
+            <p>You have not created any files yet.</p>
+          </div>
+        )
+      }
       var files = this.state.userCollections.filter(function(col, idx) {
         if(col.fileName) {
           return true;
@@ -301,13 +308,7 @@ export default class UserPage extends Component {
           return false;
         }
       });
-      if(files.length == 0) {
-        return (
-          <div style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
-            <p>You have not created any files yet.</p>
-          </div>
-        )
-      }
+
       var displayFiles = files.map((file, idx) => {
           var fileType = file.exportURI.substring(file.exportURI.lastIndexOf('.') + 1, file.exportURI.length);
           var fileIconClass;
