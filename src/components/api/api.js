@@ -72,6 +72,19 @@ var api = {
 
     return $.ajax(settings);
   },
+  string2html: function(htmlString, fileName) {
+    var settings = {
+      "crossDomain": true,
+      "url": "https://htmlntopdf.herokuapp.com/string2html",
+      "method": "POST",
+      "contentType": 'application/json',
+      "data": JSON.stringify({
+        htmlString: htmlString,
+        fileName: fileName
+      })
+    }
+    return $.ajax(settings);
+  },
   html2pdf: function(htmlArray, fileName) {
     var settings = {
       "async": true,

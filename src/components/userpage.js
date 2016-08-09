@@ -10,6 +10,8 @@ import PDFTemplate from './pdftemplate.js';
 import PDFModal from './pdfmodal.js';
 import SearchBox from './searchbox.js';
 import SocialOptions from './socialoptions.js';
+import SlidesModal from './slidesmodal.js';
+import SlidesTemplate from './slidestemplate.js';
 
 export default class UserPage extends Component {
     intervalID
@@ -187,10 +189,13 @@ export default class UserPage extends Component {
             if(reportType == 'pdf') {
               this.setState({
                 modalActive: true,
-                modal: (<PDFModal close={() => this.closeModal()} loading={this.state.loading} callback={(data) => {this.submitCollection(data)}}/>)
+                modal: (<PDFModal close={() => this.closeModal()} loading={this.state.loading} callback={(data) => {this.submitCollection(data, 'pdf')}}/>)
               });
             } else if (reportType == 'slides') {
-              alert('slides!');
+              this.setState({
+                modalActive: true,
+                modal: (<PDFModal slides={true} close={() => this.closeModal()} loading={this.state.loading} callback={(data) => {this.submitCollection(data, 'slides')}}/>)
+              })
             }
 
         }
@@ -235,30 +240,47 @@ export default class UserPage extends Component {
       });
 
     }
-    submitCollection(data) {
+    submitCollection(data, reportType) {
       this.setState({
         loading: true
       });
-
-      var strings = PDFTemplate(this.state.collectedAnnotations, data);
-
-      api.html2pdf(strings, data.fileName).done((resp) => {
-        setTimeout(() => {
-          var a = document.createElement('a');
-          document.body.appendChild(a);
-          a.style = 'display: none';
-          a.href = resp;
-          a.download = 'title.pdf';
-          a.click();
+      if(reportType == 'pdf') {
+        var strings = PDFTemplate(this.state.collectedAnnotations, data);
+        api.html2pdf(strings, data.fileName).done((resp) => {
+            this.setState({
+              loading: false,
+              modalActive: false,
+              modal: {},
+              collectedAnnotations: []
+            });
+            api.addToUserCollections(this.state.user.userName, this.state.collectedAnnotations, resp, data.fileName).done(function(response) {console.log(response)})
+            this.setState({
+              loading: false,
+              modalActive: true,
+              modal: (<SlidesModal type="pdf"fileName={data.fileName} status={!data.err ? "Success": "Failed"} src={resp} close={() => {this.closeModal()}}/>),
+              collectedAnnotations: []
+            });
+        });
+      } else if (reportType == 'slides') {
+        var htmlStrings = SlidesTemplate(this.state.collectedAnnotations, data);
+        this.setState({
+          loading: false,
+          modalActive: false,
+          modal: {},
+          collectedAnnotations: []
+        })
+        api.string2html(htmlStrings, data.fileName).done((resp) => {
+          console.log(resp);
           api.addToUserCollections(this.state.user.userName, this.state.collectedAnnotations, resp, data.fileName).done(function(response) {console.log(response)})
           this.setState({
             loading: false,
-            modalActive: false,
-            modal: {},
+            modalActive: true,
+            modal: (<SlidesModal type="slides" fileName={data.fileName} status={!data.err ? "Success": "Failed"} src={resp} close={() => {this.closeModal()}}/>),
             collectedAnnotations: []
-          })
-        }, 100)
-      });
+          });
+        });
+
+      }
 
     }
     downloadFile(file) {
@@ -287,15 +309,23 @@ export default class UserPage extends Component {
         )
       }
       var displayFiles = files.map((file, idx) => {
-        if(idx >= pageStart && idx < pageEnd) {
+          var fileType = file.exportURI.substring(file.exportURI.lastIndexOf('.') + 1, file.exportURI.length);
+          var fileIconClass;
+          switch(fileType) {
+            case 'pdf': {
+              fileIconClass = 'fa-file-pdf-o';
+              break;
+            }
+            case 'html': {
+              fileIconClass = 'fa-file-code-o';
+            }
+          }
           return (
-            <div onClick={() => {this.downloadFile(file)}} key={idx+file} style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
-              <p>{file.fileName}</p>
+            <div onClick={() => {this.downloadFile(file)}} key={idx+file} style={{width: '100%', textAlign: 'left', marginTop: '20px', marginBottom: '20px', display: 'flex', flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
+              <span style={{height: '100%', width: '40px', fontSize: '30px'}}className={"fa " + fileIconClass}></span><p style={{width: '100%', paddingLeft: '10px'}}>{file.fileName}</p>
             </div>
           );
-        } else {
-          return;
-        }
+
       });
 
       return displayFiles.reverse();

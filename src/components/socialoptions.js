@@ -162,8 +162,8 @@ export default class SocialOptions extends Component {
     };
     return (
       <div style={socialWrapper}>
-        {this.state.modalState ? <ModalGeneric close={() => {this.closeModal()}} title={this.state.modalTitle} content={this.state.modalBody} /> : ''}
-        {this.state.pdfPreview ? <PDFPreview collection={this.props.collection} /> : ""}
+        {this.state.modalState ? <ModalGeneric close={() => {this.closeModal()}} title={this.state.modalTitle} content={this.state.modalBody} /> : null}
+        {this.state.pdfPreview ? <PDFPreview collection={this.props.collection} /> : null}
         <span id='twitter' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-twitter'></span>
         <span id='facebook' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-facebook'></span>
         <span id='linkedin' onClick={(event) => {this.handleClick(event)}} style={{fontSize: '20px', color: '#00aced'}} className='fa fa-linkedin'></span>

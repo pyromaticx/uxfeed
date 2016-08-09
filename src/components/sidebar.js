@@ -4,6 +4,16 @@ import MenuItem from './menuitem.js';
 export default class SideBar extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      currentActive: false
+    }
+  }
+  setCurrentActive(active) {
+    console.log(active);
+    this.setState({
+      currentActive: active
+    });
   }
   render() {
     var barStyle = {
@@ -45,7 +55,7 @@ export default class SideBar extends Component {
     }
     var listItems = this.props.content.map((el, idx) => {
       return (
-        <MenuItem color={this.props.color} activeColor={el.activeColor} title={el.title} value={el.value} activeText={el.activeText} callback={el.callback} button={el.button} buttonText={el.buttonText} />
+        <MenuItem key={el.title + idx} idx={idx} changeActive={(active) => {this.setCurrentActive(active)}} active={idx === this.state.currentActive} color={this.props.color} activeColor={el.activeColor} title={el.title} value={el.value} activeText={el.activeText} callback={el.callback} button={el.button} buttonText={el.buttonText} />
       )
     });
 

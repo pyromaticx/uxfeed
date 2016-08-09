@@ -9,6 +9,12 @@ export default class MenuItem extends Component {
       page: 1
     };
   }
+  componentWillReceiveProps(nextProps) {
+    console.log("NP ran")
+    this.setState({
+      active: nextProps.active
+    });
+  }
   handleMouseOver() {
     this.setState({
       hovered: true
@@ -21,7 +27,11 @@ export default class MenuItem extends Component {
   }
 
   exeCallback(submit) {
-    if(!this.state.active) {
+    if(this.props.active) {
+      return this.props.changeActive(false);
+    }
+    this.props.changeActive(this.props.idx);
+  /*  if(!this.state.active) {
       this.setState({
         active: true
       });
@@ -30,22 +40,15 @@ export default class MenuItem extends Component {
       this.setState({
         active: false
       });
+    }*/
       this.props.callback(submit);
-    }
+
   }
   buttonSwitch() {
     switch (this.props.button) {
       case 'true': {
         return (
-          <button className='btn btn-default' type='button' onClick={() => this.exeCallback('buttonClicked')}>{this.props.buttonText}</button>
-        );
-      }
-      case 'page': {
-        return (
-          <div style={{display: 'flex', flexDirection: 'row'}}>
-            <button type='button' style={{}} onClick={() => {this.setState({page: this.state.page--})}}>less</button>
-            <button type='button' style={{}} onClick={() => {this.setState({page: this.state.page++})}}>more</button>
-          </div>
+          <button className='btn btn-default' type='button' onClick={() => this.props.callback('buttonClicked')}>{this.props.buttonText}</button>
         );
       }
     }
@@ -54,11 +57,12 @@ export default class MenuItem extends Component {
     var menuItemStyle = {
       display: 'flex',
       flexDirection: 'column',
-      maxHeight: this.state.active ? '100%': '50px',
+      maxHeight: this.state.active ? '5000px': '50px',
+      overflow: 'hidden',
       width: '100%',
       alignItems: 'center',
       justifyContent: this.state.active ? 'space-between' : 'center',
-      transition: 'max-height 150ms ease, background-color 50ms ease, color 50ms ease',
+      transition: 'max-height 350ms ease, background-color 150ms ease, color 150ms ease',
       padding: '10px',
       color: this.props.color.text,
       borderTop: this.state.active ? '3px solid rgba(0,0,0,0.3)' : '',

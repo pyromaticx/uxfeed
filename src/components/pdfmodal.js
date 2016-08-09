@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import moment from 'moment';
 export default class PDFModal extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       companyName: '',
       collectionTitle: '',
@@ -15,7 +15,8 @@ export default class PDFModal extends Component {
       visDesign: 'N/A',
       jsOpts: 'N/A',
       loading: false,
-      instruction: 'Finish'
+      instruction: 'Finish',
+      reportTypeString: this.props.slides ? 'Slides' : 'PDF Report'
     }
   }
   render() {
@@ -52,13 +53,12 @@ export default class PDFModal extends Component {
     if(this.state.recs) {
       backButton = this.state.modalPage == '1' ? <button className='btn btn-default' type='button' onClick={() => {this.changePage('2')}}>Recommendations</button> : <button className='btn btn-default' type='button' onClick={() => {this.changePage('1')}}>Title</button>
     }
-    var fileName = 'GoLiveLabs UxPass ' + this.state.companyName + ' ' + this.state.collectionTitle + ' ' + moment(Date.now()).format('MM-DD-YY h.mm.ss a');
-    console.log('loading:', this.props.loading)
-    console.log("exe summary", this.state.recs);
+    var fileName = this.state.collectionTitle + " " + this.state.companyName + ' ' + moment(Date.now()).format('MM-DD-YY h.mm.ss a');
     return (
       <div style={wrapper}>
         <div style={modalBox}>
           <div style={{height: '25px', width: '100%', display: 'flex', alignItems: 'center'}}>
+            {this.state.modalPage == '1' ? <span style={{position: 'absolute', left: '50%', top: '15%', transform: 'translateX(-50%)', fontSize: '25px'}}>{"Create " + this.state.reportTypeString}</span> : "" }
             <span style={{fontSize: '25px', color: '#333', marginLeft: '95%'}} className='fa fa-times' onClick={() => this.closeModal()}></span>
           </div>
           {this.state.modalPage == '1' ?
@@ -71,24 +71,24 @@ export default class PDFModal extends Component {
             :
           <div style={pageStyle}>
             <label htmlFor='cogwalk'>Cognitive Walkthrough</label>
-            <input name='cogwalk' type='text' style={inputs} value={this.state.cogWalk} onChange={(event) => {this.cogWalkChange(event)}} />
+            <input maxLength="500" name='cogwalk' type='text' style={inputs} value={this.state.cogWalk} onChange={(event) => {this.cogWalkChange(event)}} />
             <label htmlFor='hereval'>Heuristic Evaluation</label>
-            <input name='hereval' type='text' style={inputs} value={this.state.herEval} onChange={(event) => {this.herEvalChange(event)}} />
+            <input maxLength="500" name='hereval' type='text' style={inputs} value={this.state.herEval} onChange={(event) => {this.herEvalChange(event)}} />
             <label htmlFor='infoArch'>Information Architecture</label>
-            <input name='infoArch' type='text' style={inputs} value={this.state.infoArch} onChange={(event) => {this.infoArchChange(event)}} />
+            <input maxLength="500" name='infoArch' type='text' style={inputs} value={this.state.infoArch} onChange={(event) => {this.infoArchChange(event)}} />
             <label htmlFor='intDesign'>Interaction Design</label>
-            <input name='intDesign' type='text' style={inputs} value={this.state.intDesign} onChange={(event) => {this.intDesignChange(event)}} />
+            <input maxLength="500" name='intDesign' type='text' style={inputs} value={this.state.intDesign} onChange={(event) => {this.intDesignChange(event)}} />
             <label htmlFor='visDesign'>Visual Design</label>
-            <input name='visDesign' type='text' style={inputs} value={this.state.visDesign} onChange={(event) => {this.visDesignChange(event)}} />
+            <input maxLength="500" name='visDesign' type='text' style={inputs} value={this.state.visDesign} onChange={(event) => {this.visDesignChange(event)}} />
             <label htmlFor='jsOpts'>Programming Optimization</label>
-            <input name='jsOpts' type='text' style={inputs} value={this.state.jsOpts} onChange={(event) => {this.jsOptsChange(event)}} />
+            <input maxLength="500" name='jsOpts' type='text' style={inputs} value={this.state.jsOpts} onChange={(event) => {this.jsOptsChange(event)}} />
           </div>}
 
           <span>
             <label style={{marginRight: '5px'}} htmlFor='recs'>Enable Executive Summary</label>
             <input id="recbox" name='recs' type='checkbox' onChange={(event) => {this.enableRecs(event)}}/>
           </span>
-          {this.state.loading === true ? "Preparing your PDF Report..." : <button className='btn btn-primary' type='button' onClick={() => {
+          {this.state.loading === true ? "Preparing your " + this.state.reportTypeString + "..." : <button className='btn btn-primary' type='button' onClick={() => {
             if(this.state.companyName.length < 1 || this.state.collectionTitle.length < 1) {
               alert("Please enter a title and company name");
               return;

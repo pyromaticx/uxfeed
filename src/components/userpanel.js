@@ -3,13 +3,24 @@ import EditProfile from './editprofile.js';
 export default class UserPanel extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       panelOpen: false,
       user: this.props.user,
       modal: false,
       editOpen: false
     };
+  }
+  componentWillMount() {
+    $(window).click((event) => {
+      if(event.target.id == 'userPanel') {
+        event.stopPropagation();
+        event.preventDefault();
+        return;
+      }
+      this.setState({
+        panelOpen: false
+      });
+    })
   }
   togglePanel(event) {
     event.preventDefault();
@@ -59,7 +70,7 @@ export default class UserPanel extends Component {
 
 
     return (
-      <div style={bubbleStyle} onClick={(event) => {this.togglePanel(event)}}>
+      <div id='userPanel' style={bubbleStyle} onClick={(event) => {this.togglePanel(event)}}>
         {this.state.editOpen ? <EditProfile active={this.state.editOpen} switchCB={() => {this.editProfileSwitch()}}/> : ''}
         <h3>{this.state.user.userName.substring(0,1).toUpperCase()}</h3>
         <div style={panelStyle}>
@@ -76,6 +87,7 @@ export default class UserPanel extends Component {
     switch (event.target.id) {
       case 'gohome': {
         window.location = window.location.origin + '/#/username/' + this.state.user.userName;
+        location.reload();
         break;
       }
       case 'editpro': {
@@ -94,6 +106,7 @@ export default class UserPanel extends Component {
       }
 
     }
+    this.togglePanel(event);
   }
   editProfileSwitch() {
     if(this.state.editOpen == false) {
