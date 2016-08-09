@@ -18,9 +18,7 @@ if(!localStorage.getItem('auth')) {
   localStorage.user = "";
   localStorage.auth = "";
 }
-window.brendansFunc = () => {
-  alert('All your base are belong to us.');
-}
+
 // colorKey is used to store the current selection of UI pallete.
 var colorKey = 'uxfeed';
 var currentUser = {};
