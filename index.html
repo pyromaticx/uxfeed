@@ -82,8 +82,8 @@
   window.addEventListener("FromPage", function(event) {
     if(event.detail) {
       console.log(event.detail)
-      localStorage.auth = event.detail.token,
-      localStorage.user = event.detail.user
+      localStorage.auth = event.detail.token.toString(),
+      localStorage.user = event.detail.user.toString()
     }
   })
   </script>
