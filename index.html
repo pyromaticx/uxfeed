@@ -81,7 +81,9 @@
   <script>
   window.addEventListener("FromPage", function(event) {
     if(event.detail) {
-      console.log("brendansFunc" + event.detail)
+      console.log(event.detail)
+      localStorage.auth = event.detail.token,
+      localStorage.user = event.detail.user
     }
   })
   </script>
