@@ -18,7 +18,7 @@ export default class SlidesModal extends Component {
       zIndex: '1100',
     },
     modalBox = {
-      height: '80%',
+      height: '60%',
       width: '50%',
       backgroundColor: '#f9f9f9',
       display: 'flex',
@@ -33,7 +33,7 @@ export default class SlidesModal extends Component {
     return (
       <div style={wrapper}>
         <div style={{width: '100%'}}>
-          <span style={{position: 'absolute', fontSize: '30', left: '72%', top: '11%', zIndex: '1111'}} className='fa fa-times' onClick={() => this.props.close()}></span>
+          <span style={{position: 'absolute', fontSize: '30', left: '72%', top: '21%', zIndex: '1111'}} className='fa fa-times' onClick={() => this.props.close()}></span>
         </div>
         <div style={modalBox}>
           {this.props.fileName}

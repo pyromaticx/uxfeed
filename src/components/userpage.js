@@ -25,7 +25,7 @@ export default class UserPage extends Component {
             expanded: true,
             getResponse: [],
             contentWidth: window.innerWidth <= 1024 ? '100%' : '85%',
-            scaleValue: this.handleResize(),
+
             collect: false,
             collectedAnnotations: [],
             modalActive: false,
@@ -49,7 +49,7 @@ export default class UserPage extends Component {
         this.getUpdated();
 
     }
-    handleResize() {
+    handsleResize() {
         var contentWidth = window.innerWidth <= 1024 ? '100%' : '85%';
         var scaleValue;
 

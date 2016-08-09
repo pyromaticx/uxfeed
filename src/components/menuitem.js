@@ -10,7 +10,7 @@ export default class MenuItem extends Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    console.log("NP ran")
+
     this.setState({
       active: nextProps.active
     });

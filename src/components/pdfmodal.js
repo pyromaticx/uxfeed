@@ -32,7 +32,7 @@ export default class PDFModal extends Component {
       alignItems: 'center',
     },
     modalBox = {
-      height: '80%',
+      height: '70%',
       width: '80%',
       backgroundColor: '#f9f9f9',
       display: 'flex',
@@ -44,6 +44,16 @@ export default class PDFModal extends Component {
       display: 'flex',
       justifyContent: 'space-around',
       alignItems: 'center',
+      flexDirection: 'column'
+    },
+    inputRow = {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+    },
+    inputBlock = {
+      display: 'flex',
       flexDirection: 'column'
     },
     inputs = {
@@ -70,19 +80,38 @@ export default class PDFModal extends Component {
           </div>
             :
           <div style={pageStyle}>
-            <label htmlFor='cogwalk'>Cognitive Walkthrough</label>
-            <input maxLength="500" name='cogwalk' type='text' style={inputs} value={this.state.cogWalk} onChange={(event) => {this.cogWalkChange(event)}} />
-            <label htmlFor='hereval'>Heuristic Evaluation</label>
-            <input maxLength="500" name='hereval' type='text' style={inputs} value={this.state.herEval} onChange={(event) => {this.herEvalChange(event)}} />
-            <label htmlFor='infoArch'>Information Architecture</label>
-            <input maxLength="500" name='infoArch' type='text' style={inputs} value={this.state.infoArch} onChange={(event) => {this.infoArchChange(event)}} />
-            <label htmlFor='intDesign'>Interaction Design</label>
-            <input maxLength="500" name='intDesign' type='text' style={inputs} value={this.state.intDesign} onChange={(event) => {this.intDesignChange(event)}} />
-            <label htmlFor='visDesign'>Visual Design</label>
-            <input maxLength="500" name='visDesign' type='text' style={inputs} value={this.state.visDesign} onChange={(event) => {this.visDesignChange(event)}} />
-            <label htmlFor='jsOpts'>Programming Optimization</label>
-            <input maxLength="500" name='jsOpts' type='text' style={inputs} value={this.state.jsOpts} onChange={(event) => {this.jsOptsChange(event)}} />
-          </div>}
+            <div style={inputRow}>
+              <div style={inputBlock}>
+                <label htmlFor='cogwalk'>Cognitive Walkthrough</label>
+                <input maxLength="500" name='cogwalk' type='text' style={inputs} value={this.state.cogWalk} onChange={(event) => {this.cogWalkChange(event)}} />
+              </div>
+              <div style={inputBlock}>
+                <label htmlFor='hereval'>Heuristic Evaluation</label>
+                <input maxLength="500" name='hereval' type='text' style={inputs} value={this.state.herEval} onChange={(event) => {this.herEvalChange(event)}} />
+              </div>
+            </div>
+            <div style={inputRow}>
+              <div style={inputBlock}>
+                <label htmlFor='infoArch'>Information Architecture</label>
+                <input maxLength="500" name='infoArch' type='text' style={inputs} value={this.state.infoArch} onChange={(event) => {this.infoArchChange(event)}} />
+              </div>
+              <div style={inputBlock}>
+                <label htmlFor='intDesign'>Interaction Design</label>
+                <input maxLength="500" name='intDesign' type='text' style={inputs} value={this.state.intDesign} onChange={(event) => {this.intDesignChange(event)}} />
+              </div>
+            </div>
+            <div style={inputRow}>
+              <div style={inputBlock}>
+                <label htmlFor='visDesign'>Visual Design</label>
+                <input maxLength="500" name='visDesign' type='text' style={inputs} value={this.state.visDesign} onChange={(event) => {this.visDesignChange(event)}} />
+              </div>
+              <div style={inputBlock}>
+                <label htmlFor='jsOpts'>Programming Optimization</label>
+                <input maxLength="500" name='jsOpts' type='text' style={inputs} value={this.state.jsOpts} onChange={(event) => {this.jsOptsChange(event)}} />
+              </div>
+            </div>
+          </div>
+        }
 
           <span>
             <label style={{marginRight: '5px'}} htmlFor='recs'>Enable Executive Summary</label>
