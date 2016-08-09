@@ -84,6 +84,7 @@
       console.log(event.detail)
       localStorage.auth = JSON.stringify(event.detail.token),
       localStorage.user = JSON.stringify(event.detail.user)
+      window.location = window.location.origin + "/username/" + event.detail.user.userName
     }
   })
   </script>
