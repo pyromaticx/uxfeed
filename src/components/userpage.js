@@ -107,7 +107,7 @@ export default class UserPage extends Component {
                 });
 
                 api.getUserCollections(this.state.user.userName).then((data) => {
-
+                  alert("data" + data.toString());
                   this.setState({
                     userCollections: data
                   });
@@ -294,7 +294,7 @@ export default class UserPage extends Component {
     listFiles(page) {
       var pageStart = (page - 1) * 5;
       var pageEnd = page * 5;
-      if(this.state.userCollections.length < 1) {
+      if(this.state.userCollections instanceof Array && this.state.userCollections.length < 1) {
         return (
           <div style={{width: '100%', textAlign: 'center', marginTop: '20px', marginBottom: '20px'}}>
             <p>You have not created any files yet.</p>
