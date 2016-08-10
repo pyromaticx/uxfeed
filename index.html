@@ -6,6 +6,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Quicksand:700,400' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/style/style.css">
+    <script>
+    window.addEventListener("FromPage", function(event) {
+      if(event.detail) {
+        console.log(event.detail)
+        localStorage.auth = event.detail.token,
+        localStorage.user = JSON.stringify(event.detail.user)
+
+      }
+    })
+    </script>
   </head>
   <body>
     <div id="app"></div>
@@ -78,14 +88,5 @@
   <script src='/fetch.js'></script>
   <script src="/bundle.js"></script>
 
-  <script>
-  window.addEventListener("FromPage", function(event) {
-    if(event.detail) {
-      console.log(event.detail)
-      localStorage.auth = event.detail.token,
-      localStorage.user = JSON.stringify(event.detail.user)
 
-    }
-  })
-  </script>
 </html>
