@@ -107,7 +107,7 @@ export default class UserPage extends Component {
                 });
 
                 api.getUserCollections(this.state.user.userName).then((data) => {
-                  alert("data" + data.toString());
+                  console.warn(data);
                   this.setState({
                     userCollections: data
                   });
